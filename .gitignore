@@ -1,0 +1,12 @@
+cat > .gitignore <<'EOF'
+node_modules
+.next
+out
+dist
+build
+.env
+.env.*
+*.log
+.DS_Store
+fanith-website.zip
+EOF
