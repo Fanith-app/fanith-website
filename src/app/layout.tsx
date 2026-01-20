@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from "../components/layout/Footer";
@@ -35,15 +36,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-    <head></head>
+      <head>
+        {/* Google tag (gtag.js) */}
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-WDBDHCKBRE" strategy="afterInteractive" />
+        <Script id="ga4" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-WDBDHCKBRE');
+          `}
+        </Script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <CenterPopupProvider>
-        <Header />
-        <main className="pt-16">{children}</main>
-        <Footer />
-        <ToastContainer />
+          <Header />
+          <main className="pt-16">{children}</main>
+          <Footer />
+          <ToastContainer />
         </CenterPopupProvider>
       </body>
     </html>
