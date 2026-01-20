@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Header from "../components/layout/Header";
-import Footer from "../components/layout/Footer";
-import { CenterPopupProvider } from "../context/CenterPopupContext";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from "../components/layout/Footer";
+import Header from "../components/layout/Header";
+import { CenterPopupProvider } from "../context/CenterPopupContext";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  verification: {
+    google: "google-site-verification=NuzrfCBkMnKxUWqtc90k75r1a0AmcO4Fq7sfQNDU0XM",
+  },
 };
 
 export default function RootLayout({
@@ -32,6 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+    <head></head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
