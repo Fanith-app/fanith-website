@@ -1,23 +1,23 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   Facebook,
   Instagram,
   Linkedin,
   Twitter,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import EarlyAccessModal from "../modals/EarlyAccessModal";
 import { _makePostRequest } from "../../api/api";
 import endpoints from "../../api/endpoint";
+import EarlyAccessModal from "../modals/EarlyAccessModal";
 
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useCenterPopup } from "@/src/context/CenterPopupContext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Define proper types for social links
 type SocialLink =
@@ -25,11 +25,11 @@ type SocialLink =
   | { type: "svg"; src: string; alt: string; href: string };
 
 const socialLinks: SocialLink[] = [
-  { type: "icon", icon: Facebook, href: "#" },
-  { type: "icon", icon: Twitter, href: "#" },
-  { type: "icon", icon: Instagram, href: "#" },
-  { type: "icon", icon: Linkedin, href: "#" },
-  { type: "svg", src: "/assets/svg/boticon.svg", alt: "Bot", href: "#" },
+  { type: "icon", icon: Facebook, href: "https://www.facebook.com/people/Fanith/61585037715830/" },
+  { type: "icon", icon: Twitter, href: "https://x.com/fanith_app/" },
+  { type: "icon", icon: Instagram, href: "https://www.instagram.com/fanith.app/" },
+  { type: "icon", icon: Linkedin, href: "https://www.linkedin.com/showcase/fanith/" },
+  { type: "svg", src: "/assets/svg/boticon.svg", alt: "Bot", href: "https://www.reddit.com/user/FanithApp/" },
 ];
 
 type FooterLink =
