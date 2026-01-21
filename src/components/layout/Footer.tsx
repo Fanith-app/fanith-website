@@ -114,7 +114,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="rounded-t-3xl bg-linear-to-r from-[#9E1D1D] to-[#FF0000] text-white">
+    <footer className="rounded-t-3xl bg-[#960018] text-white">
 
       <div className="mx-auto max-w-7xl px-4 md:px-6 py-6">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-0 mb-10">
