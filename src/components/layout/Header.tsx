@@ -53,7 +53,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/assets/svg/logo.svg"
+              src="/assets/images/Fanith_New_Header_Logo.png"
               alt="Fanith Logo"
               width={150}
               height={150}
