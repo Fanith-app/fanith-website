@@ -120,7 +120,7 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-0 mb-10">
           <Link href="/" className="flex items-center gap-3">
             <Image
-              src="/assets/svg/logo-white.svg"
+              src="/assets/images/Fanith_New_Footer_Logo.png"
               alt="Fanith Logo"
               width={150}
               height={150}
