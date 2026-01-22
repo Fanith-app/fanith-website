@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { navLinks } from "@/src/lib/data";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
-import { navLinks } from "@/src/lib/data";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import EarlyAccessModal from "../modals/EarlyAccessModal";
 
 export default function Header() {
