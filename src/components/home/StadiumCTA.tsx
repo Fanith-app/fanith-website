@@ -1,10 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import EarlyAccessModal from "../modals/EarlyAccessModal";
-import { useState } from "react";
+import Image from "next/image";
 import { Button } from "../ui/button";
 
 interface StadiumCTAProps {
@@ -31,7 +28,7 @@ export default function StadiumCTA({
       {/* Background */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/assets/images/stadium.png" // replace with your image
+          src="/assets/images/Stadium_is_Filling_Fast.webp" // replace with your image
           alt="Stadium Background"
           fill
           priority

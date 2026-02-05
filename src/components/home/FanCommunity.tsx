@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 
 const posts = [
   {
@@ -34,7 +34,7 @@ const posts = [
 
 export default function FanCommunity() {
   return (
-    <section className="bg-white py-20">
+    <section className="bg-[#141414] py-20">
       <motion.div 
         className="max-w-7xl mx-auto px-4 md:px-15"
         initial="hidden"
@@ -55,7 +55,7 @@ export default function FanCommunity() {
       >
         {/* Heading */}
         <motion.h2 
-          className="text-center text-4xl font-bold mb-14"
+          className="text-center text-4xl font-bold mb-14 text-white"
           variants={{
             hidden: { y: 50, opacity: 0, scale: 0.9 },
             visible: { 
@@ -113,7 +113,7 @@ export default function FanCommunity() {
               }}
             >
               <Card
-                className="relative overflow-hidden rounded-3xl border border-red-600 shadow-2xl bg-gray-100 transform transition-all duration-500 ease-in-out hover:scale-105 cursor-pointer"
+                className="relative overflow-hidden shadow-2xl transform transition-all duration-500 ease-in-out hover:scale-105 cursor-pointer bg-[#202020] [clip-path:polygon(20px_0,calc(100%-30px)_0,100%_30px,100%_calc(100%-20px),calc(100%-20px)_100%,0_100%,0_20px)] rounded-none border-none"
               >
                 {/* Image */}
                 <motion.div 
@@ -153,7 +153,7 @@ export default function FanCommunity() {
 
                   {/* Content */}
                   <motion.h3 
-                    className="text-xl text-[#111111] font-semibold mb-3"
+                    className="text-xl text-[#FFFFFF] font-semibold mb-3"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -167,7 +167,7 @@ export default function FanCommunity() {
                   </motion.h3>
 
                   <motion.p 
-                    className="text-sm text-[#333333] leading-relaxed mb-6"
+                    className="text-sm text-[#C3C3C3] leading-relaxed mb-6"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}

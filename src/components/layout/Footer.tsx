@@ -114,10 +114,38 @@ export default function Footer() {
   };
 
   return (
-    <footer className="rounded-t-3xl bg-[#960018] text-white">
+    <footer className="rounded-t-3xl bg-[#0E0E0E] text-white">
 
       <div className="mx-auto max-w-7xl px-4 md:px-6 py-6">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-0 mb-10">
+          <motion.div>
+            <h5 className="text-white text-[19px] font-bold leading-snug mb-[8px]">Stay in the game.</h5>
+            <p className="max-w-md text-sm text-white/90 mb-6">
+              Get match features, fan updates, and early access drops.
+            </p>
+
+            <form
+              onSubmit={handleEmailSubscription}
+              className="flex flex-col sm:flex-row gap-3"
+            >
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isSubmitting}
+                className="flex-1 rounded-xl border border-white/40 bg-transparent px-4 py-3 text-sm text-white placeholder:text-white/70 focus:outline-none focus:ring-2 focus:ring-white disabled:opacity-50"
+              />
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="rounded-xl bg-white px-6 py-3 text-sm font-semibold text-black transform transition-all duration-300 ease-in-out hover:bg-white/90 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? "Subscribing..." : "Subscribe"}
+              </button>
+            </form>
+          </motion.div>
           <Link href="/" className="flex items-center gap-3">
             <Image
               src="/assets/images/Fanith_New_Footer_Logo.png"
@@ -130,7 +158,7 @@ export default function Footer() {
           </Link>
 
           <div className="flex items-center gap-4 ">
-            <span>Follow Us</span>
+            {/* <span>Follow Us</span> */}
             {socialLinks.map((link, index) => (
               <Link
                 key={index}
@@ -215,11 +243,21 @@ export default function Footer() {
             ))}
           </motion.div>
         </div>
+        <div className="pt-10">
+          <div className="flex justify-center text-md font-medium text-white/90 gap-[20px]">
+          <Link href="/features">Fan Room</Link> <span>|</span> <Link href="/features?tab=fanpedia">Fan Pedia</Link> <span>|</span> <Link href="/features?tab=tribe">F Points</Link> <span>|</span> <Link href="/features?tab=fandom">Fanboard</Link>
+        </div>
+        </div>
+        <div className="pt-7">
+          <div className="flex justify-center text-md font-medium text-white/90 gap-[20px]">
+          <Link href="/about">About Us</Link> <span>|</span> <Link href="/blog">Blog</Link> <span>|</span> <Link href="/faq">FAQ</Link> <span>|</span> <Link href="/contact">Contact</Link>
+        </div>
+        </div>
 
         <div className="my-6 h-px w-full bg-white/30" />
 
-        <div className="flex justify-center text-sm font-medium text-white/90">
-          Copyright © 2025 NARISTA ECOM PRIVATE LIMITED, All Rights Reserved.
+        <div className="flex justify-center text-md font-medium text-white/90 gap-[20px]">
+          <Link href="/privacy-policy">Privacy Policy</Link> <span>•</span> © 2026 Fanith <span>•</span> <Link href="/terms-conditions">Terms & Conditions</Link>
         </div>
       </div>
 

@@ -1,17 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import { ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function PartnersAndFeatures() {
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 md:px-15 py-16 space-y-20">
+    <section className="w-full mx-auto px-4 md:px-15 py-16 space-y-20 bg-[#141414]">
       {/* ===================== */}
       {/* OUR PARTNERS */}
       {/* ===================== */}
       <div className="text-center space-y-10 w-full">
-        <h2 className="text-3xl font-semibold">Our Partners</h2>
+        <h2 className="text-4xl font-semibold text-white text-center">Our Partners</h2>
 
         <div className="flex items-center justify-center gap-14 flex-wrap">
           {/* Replace src with your actual logos */}
@@ -36,7 +35,7 @@ export default function PartnersAndFeatures() {
       {/* ===================== */}
       {/* APP FEATURES */}
       {/* ===================== */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
@@ -47,7 +46,7 @@ export default function PartnersAndFeatures() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* LEFT LARGE CARD */}
+          LEFT LARGE CARD
           <FeatureCard
             icon={<Image src="/assets/images/feature-icon1.png" alt={"Feature Icon"} width={24} height={24} />}
             title="Game room real-time action"
@@ -56,7 +55,7 @@ export default function PartnersAndFeatures() {
             large
           />
 
-          {/* RIGHT COLUMN */}
+          RIGHT COLUMN
           <div className="grid grid-cols-1 gap-6">
             <FeatureCard
               icon={<Image src="/assets/images/feature-icon2.png" alt={"Feature Icon"} width={24} height={24} />}
@@ -80,7 +79,7 @@ export default function PartnersAndFeatures() {
             </div>
           </div>
         </div>
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }
