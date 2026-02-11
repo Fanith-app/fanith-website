@@ -221,6 +221,9 @@ export default function Footer() {
         <div className="flex justify-center text-sm font-medium text-white/90">
           Copyright © 2025 NARISTA ECOM PRIVATE LIMITED, All Rights Reserved.
         </div>
+        <div className="flex justify-center text-sm font-medium text-white/90 pt-2.5">
+          A Brand of MEEDEE DIGITAL LABS PRIVATE LIMITED
+        </div>
       </div>
 
       <EarlyAccessModal
