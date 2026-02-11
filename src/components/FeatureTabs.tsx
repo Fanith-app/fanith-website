@@ -1,9 +1,9 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 const TABS = [
   {
@@ -209,8 +209,8 @@ export default function FeatureTabs() {
                 onClick={() => handleTabChange(tab)}
                 className={`rounded-full px-5 md:px-8 md:py-2 2xl:px-12 py-1 text-[17px] md:text-[20px] 2xl:text-[24px] font-semibold transform transition-all duration-300 ease-in-out hover:scale-105 active:scale-95
                   ${activeTab.key === tab.key
-                    ? "bg-[#ff0000] text-white shadow-lg"
-                    : "bg-gray-300 text-black hover:bg-gray-400"
+                    ? "bg-[#960018] text-white shadow-lg"
+                    : "bg-[#ffffff] text-black hover:bg-gray-400"
                   }`}
               >
                 {tab.label}
@@ -264,7 +264,7 @@ export default function FeatureTabs() {
                 lg:w-105
                 xl:w-130
 
-                bg-gray-300
+                bg-[#202020]
 
                 rounded-[40px]
                 md:rounded-[60px]
@@ -316,7 +316,7 @@ export default function FeatureTabs() {
                   ease: [0.25, 0.46, 0.45, 0.94],
                   delay: 0.25
                 }}
-                className="text-3xl font-bold mb-6"
+                className="text-3xl font-bold mb-6 text-white"
               >
                 {activeTab.title}
               </motion.h2>
@@ -329,7 +329,7 @@ export default function FeatureTabs() {
                   ease: [0.25, 0.46, 0.45, 0.94],
                   delay: 0.35
                 }}
-                className="text-2xl text-gray-700 leading-relaxed mb-8 tracking-wider"
+                className="text-2xl text-[#c3c3c3] leading-relaxed mb-8 tracking-wider"
               >
                 {activeTab.description}
               </motion.p>
@@ -350,7 +350,7 @@ export default function FeatureTabs() {
                   transition: { duration: 0.2, ease: "easeOut" }
                 }}
                 whileTap={{ scale: 0.95 }}
-                className="rounded-lg bg-linear-to-r from-[#d60000] to-[#ff0000] px-6 py-3 text-white font-semibold transform transition-all duration-300 ease-in-out hover:shadow-lg"
+                className="rounded-lg bg-[#960018] px-6 py-3 text-white font-semibold transform transition-all duration-300 ease-in-out hover:shadow-lg"
               >
                 Watch Video
               </motion.button>

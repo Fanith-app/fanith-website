@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const TARGET_DATE = new Date("2026-03-01T00:00:00");
 
@@ -147,7 +147,7 @@ function SevenSegmentDigit({ digit }: { digit: number }) {
   ];
 
   return (
-    <div className="relative w-[40px] h-[68px] sm:w-[46px] sm:h-[78px] sclae-65">
+    <div className="relative w-10 h-17 sm:w-11.5 sm:h-19.5 sclae-65">
       {positions.map((pos, i) => (
         <span key={i} className={`segment ${pos} ${seg[i] ? "on" : ""}`} />
       ))}
@@ -189,7 +189,7 @@ function TimerBox({ label, value }: { label: string; value: number }) {
         h-[clamp(110px,22vw,150px)]
         rounded-xl
         bg-linear-to-r from-[#303338] via-[#87909E] to-[#303338]
-        p-[2px] sm:p-[3px]
+        p-0.5 sm:p-0.75
         shadow-[0_30px_60px_-30px_#000000]
         cursor-pointer
       "
@@ -221,5 +221,3 @@ function TimerBox({ label, value }: { label: string; value: number }) {
     </motion.div>
   );
 }
-
-

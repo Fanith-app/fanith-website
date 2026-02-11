@@ -19,6 +19,7 @@ export default function PartnersAndFeatures() {
             "/assets/svg/partner2.svg",
             "/assets/svg/partner3.svg",
             "/assets/svg/partner4.svg",
+            "/assets/svg/partner1.svg",
           ].map((logo, index) => (
             <div key={index} className="relative h-30 w-50">
               <Image
@@ -108,7 +109,7 @@ function FeatureCard({
       className={`p-[1.5px] rounded-xl bg-linear-to-r from-[#9E1D1D] to-[#FF0000] flex flex-col justify-between relative
         ${large ? "row-span-2" : ""}`}
     >
-      <div className={`z-10 relative rounded-2xl p-6 min-h-[260px] lg:min-h-[280px] bg-white shadow-sm overflow-hidden ${large ? 'rounded-b-none' : 'h-full'}`}>
+      <div className={`z-10 relative rounded-2xl p-6 min-h-65 lg:min-h-70 bg-white shadow-sm overflow-hidden ${large ? 'rounded-b-none' : 'h-full'}`}>
         <div className={`space-y-4 relative z-10 ${image && !large ? "w-full lg:w-1/2" : "w-full"
           }`}>
           <div className="w-9 h-9 flex items-center justify-center">
@@ -119,7 +120,7 @@ function FeatureCard({
           <p className="text-md text-[#333333]">{description}</p>
 
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-3">
-            <button className="bg-gradient-to-r from-[#D60000] to-[#FF0000] text-white text-sm lg:text-base px-4 py-2 min-h-[40px] rounded-md whitespace-nowrap transform transition-all duration-300 ease-in-out hover:scale-105 active:scale-95">
+            <button className="bg-linear-to-r from-[#D60000] to-[#FF0000] text-white text-sm lg:text-base px-4 py-2 min-h-10 rounded-md whitespace-nowrap transform transition-all duration-300 ease-in-out hover:scale-105 active:scale-95">
               Watch Video
             </button>
 

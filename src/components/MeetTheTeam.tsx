@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 type TeamMember = {
   name: string;
@@ -18,7 +18,7 @@ interface MeetTheTeamProps {
 
 export default function MeetTheTeam({ members }: MeetTheTeamProps) {
   return (
-    <section className="bg-white px-4 md:px-10 py-28 shadow-2xl">
+    <section className="px-4 md:px-10 pt-10 pb-15 shadow-2xl">
       <motion.div
         className="mx-auto max-w-7xl md:px-6"
         initial="hidden"
@@ -40,7 +40,7 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
 
         {/* Heading */}
         <motion.h2
-          className="text-center text-3xl sm:text-4xl font-bold mb-16"
+          className="text-center text-3xl sm:text-4xl font-bold mb-16 text-white"
           variants={{
             hidden: { opacity: 0 },
             visible: { 
@@ -82,7 +82,7 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
                 }
               }}
             >
-              <Card className="group relative rounded-[36px] border border-red-600 bg-[#cfcfcf] shadow-2xl transform ease-in-out cursor-pointer transition-transform duration-300 hover:scale-105">
+              <Card className="group relative rounded-none bg-[#202020] shadow-2xl transform ease-in-out cursor-pointer transition-transform duration-300 hover:scale-105">
                 <CardContent className="px-10 text-center">
 
                   {/* Avatar */}
@@ -108,7 +108,7 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
 
                   {/* Name Banner */}
                   <motion.div
-                    className="mx-auto mb-4 w-fit bg-red-600 px-8 py-2 text-white text-lg font-bold [clip-path:polygon(0%_0%,100%_0%,85%_100%,15%_100%)] transform transition-all duration-500"
+                    className="mx-auto mb-4 w-fit bg-[#960018] px-8 py-2 text-white text-lg font-bold [clip-path:polygon(0%_0%,100%_0%,85%_100%,15%_100%)] transform transition-all duration-500"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
@@ -123,7 +123,7 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
 
                   {/* Designation */}
                   <motion.p
-                    className="text-xl font-semibold mb-8 transform transition-all duration-500"
+                    className="text-xl font-semibold mb-8 transform transition-all duration-500 text-white"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
@@ -149,16 +149,16 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
                     }}
                   >
                     <p>
-                      <span className="font-semibold text-red-600">
+                      <span className="font-semibold text-[#960018]">
                         Superpower:
                       </span>{" "}
-                      {member.superpower}
+                      <span className="text-[#c3c3c3]">{member.superpower}</span>
                     </p>
                     <p>
-                      <span className="font-semibold text-red-600">
+                      <span className="font-semibold text-[#960018]">
                         Favourite Team:
                       </span>{" "}
-                      {member.favouriteTeam}
+                      <span className="text-[#c3c3c3]">{member.favouriteTeam}</span>
                     </p>
                   </motion.div>
 

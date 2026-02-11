@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import axios from "axios";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -16,8 +16,8 @@ import {
   SelectValue,
 } from "../ui/select";
 
-import endpoints, { BASE_URL } from "../../api/endpoint";
 import { _makePostRequest } from "@/src/api/api";
+import endpoints, { BASE_URL } from "../../api/endpoint";
 
 interface Team {
   name: string;
@@ -99,40 +99,40 @@ export default function EarlyAccess() {
       <ToastContainer newestOnTop />
 
       {/* Background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="h-full w-full bg-linear-to-r from-[#9E1D1D] to-[#FF0000] rounded-t-4xl" />
-      </div>
+      {/* <div className="absolute inset-0 -z-10">
+        <div className="h-full w-full bg-transparent rounded-t-4xl" />
+      </div> */}
 
       <motion.div
-        className="mx-auto max-w-6xl px-4 pt-32 pb-20 text-center text-white"
+        className="max-w-6xl px-0 pt-10 pb-3 text-left text-white"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
         <motion.h2
-          className="text-3xl md:text-4xl font-extrabold"
+          className="text-2xl md:text-2xl font-bold"
           initial={{ y: 40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
         >
           Get Early Access
         </motion.h2>
 
-        <p className="mx-auto mt-4 max-w-3xl text-white/90">
+        {/* <p className="mx-auto mt-4 max-w-3xl text-white/90">
           Be the first to experience the app. Join our waitlist and help shape the
           future.
-        </p>
+        </p> */}
 
         <form
           onSubmit={handleEarlyAccess}
-          className="mt-10 flex flex-col md:flex-row items-center gap-4 justify-center"
+          className="mt-5 flex flex-col md:flex-row items-start gap-4"
         >
           <input
             type="text"
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="h-full w-full md:w-72 rounded-xl bg-white px-6 py-3 text-sm text-[#555]"
+            className="h-full w-full md:w-72 rounded-full border border-white bg-white/20 backdrop-blur-md px-6 py-2.5 text-sm text-[#bfbfbf]"
           />
 
           <input
@@ -140,12 +140,12 @@ export default function EarlyAccess() {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="h-full w-full md:w-72 rounded-xl bg-white px-6 py-3 text-sm text-[#555]"
+            className="h-full w-full md:w-72 rounded-full border border-white bg-white/20 backdrop-blur-md px-6 py-2.5 text-sm text-[#bfbfbf]"
           />
 
           <div className="w-full md:w-72">
             <Select value={selectedTeam} onValueChange={setSelectedTeam}>
-              <SelectTrigger className="rounded-xl bg-white px-6 py-3 text-sm text-[#555] w-full h-full">
+              <SelectTrigger className="h-full w-full md:w-72 rounded-full border border-white bg-white/20 backdrop-blur-md px-6 py-2.5 text-sm text-[#bfbfbf]">
                 <SelectValue placeholder="Select Team " />
               </SelectTrigger>
               <SelectContent>
@@ -161,7 +161,7 @@ export default function EarlyAccess() {
           <button
             type="submit"
             disabled={loading}
-            className={`rounded-full bg-[#2b2b2b] px-8 py-3 text-sm font-semibold text-white ${
+            className={`rounded-full bg-[#960018] px-8 py-3 text-sm font-semibold text-white ${
               loading ? "opacity-70 cursor-not-allowed" : "hover:bg-black"
             }`}
           >

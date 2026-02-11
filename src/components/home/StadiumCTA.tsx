@@ -14,7 +14,7 @@ export default function StadiumCTA({
   joinedFans = 48000,
 }: StadiumCTAProps) {
 
-  
+
   const scrollToEarlyAccess = () => {
     const earlyAccessSection = document.getElementById('early-access');
     if (earlyAccessSection) {
@@ -90,7 +90,7 @@ export default function StadiumCTA({
               }
             }
           }}
-          className="mt-5 text-base md:text-lg lg:text-2xl font-bold text-[#FFFFFF]"
+          className="mt-5 text-base md:text-lg lg:text-2xl font-bold text-[#ededed]"
         >
           {joinedFans.toLocaleString()} fans have already joined the Fanith tribe.
           Be part of the roar.
@@ -115,7 +115,7 @@ export default function StadiumCTA({
         >
           <div className="mx-auto h-4 max-w-xl rounded-full bg-white/20">
             <motion.div
-              className="h-full rounded-full bg-linear-to-r from-[#8F231B] to-[#C83228]"
+              className="h-full rounded-full bg-[linear-gradient(90deg,rgba(255,213,79,0.8)_-19.53%,rgba(255,183,77,0.8)_20.5%,rgba(244,81,30,0.8)_63.48%,rgba(183,28,28,0.8)_102.92%)] shadow-[inset_0_10px_13.7px_rgba(0,0,0,0.25)]"
               initial={{ width: 0 }}
               whileInView={{ width: `${filledPercentage}%` }}
               viewport={{ once: true }}
@@ -160,14 +160,14 @@ export default function StadiumCTA({
         >
           <Button
             onClick={scrollToEarlyAccess}
-          className="inline-flex items-center justify-center rounded-full bg-[#9E1F16] px-8 py-3 text-base font-semibold transform transition-all duration-300 ease-in-out hover:bg-[#b3261c] hover:scale-105 cursor-pointer"
+            className="inline-flex items-center justify-center rounded-full bg-[#9E1F16] px-8 py-3 text-base font-semibold transform transition-all duration-300 ease-in-out hover:bg-[#b3261c] hover:scale-105 cursor-pointer"
           >
-            Secure My Seat Now →
+            Join Early Access →
           </Button>
         </motion.div>
 
       </motion.div>
-     
+
     </section>
   );
 }

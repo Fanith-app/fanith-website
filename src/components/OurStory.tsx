@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import VisionMission from "./common/VisionMission";
 
 interface OurStoryProps {
   title?: string;
@@ -54,9 +55,9 @@ export default function OurStory({
           }}
         >
           {/* Gradient Border */}
-          <span className="p-0.5 rounded-full bg-linear-to-t from-[#ff0000] to-[#000000]">
+          <span className="p-0.5">
             {/* Inner content */}
-            <span className="block rounded-full bg-white px-20 py-3 text-xl font-bold text-black">
+            <span className="block px-20 py-3 text-md md:text-xl xl:text-[32px] font-bold text-white">
               {title}
             </span>
           </span>
@@ -64,7 +65,7 @@ export default function OurStory({
 
         {/* Story Text */}
         <motion.p
-          className="text-center text-md md:text-xl xl:text-[24px] leading-relaxed text-gray-700 mb-24 tracking-wider"
+          className="text-center text-md md:text-xl xl:text-[21px] leading-relaxed text-[#c3c3c3] mb-24 tracking-wider"
           variants={{
             hidden: { y: 50, opacity: 0 },
             visible: {
@@ -80,6 +81,23 @@ export default function OurStory({
         >
           {storyText}
         </motion.p>
+
+        <VisionMission
+                items={[
+                  {
+                    title: "Our Vision",
+                    description:
+                      "To build the world's most engaging digital community for sports fans — where passion, connection, and excitement come alive.",
+                    icon: "/assets/images/vision-icon.png",
+                  },
+                  {
+                    title: "Our Mission",
+                    description:
+                      "To empower fans with real-time engagement tools, community-driven content, and features that transform the way people experience sports digitally.",
+                    icon: "/assets/images/mission-icon.png",
+                  },
+                ]}
+              />
 
         {/* Founder Section */}
         <motion.div
@@ -108,7 +126,7 @@ export default function OurStory({
             }}
           >
             <motion.h3
-              className="text-md md:text-xl xl:text-[32px] font-bold mb-6"
+              className="text-md md:text-xl xl:text-[32px] font-bold mb-6 text-white"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -122,7 +140,7 @@ export default function OurStory({
             </motion.h3>
 
             <motion.p
-              className="text-md md:text-xl xl:text-[24px] leading-relaxed text-gray-700 tracking-wider"
+              className="text-md md:text-xl xl:text-[21px] leading-relaxed text-[#c3c3c3] tracking-wider"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

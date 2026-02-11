@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import UpperHeader from "../layout/UpperHeader";
 import EarlyAccessModal from "../modals/EarlyAccessModal";
 
 export default function Header() {
@@ -47,16 +48,20 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 w-full bg-white border-b border-gray-200 z-50">
+    <>
+     {/* TOP ANNOUNCEMENT HEADER */}
+      <UpperHeader />
+      {/* <header className="fixed top-0 left-0 right-0 w-full bg-[#141414]/80 rounded-xl border border-[#eeeeee]/18 z-50"> */}
+      <header className="absolute overflow-hidden left-50 right-50 mt-5 w-3/4 bg-[#141414]/80 rounded-xl border border-[#eeeeee]/18 z-50 mx-auto">
       <div className="mx-auto max-w-7xl px-4">
         <div className="flex h-16 items-center justify-between px-2 ">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/assets/images/Fanith_New_Header_Logo.png"
+              src="/assets/images/Fanith_Logo.png"
               alt="Fanith Logo"
-              width={150}
-              height={150}
+              width={120}
+              height={120}
               priority
               className="object-cover"
             />
@@ -69,8 +74,8 @@ export default function Header() {
                 key={link.label}
                 href={link.href}
                 className={`text-md font-medium transition ${isActiveLink(link.href)
-                  ? "text-[#ff0000]" // active
-                  : "text-gray-700 hover:text-black" // inactive
+                  ? "text-[#960018]" // active
+                  : "text-[#c3c3c3] hover:text-[#960018]" // inactive
                   }`}
               >
                 {link.label}
@@ -82,7 +87,7 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <button
               onClick={handleJoinBeta}
-              className="hidden lg:inline-flex items-center rounded-full bg-linear-to-r from-[#ff0000] to-[#de0000] px-5 py-2 text-sm font-semibold text-white transform transition-all duration-300 ease-in-out hover:scale-105 cursor-pointer"
+              className="hidden lg:inline-flex items-center rounded-full bg-[#960018] px-5 py-2 text-sm font-semibold text-white transform transition-all duration-300 ease-in-out hover:scale-105 cursor-pointer"
             >
               Join Beta
             </button>
@@ -185,5 +190,6 @@ export default function Header() {
         onClose={() => setModalOpen(false)} 
       />
     </header>
+    </>
   );
 }
