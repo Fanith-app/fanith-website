@@ -424,5 +424,355 @@ export const termsAndConditions = {
   }
 };
 
+// Child Safety Policy
+export const childSafetyPolicy = {
+  policyId: "fanith-child-safety-policy",
+  lastUpdated: "2025-01-01",
+
+  website: {
+    name: "Fanith",
+    type: "Sports & IPL Cricket Platform",
+    url: "https://www.fanith.com"
+  },
+
+  introduction: {
+    title: "Child Safety Policy",
+    description:
+      "At Fanith, we are deeply committed to creating a safe, secure, and age-appropriate environment for all users, especially children and teenagers. This Child Safety Policy outlines how we protect young fans engaging with IPL cricket content and community features on our platform."
+  },
+
+  ageRequirements: {
+    title: "Age Requirements",
+    minimumAge: 13,
+    description:
+      "Fanith requires all users to be at least 13 years of age. We implement age verification mechanisms during registration and do not knowingly collect personal information from children under 13 without verified parental consent.",
+    requirements: [
+      "Users must be 13 years or older to create an account",
+      "Age verification required during registration process",
+      "Parental consent required for users under 18 in certain regions",
+      "Special protections in place for users between 13-17 years",
+      "Immediate account suspension for age misrepresentation"
+    ]
+  },
+
+  parentalControls: {
+    title: "Parental Controls & Oversight",
+    description:
+      "We empower parents and guardians with comprehensive tools to manage and monitor their children's activity on Fanith.",
+    features: [
+      {
+        name: "Supervised Accounts",
+        description:
+          "Parents can create and manage supervised accounts for children, with full visibility into activity and content access."
+      },
+      {
+        name: "Activity Monitoring",
+        description:
+          "View chat history, engagement patterns, FanDom point accumulation, and community interactions in real-time."
+      },
+      {
+        name: "Privacy Controls",
+        description:
+          "Control who can contact your child, view their profile, and interact with their posts and comments."
+      },
+      {
+        name: "Screen Time Management",
+        description:
+          "Set daily usage limits, schedule breaks during match days, and receive notifications about extended sessions."
+      },
+      {
+        name: "Content Filtering",
+        description:
+          "Enable strict filtering of user-generated content and limit access to age-appropriate discussions only."
+      }
+    ]
+  },
+
+  contentGuidelines: {
+    title: "Content Guidelines & Age-Appropriate Content",
+    description:
+      "All content on Fanith is moderated to ensure age-appropriate sports discussions and positive fan engagement.",
+    allowedContent: [
+      "Match discussions and sports commentary",
+      "Player statistics, team information, and cricket analysis",
+      "Fan polls, trivia, and interactive sports quizzes",
+      "Positive fan community engagement and team support",
+      "Educational sports content and cricket history",
+      "Age-appropriate celebration of victories and sportsmanship"
+    ],
+    prohibitedContent: [
+      "Inappropriate language, profanity, or vulgar expressions",
+      "Bullying, harassment, hate speech, or discriminatory content",
+      "Sharing of personal contact information (phone numbers, addresses, emails)",
+      "Violent, sexually explicit, or adult-oriented content",
+      "Gambling-related discussions or betting encouragement",
+      "Commercial solicitation, spam, or promotional content targeting minors",
+      "Impersonation of other users, celebrities, or official entities"
+    ]
+  },
+
+  privacyProtection: {
+    title: "Privacy Protection for Children",
+    subtitle: "COPPA & GDPR-K Compliance",
+    description:
+      "We strictly comply with the Children's Online Privacy Protection Act (COPPA), GDPR Article 8 (processing of children's data), and similar international regulations protecting children's privacy online.",
+    protections: [
+      {
+        title: "Limited Data Collection",
+        description:
+          "We collect only essential information necessary to provide cricket fan engagement services. No unnecessary personal data is requested from minor users."
+      },
+      {
+        title: "Verified Parental Consent",
+        description:
+          "For users under 13 (where permitted), we obtain verified parental consent before collecting any personal information through double-verification email processes."
+      },
+      {
+        title: "No Behavioral Advertising",
+        description:
+          "We do not serve targeted behavioral advertisements to users identified as children or minors. All ads shown to minors are contextual and age-appropriate."
+      },
+      {
+        title: "Enhanced Data Security",
+        description:
+          "Children's data is encrypted with enhanced security protocols, stored separately, and subject to stricter access controls than adult user data."
+      },
+      {
+        title: "Parental Access Rights",
+        description:
+          "Parents can request to review, modify, or delete their child's data at any time. We respond to such requests within 48 hours."
+      },
+      {
+        title: "Data Retention Limits",
+        description:
+          "Minor user data is retained only as long as necessary to provide services. Upon account deletion, all data is permanently erased within 30 days."
+      }
+    ]
+  },
+
+  safetyFeatures: {
+    title: "Safety Features & Protection Mechanisms",
+    description:
+      "Multi-layered safety mechanisms work around the clock to protect young users from harmful content and inappropriate interactions.",
+    features: [
+      {
+        name: "AI Content Moderation",
+        description:
+          "Real-time automated filtering uses advanced AI to detect and block inappropriate language, bullying, and harmful content before it reaches users.",
+        icon: "Bot"
+      },
+      {
+        name: "Human Safety Team",
+        description:
+          "Dedicated child safety specialists review flagged content within 2 hours for critical issues and 24 hours for standard reports.",
+        icon: "Users"
+      },
+      {
+        name: "One-Tap Reporting",
+        description:
+          "Instantly report concerning content, users, or behavior with a single tap. All reports are reviewed promptly and confidentially.",
+        icon: "Flag"
+      },
+      {
+        name: "Restricted Communication",
+        description:
+          "Age-based chat restrictions prevent unsolicited contact from strangers. Minors can only message verified contacts and approved users.",
+        icon: "MessageSquareOff"
+      },
+      {
+        name: "Safe Search & Discovery",
+        description:
+          "Age-appropriate content recommendations and search results ensure children only discover suitable cricket content and discussions.",
+        icon: "Search"
+      },
+      {
+        name: "Automatic Profanity Blocking",
+        description:
+          "Advanced filters automatically block profanity, slurs, and inappropriate language in all user interactions.",
+        icon: "ShieldCheck"
+      }
+    ]
+  },
+
+  dataCollection: {
+    title: "Data Collection from Children",
+    description:
+      "We are transparent about what information we collect from minor users and the specific purposes for each type of data.",
+    collectedData: [
+      {
+        type: "Account Information",
+        details: "Username (no real names required), age, parent/guardian email (for users under 13)",
+        purpose: "Account creation, age verification, and parental communication"
+      },
+      {
+        type: "Engagement Data",
+        details: "Match predictions, poll responses, FanDom points earned, team preferences",
+        purpose: "Platform functionality, gamification, and personalized cricket content"
+      },
+      {
+        type: "Safety & Moderation Data",
+        details: "Reported content, blocked users, moderation actions, chat history (encrypted)",
+        purpose: "Child safety monitoring, policy enforcement, and platform improvement"
+      },
+      {
+        type: "Technical Data",
+        details: "Device type, browser, IP address (anonymized), session timestamps",
+        purpose: "Security, fraud prevention, and technical support"
+      }
+    ],
+    notCollected: [
+      "Precise geolocation or GPS coordinates",
+      "Biometric information (fingerprints, facial recognition)",
+      "Financial information, credit cards, or payment details from minors",
+      "Social media account credentials or friend lists",
+      "Behavioral tracking data for advertising purposes",
+      "Voice recordings or video uploads",
+      "Real names, home addresses, or phone numbers (not required)"
+    ]
+  },
+
+  communicationRestrictions: {
+    title: "Communication Restrictions",
+    description:
+      "Age-based communication safeguards prevent inappropriate contact and protect children from potential online predators.",
+    restrictions: [
+      {
+        ageGroup: "Users Under 13",
+        rules: [
+          "Direct messaging disabled by default (parents can enable with supervision)",
+          "Can only interact with pre-approved contacts verified by parents",
+          "No private messaging with users outside approved list",
+          "All public comments are pre-moderated before posting",
+          "Group chat participation limited to verified supervised groups",
+          "Cannot share profile publicly or be discovered in search"
+        ]
+      },
+      {
+        ageGroup: "Users 13-17 Years",
+        rules: [
+          "Limited direct messaging with automatic safety filters active",
+          "Cannot receive messages from users 18+ unless mutually following",
+          "Restricted from adult-only discussion rooms and mature content",
+          "Real-time profanity and harassment detection in all messages",
+          "Daily message limits to prevent excessive communication",
+          "Cannot share contact information in messages or comments"
+        ]
+      }
+    ]
+  },
+
+  educationalResources: {
+    title: "Educational Resources",
+    description:
+      "We provide comprehensive resources to help parents and children navigate online safety and digital citizenship.",
+    forParents: [
+      {
+        title: "Parent's Guide to Online Safety",
+        description:
+          "Comprehensive guide covering online risks, warning signs, and best practices for keeping kids safe on social platforms.",
+        link: "/resources/parents-guide"
+      },
+      {
+        title: "Setting Up Parental Controls",
+        description:
+          "Step-by-step video tutorial on configuring safety settings, monitoring tools, and content filters for your child's account.",
+        link: "/resources/parental-controls-setup"
+      },
+      {
+        title: "Recognizing Warning Signs",
+        description:
+          "Learn to identify problematic online behavior, cyberbullying indicators, and when to intervene in your child's online activity.",
+        link: "/resources/warning-signs"
+      },
+      {
+        title: "Talking to Kids About Online Safety",
+        description:
+          "Age-appropriate conversation starters and tips for discussing internet safety, privacy, and responsible digital citizenship.",
+        link: "/resources/family-conversations"
+      }
+    ],
+    forChildren: [
+      {
+        title: "Be a Good Digital Citizen",
+        description:
+          "Fun, interactive lessons on online etiquette, treating others with respect, and being a positive member of the Fanith community.",
+        link: "/resources/digital-citizenship"
+      },
+      {
+        title: "When to Report Something",
+        description:
+          "Kid-friendly guide explaining what content should be reported, how to use the report button, and why reporting helps everyone.",
+        link: "/resources/how-to-report"
+      },
+      {
+        title: "Keeping Your Info Private",
+        description:
+          "Simple, actionable tips on protecting personal information, recognizing sharing risks, and staying safe online.",
+        link: "/resources/privacy-tips-kids"
+      },
+      {
+        title: "Dealing with Bullying",
+        description:
+          "Resources for kids experiencing cyberbullying, including how to respond, when to ask for help, and support options.",
+        link: "/resources/anti-bullying"
+      }
+    ]
+  },
+
+  incidentResponse: {
+    title: "Incident Response & Reporting",
+    description:
+      "Our commitment to rapid, thorough response for all child safety concerns and content violations.",
+    process: [
+      {
+        step: "Report Submission",
+        description:
+          "Use the in-app report button on any content or user, or email our child safety team at childsafety@fanith.com",
+        timeframe: "Immediate submission and confirmation"
+      },
+      {
+        step: "Automated Acknowledgment",
+        description:
+          "Receive automated confirmation that your report has been received and assigned to our safety team",
+        timeframe: "Within 2 minutes"
+      },
+      {
+        step: "Safety Team Review",
+        description:
+          "Human safety specialists assess the concern, review context, and determine appropriate action based on severity",
+        timeframe: "Within 2 hours for critical safety issues, 24 hours for standard reports"
+      },
+      {
+        step: "Immediate Action",
+        description:
+          "Content removal, account suspension, or other protective measures taken based on policy violations",
+        timeframe: "Immediate for severe violations, within 24 hours for standard issues"
+      },
+      {
+        step: "Follow-up Communication",
+        description:
+          "Reporter notified of outcome and actions taken (within privacy and legal constraints)",
+        timeframe: "Within 48 hours"
+      }
+    ],
+    emergencyContact:
+      "For urgent child safety emergencies involving immediate danger, contact: childsafety@fanith.com with subject line 'URGENT' or use the emergency report button in the app. We monitor this 24/7.",
+    lawEnforcement:
+      "We cooperate fully with law enforcement agencies investigating child safety issues and will provide necessary information in compliance with legal requirements."
+  },
+
+  contactInformation: {
+    title: "Child Safety Contact Information",
+    description:
+      "Our dedicated child safety team is available to answer questions, address concerns, and support parents in keeping their children safe.",
+    childSafetyEmail: "childsafety@fanith.com",
+    parentSupportEmail: "parentsupport@fanith.com",
+    generalEmail: "support@fanith.com",
+    address: "Fanith Sports Pvt Ltd, Child Safety Team, India",
+    responseTime:
+      "We respond to child safety concerns within 2 hours during business hours (9 AM - 6 PM IST, Monday-Friday) and within 24 hours outside business hours. Urgent safety issues are monitored 24/7."
+  }
+};
+
 
 
