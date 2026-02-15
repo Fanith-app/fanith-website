@@ -1,8 +1,8 @@
-import routes from "./routes";
 
 export const navLinks = [
-  { label: "Home", href: "/"  },
+  // { label: "Home", href: "/"  },
   { label: "Features", href: "/features" },
+  { label: "Download", href: "/download" },
   { label: "About Us", href: "/about" },
   // { label: "Brand Partnership", href: "/partnership" },
   { label: "Blog", href: "/blog" },

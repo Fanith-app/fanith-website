@@ -282,7 +282,11 @@ export default function Footer() {
         <div className="my-6 h-px w-full bg-white/30" />
 
         <div className="flex justify-center text-md font-medium text-white/90 gap-5">
-          <Link href="/privacy-policy">Privacy Policy</Link> <span>•</span> © 2026 Fanith <span>•</span> <Link href="/terms-conditions">Terms & Conditions</Link>
+          {/* <Link href="/privacy-policy">Privacy Policy</Link> <span>•</span> © 2026 Fanith <span>•</span> <Link href="/terms-conditions">Terms & Conditions</Link> */}
+          <Link href="/privacy-policy">Privacy Policy</Link> <span>•</span> <Link href="/terms-conditions">Terms & Conditions</Link>
+        </div>
+        <div className="flex justify-center text-md font-medium text-white/90 pt-4 pb-3 tracking-wide">
+          Copyright © {new Date().getFullYear()} MEEDEE DIGITAL LABS PRIVATE LIMITED, All Rights Reserved.
         </div>
       </div>
 

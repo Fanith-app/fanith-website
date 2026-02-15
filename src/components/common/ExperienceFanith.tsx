@@ -105,7 +105,7 @@ export default function CenteredCTA({
             {buttonText}
           </Button> */}
           <div className="flex justify-center items-center gap-3">
-            <span><img src="/assets/images/Google-Play-Features.png" alt="Google Play Store" className="h-12 w-auto" /></span>{" "}<span><img src="/assets/images/App-Store-Features.png" alt="App App Store" className="h-12 w-auto" /></span>
+            <span><img src="/assets/images/Google-Play-Features.png" alt="Google Play Store" className="h-12 w-auto cursor-pointer" /></span>{" "}<span><img src="/assets/images/App-Store-Features.png" alt="App App Store" className="h-12 w-auto cursor-pointer" /></span>
           </div>
         </motion.div>
 
