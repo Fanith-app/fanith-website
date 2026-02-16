@@ -1,12 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -14,14 +9,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { Textarea } from "@/components/ui/textarea";
 import { _makeUnauthenticatedPostRequest } from "@/src/api/api";
 import endpoints from "@/src/api/endpoint";
-import routes from "../lib/routes";
 import { useCenterPopup } from "@/src/context/CenterPopupContext";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
+import { z } from "zod";
+import routes from "../lib/routes";
 
 const tabs = ["Support Form", "Brand Partnership Form"] as const;
 
@@ -83,7 +83,7 @@ export default function SupportTabs() {
   }, [tabParam]);
 
   return (
-    <section className="bg-transparent py-10 md:py-24">
+    <section className="bg-transparent py-10 md:py-10">
       <div className="max-w-7xl mx-auto px-4 md:px-15">
 
         {/* Tabs */}
@@ -91,15 +91,15 @@ export default function SupportTabs() {
           ref={tabsRef}
           className="flex justify-center mb-14"
         >
-          <div className="flex rounded-xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.1)] w-160 ">
+          <div className="flex rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.1)] w-160 gap-4">
             {tabs.map((tab, index) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`w-full rounded-xl text-sm md:text-xl font-semibold py-4 transition-all duration-200
+                className={`w-full rounded-full text-sm md:text-xl py-4 cursor-pointer transition-all duration-200
                   ${activeTab === tab
-                    ? "bg-[#FF0000] text-[#F8F8F8]"
-                    : "text-[#111111] bg-transparent"
+                    ? "bg-[#960018] text-[#FFFFFF] font-semibold"
+                    : "text-[#C3C3C3] bg-[#202020] font-normal"
                   }`}
               >
                 {tab}
@@ -132,7 +132,7 @@ export default function SupportTabs() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.15 }}
-                    className="text-2xl text-[#111111] font-bold mb-4"
+                    className="text-2xl text-[#FFFFFF] font-bold mb-4"
                   >
                     When Should You Use This Form?
                   </motion.h2>
@@ -140,12 +140,12 @@ export default function SupportTabs() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.2 }}
-                    className="space-y-4 text-[#333333]/70 font-semibold"
+                    className="space-y-4 text-[#C3C3C3]/70 font-semibold"
                   >
-                    <li><span className="text-[#111111] text-2xl">●</span> You have product or app-related questions</li>
-                    <li><span className="text-[#111111] text-2xl">●</span> You need technical help or installation support</li>
-                    <li><span className="text-[#111111] text-2xl">●</span> You want to report an issue or bug</li>
-                    <li><span className="text-[#111111] text-2xl">●</span> You need help with FanDom or FanPedia features</li>
+                    <li><span className="text-[#C3C3C3] text-2xl">●</span> You have product or app-related questions</li>
+                    <li><span className="text-[#C3C3C3] text-2xl">●</span> You need technical help or installation support</li>
+                    <li><span className="text-[#C3C3C3] text-2xl">●</span> You want to report an issue or bug</li>
+                    <li><span className="text-[#C3C3C3] text-2xl">●</span> You need help with FanDom or FanPedia features</li>
                   </motion.ul>
 
                   <motion.button
@@ -154,7 +154,7 @@ export default function SupportTabs() {
                     transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.25 }}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="mt-8 border-2 border-[#111111] px-8 py-3 rounded-lg font-medium text-[#111111] transform transition-all duration-300 ease-in-out hover:scale-105 hover:bg-[#111111] hover:text-white cursor-pointer"
+                    className="mt-8 border-2 border-[#960018] px-8 py-3 rounded-lg font-medium text-[#960018] transform transition-all duration-300 ease-in-out hover:scale-105 hover:bg-transparent hover:text-white cursor-pointer"
                  onClick={()=> router.push(routes.faq)}
                  >
                     View FAQ
@@ -166,7 +166,7 @@ export default function SupportTabs() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.15 }}
-                    className="text-2xl text-[#111111] font-bold mb-4"
+                    className="text-2xl text-[#FFFFFF] font-bold mb-4"
                   >
                     Brand Collaborations
                   </motion.h2>
@@ -174,12 +174,12 @@ export default function SupportTabs() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.2 }}
-                    className="space-y-4 text-[#333333]/70 font-semibold"
+                    className="space-y-4 text-[#C3C3C3]/70 font-semibold"
                   >
-                    <li><span className="text-[#111111] text-2xl">●</span> Sponsorship opportunities</li>
-                    <li><span className="text-[#111111] text-2xl">●</span> Game Room branding</li>
-                    <li><span className="text-[#111111] text-2xl">●</span> Affiliate marketing</li>
-                    <li><span className="text-[#111111] text-2xl">●</span> Coupon rewards for winners</li>
+                    <li><span className="text--[#C3C3C3] text-2xl">●</span> Sponsorship opportunities</li>
+                    <li><span className="text--[#C3C3C3] text-2xl">●</span> Game Room branding</li>
+                    <li><span className="text--[#C3C3C3] text-2xl">●</span> Affiliate marketing</li>
+                    <li><span className="text--[#C3C3C3] text-2xl">●</span> Coupon rewards for winners</li>
                   </motion.ul>
                 </>
               )}
@@ -192,7 +192,7 @@ export default function SupportTabs() {
                 className="mt-12"
               >
                 <Image
-                  src="/assets/svg/contact-us.svg"
+                  src="/assets/images/contact-us-form.webp"
                   alt="Support Illustration"
                   width={400}
                   height={300}
@@ -205,7 +205,7 @@ export default function SupportTabs() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.2 }}
-              className="bg-white rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-4 md:p-10"
+              className="bg-[#202020] rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.1)] p-4 md:p-10"
             >
               {activeTab === "Support Form" ? (
                 <SupportForm />
@@ -540,13 +540,13 @@ function FormInput({
 }) {
   return (
     <div className="space-y-2">
-      <Label htmlFor={label.toLowerCase().replace(/\s+/g, '-')} className="text-sm font-medium">
+      <Label htmlFor={label.toLowerCase().replace(/\s+/g, '-')} className="text-sm font-medium text-white">
         {label}:
       </Label>
       <Input
         id={label.toLowerCase().replace(/\s+/g, '-')}
         type={type}
-        className={`h-8 md:h-10 lg:h-12 border-2 rounded-full px-5 py-3 ${error ? 'border-red-500 focus:border-red-500' : 'border-[#111111]'
+        className={`h-8 md:h-10 lg:h-12 border-2 rounded-full text-white px-5 py-3 ${error ? 'border-red-500 focus:border-red-500' : 'border-[#FFFFFF]/50'
           }`}
         {...field}
       />
@@ -572,11 +572,11 @@ function FormSelect({
 }) {
   return (
     <div className="space-y-2">
-      <Label htmlFor={label.toLowerCase().replace(/\s+/g, '-')} className="text-sm font-medium">
+      <Label htmlFor={label.toLowerCase().replace(/\s+/g, '-')} className="text-sm font-medium text-white">
         {label}:
       </Label>
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className={`w-full h-8 md:h-10 lg:h-12 border-2 rounded-full px-5 py-3 ${error ? 'border-red-500 focus:border-red-500' : 'border-[#111111]'
+        <SelectTrigger className={`w-full h-8 md:h-10 lg:h-12 border-2 rounded-full text-white px-5 py-3 ${error ? 'border-red-500 focus:border-red-500' : 'border-[#FFFFFF]/50'
           }`}>
           <SelectValue placeholder="Select an option" />
         </SelectTrigger>
@@ -609,12 +609,12 @@ function FormTextarea({
 }) {
   return (
     <div className="space-y-2">
-      <Label htmlFor={label.toLowerCase().replace(/\s+/g, '-')} className="text-sm font-medium">
+      <Label htmlFor={label.toLowerCase().replace(/\s+/g, '-')} className="text-sm font-medium text-white">
         {label}:
       </Label>
       <Textarea
         id={label.toLowerCase().replace(/\s+/g, '-')}
-        className={`min-h-32 border-2 rounded-xl px-5 py-3 ${error ? 'border-red-500 focus:border-red-500' : 'border-[#111111]'
+        className={`min-h-32 border-2 rounded-xl text-white px-5 py-3 ${error ? 'border-red-500 focus:border-red-500' : 'border-[#FFFFFF]/50'
           }`}
         placeholder={`Enter your ${label.toLowerCase()}...`}
         {...field}
@@ -639,7 +639,7 @@ function SubmitButton({ isSubmitting }: { isSubmitting?: boolean }) {
         disabled={isSubmitting}
         className={`px-10 py-2 rounded-lg font-semibold transform transition-all duration-300 ease-in-out ${isSubmitting
           ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
-          : 'bg-[#FF0000] text-[#F8F8F8] hover:scale-105 hover:bg-red-700 active:scale-95'
+          : 'bg-[#960018] text-[#C3C3C3] hover:scale-105 hover:bg-red-700 active:scale-95'
           }`}
       >
         {isSubmitting ? 'Submitting...' : 'Submit'}

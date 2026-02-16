@@ -5,7 +5,7 @@ import CommunityArticles from '@/src/components/CommunityArticles'
 import CommunityContent from '@/src/components/CommunityContent'
 import CommunityHeroTabs from '@/src/components/CommunityHeroTabs'
 import NewsletterSubscribe from '@/src/components/NewsletterSubscribe'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const page = () => {
   const [activeTab, setActiveTab] = useState("All");
@@ -14,7 +14,7 @@ const page = () => {
       <Banner
         title="From the Fan Community"
         description="Match highlights, fan stories, commentary recaps, and updates from the Fanith universe."
-        backgroundImage="/assets/images/blog-banner.jpg"
+        backgroundImage="/assets/images/blog-page-banner.webp"
       >
         <CommunitySearch />
         <CommunityHeroTabs active={activeTab} onChange={setActiveTab} />

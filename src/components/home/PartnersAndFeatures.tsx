@@ -1,17 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import { ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function PartnersAndFeatures() {
   return (
-    <section className="w-full max-w-7xl mx-auto px-4 md:px-15 py-16 space-y-20">
+    <section className="w-full mx-auto px-4 md:px-15 py-16 space-y-20 bg-[#141414]">
       {/* ===================== */}
       {/* OUR PARTNERS */}
       {/* ===================== */}
       <div className="text-center space-y-10 w-full">
-        <h2 className="text-3xl font-semibold">Our Partners</h2>
+        <h2 className="text-4xl font-semibold text-white text-center">Our Partners</h2>
 
         <div className="flex items-center justify-center gap-14 flex-wrap">
           {/* Replace src with your actual logos */}
@@ -20,6 +19,7 @@ export default function PartnersAndFeatures() {
             "/assets/svg/partner2.svg",
             "/assets/svg/partner3.svg",
             "/assets/svg/partner4.svg",
+            "/assets/svg/partner1.svg",
           ].map((logo, index) => (
             <div key={index} className="relative h-30 w-50">
               <Image
@@ -36,7 +36,7 @@ export default function PartnersAndFeatures() {
       {/* ===================== */}
       {/* APP FEATURES */}
       {/* ===================== */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
@@ -47,7 +47,7 @@ export default function PartnersAndFeatures() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* LEFT LARGE CARD */}
+          LEFT LARGE CARD
           <FeatureCard
             icon={<Image src="/assets/images/feature-icon1.png" alt={"Feature Icon"} width={24} height={24} />}
             title="Game room real-time action"
@@ -56,7 +56,7 @@ export default function PartnersAndFeatures() {
             large
           />
 
-          {/* RIGHT COLUMN */}
+          RIGHT COLUMN
           <div className="grid grid-cols-1 gap-6">
             <FeatureCard
               icon={<Image src="/assets/images/feature-icon2.png" alt={"Feature Icon"} width={24} height={24} />}
@@ -80,7 +80,7 @@ export default function PartnersAndFeatures() {
             </div>
           </div>
         </div>
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }
@@ -109,7 +109,7 @@ function FeatureCard({
       className={`p-[1.5px] rounded-xl bg-linear-to-r from-[#9E1D1D] to-[#FF0000] flex flex-col justify-between relative
         ${large ? "row-span-2" : ""}`}
     >
-      <div className={`z-10 relative rounded-2xl p-6 min-h-[260px] lg:min-h-[280px] bg-white shadow-sm overflow-hidden ${large ? 'rounded-b-none' : 'h-full'}`}>
+      <div className={`z-10 relative rounded-2xl p-6 min-h-65 lg:min-h-70 bg-white shadow-sm overflow-hidden ${large ? 'rounded-b-none' : 'h-full'}`}>
         <div className={`space-y-4 relative z-10 ${image && !large ? "w-full lg:w-1/2" : "w-full"
           }`}>
           <div className="w-9 h-9 flex items-center justify-center">
@@ -120,7 +120,7 @@ function FeatureCard({
           <p className="text-md text-[#333333]">{description}</p>
 
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mt-3">
-            <button className="bg-gradient-to-r from-[#D60000] to-[#FF0000] text-white text-sm lg:text-base px-4 py-2 min-h-[40px] rounded-md whitespace-nowrap transform transition-all duration-300 ease-in-out hover:scale-105 active:scale-95">
+            <button className="bg-linear-to-r from-[#D60000] to-[#FF0000] text-white text-sm lg:text-base px-4 py-2 min-h-10 rounded-md whitespace-nowrap transform transition-all duration-300 ease-in-out hover:scale-105 active:scale-95">
               Watch Video
             </button>
 

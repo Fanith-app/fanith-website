@@ -1,11 +1,9 @@
 "use client";
 
-import React from 'react'
-import VisionMission from '@/src/components/common/VisionMission';
-import OurStory from '@/src/components/OurStory';
-import MeetTheTeam from '@/src/components/MeetTheTeam';
 import Banner from '@/src/components/common/Banner';
-import { motion } from 'framer-motion';
+import CenteredCTA from '@/src/components/common/ExperienceFanith';
+import MeetTheTeam from '@/src/components/MeetTheTeam';
+import OurStory from '@/src/components/OurStory';
 
 const page = () => {
   return (
@@ -13,12 +11,12 @@ const page = () => {
       <Banner
         title="About Fanith"
         description="A sports fan platform built to connect fans, celebrate passion, and bring stadium energy to your screen."
-        backgroundImage="/assets/images/generated-image (8) 1.png"
-        // ctaText="Join Beta"
-        // ctaLink="/join-beta"
+        backgroundImage="/assets/images/about-us-page-banner.webp"
+        ctaText="Join Beta"
+        ctaLink="/join-beta"
       />
 
-      <VisionMission
+      {/* <VisionMission
         items={[
           {
             title: "Our Vision",
@@ -33,7 +31,7 @@ const page = () => {
             icon: "/assets/images/mission-icon.png",
           },
         ]}
-      />
+      /> */}
 
       <OurStory
         storyText="Fanith was created to solve a simple problem — fans had no single place to celebrate matches together online. With live game rooms, FanDom points, and FanPedia knowledge, Fanith brings fans closer to the action and to each other, no matter where they are."
@@ -66,6 +64,25 @@ const page = () => {
             image: "/assets/images/member3.jpg",
           },
         ]}
+      />
+
+      {/* <CenteredCTA
+        title={
+          <>
+            Ready to watch matches the{" "}
+            <span className="text-[#960018]">Fanith</span>{" "} way?
+          </>
+        }
+        description="Explore everything Fanith offers — from live match chat rooms to FanDom rewards and FanPedia player insights."
+      /> */}
+      <CenteredCTA
+        title={
+          <>
+            Be the First to Experience{" "}
+            <span className="text-[#960018]">Fanith</span>
+          </>
+        }
+        description="Explore everything Fanith offers — from live match chat rooms to FanDom rewards and FanPedia player insights."
       />
 
     </main>

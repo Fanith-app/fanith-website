@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
-import { motion } from "framer-motion";
 import clsx from "clsx";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 type HighlightItem = {
   title: string;
@@ -17,7 +17,7 @@ interface HighlightCardsProps {
 
 export default function HighlightCards({ items }: HighlightCardsProps) {
   return (
-    <section className="bg-linear-to-r from-[#9E1D1D] to-[#FF0000] py-24">
+    <section className="py-24">
       <motion.div 
         className="mx-auto max-w-7xl px-4 md:px-6"
         initial="hidden"

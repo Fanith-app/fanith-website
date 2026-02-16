@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Kanit } from "next/font/google";
 import Script from "next/script";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,6 +11,12 @@ import "./globals.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+const geistKanit = Kanit({
+  variable: "--font-geist-kanit",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 const geistMono = Geist_Mono({
@@ -70,14 +76,14 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistMono.variable} ${geistSans.variable} ${geistKanit.variable} antialiased`}>
         {/* Google Tag Manager (noscript) */}
           <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LVD24J8"
           height="0" width="0" style={{ display: "none", visibility: "hidden" }}></iframe></noscript>
         {/* End Google Tag Manager (noscript) */}
         <CenterPopupProvider>
           <Header />
-          <main className="pt-16">{children}</main>
+          <main className="pt-0">{children}</main>
           <Footer />
           <ToastContainer />
         </CenterPopupProvider>

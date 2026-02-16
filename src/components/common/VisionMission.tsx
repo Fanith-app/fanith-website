@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 type Item = {
   title: string;
@@ -16,7 +16,7 @@ interface VisionMissionProps {
 
 export default function VisionMission({ items }: VisionMissionProps) {
   return (
-    <section className="relative bg-linear-to-r from-[#ff0000] to-[#9e1d1d] pt-10 sm:pt-30 lg:pt-40 lg:[clip-path:ellipse(72%_100%_at_50%_100%)] pb-10 sm:pb-24 overflow-hidden lg:-mt-50">
+    <section className="relative pt-10 sm:pt-30 lg:pt-40 pb-10 sm:pb-24 overflow-hidden lg:-mt-50">
       <motion.div 
         className="mx-auto max-w-7xl px-4 md:px-6"
         initial="hidden"
@@ -67,7 +67,7 @@ export default function VisionMission({ items }: VisionMissionProps) {
                 transition: { duration: 0.3, ease: "easeOut" }
               }}
             >
-              <Card className="group relative overflow-hidden rounded-[36px] border-none shadow-2xl h-96 md:h-[450px]">
+              <Card className="group relative overflow-hidden bg-[#202020] rounded-none border-none shadow-2xl h-96 md:h-112.5">
                 <motion.div
                   initial={{ scale: 1.2, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 0.7 }}
@@ -78,12 +78,12 @@ export default function VisionMission({ items }: VisionMissionProps) {
                     delay: 0.2 + index * 0.1
                   }}
                 >
-                  <Image
+                  {/* <Image
                     src="/assets/images/bg-img.png" 
                     alt="bg-img"
                     fill
                     className="object-cover opacity-70"
-                  />
+                  /> */}
                 </motion.div>
 
                 <CardContent className="relative px-6 sm:px-10 py-8 sm:py-14 text-center h-full flex flex-col justify-center">
@@ -103,7 +103,7 @@ export default function VisionMission({ items }: VisionMissionProps) {
 
                   {/* Title */}
                   <motion.h3 
-                    className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 transform transition-all duration-500 group-hover:scale-102"
+                    className="text-2xl sm:text-3xl text-white font-bold mb-4 sm:mb-6 transform transition-all duration-500 group-hover:scale-102"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
@@ -118,7 +118,7 @@ export default function VisionMission({ items }: VisionMissionProps) {
 
                   {/* Description */}
                   <motion.p 
-                    className="text-base sm:text-lg leading-relaxed text-gray-700 transform transition-all duration-500 group-hover:text-gray-600 line-clamp-4"
+                    className="text-base sm:text-lg leading-relaxed text-[#c3c3c3] transform transition-all duration-500 group-hover:text-[#c3c3c3] line-clamp-4"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}

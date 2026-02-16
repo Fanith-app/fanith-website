@@ -1,16 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
+import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle, X } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
 
 
+import endpoints, { BASE_URL } from "../../api/endpoint";
+import { Modal } from "../ui/modal";
 import {
   Select,
   SelectContent,
@@ -18,9 +20,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Modal } from "../ui/modal";
-import endpoints, { BASE_URL } from "../../api/endpoint";
-import { i, nav } from "framer-motion/client";
 
 interface Team {
   name: string;
@@ -126,7 +125,7 @@ export default function EarlyAccessModal({
         </button>
 
         {/* Header */}
-        <div className="relative bg-linear-to-br from-red-500 via-red-600 to-red-700 px-8 pt-8 pb-6">
+        <div className="relative bg-[#960018] px-8 pt-8 pb-6">
           <div className="absolute inset-0 bg-black/10"></div>
           <div className="relative z-10 text-center">
             <motion.div
@@ -228,7 +227,7 @@ export default function EarlyAccessModal({
                   <button
                     type="submit"
                     disabled={loading}
-                    className={`w-full rounded-xl bg-linear-to-r from-red-500 to-red-600 px-6 py-4 text-sm font-semibold text-white ${
+                    className={`w-full rounded-xl bg-[#960018] px-6 py-4 text-sm font-semibold text-white ${
                       loading ? "opacity-70 cursor-not-allowed" : ""
                     }`}
                   >

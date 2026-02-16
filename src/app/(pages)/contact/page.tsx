@@ -1,6 +1,6 @@
 import Banner from '@/src/components/common/Banner'
 import SupportTabs from '@/src/components/SupportTabs'
-import React, { Suspense } from 'react'
+import { Suspense } from 'react'
 
 const page = () => {
   return (
@@ -11,7 +11,7 @@ const page = () => {
         <Banner
           title="We're Here to Help"
           description="Whether you have product questions, need support, or want to partner with us, feel free to reach out."
-          backgroundImage="/assets/images/contact-us-banner.jpg"
+          backgroundImage="/assets/images/contact-us.webp"
           // ctaText="Join Beta"
           // ctaLink="/join-beta"
           bottomcurve='lg:h-150 lg:[clip-path:ellipse(70%_90%_at_50%_0%)]  '
@@ -19,7 +19,7 @@ const page = () => {
 
 
         {/* Full-width curved glow element (Tailwind only) */}
-        <div
+        {/* <div
           aria-hidden
           className={
             "pointer-events-none absolute left-1/2 -translate-x-1/2 -bottom-10 " +
@@ -27,7 +27,7 @@ const page = () => {
             "bg-[radial-gradient(ellipse_at_50%_0%,rgba(160,16,16,0.88)_0%,rgba(128,12,12,0.6)_30%,rgba(96,10,10,0.25)_55%,transparent_85%)] " +
             "blur-[30px] z-0" + "overflow-hidden"
           }
-        />
+        /> */}
 
       </div>
 

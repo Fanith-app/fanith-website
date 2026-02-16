@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { ReactNode, useState } from "react";
 import EarlyAccessModal from "../modals/EarlyAccessModal";
 import { Button } from "../ui/button";
@@ -28,10 +27,10 @@ export default function Banner({
 
   const [modalOpen, setModalOpen] = useState(false);
   return (
-    <section className={`relative overflow-hidden ${bottomcurve} `}>
+    <section className={`relative overflow-hidden ${bottomcurve}`}>
 
       {/* Background Image */}
-      <div className="">
+      <div className="pt-15">
         <Image
           src={backgroundImage}
           alt={title}
@@ -97,7 +96,7 @@ export default function Banner({
               }
             }
           }}
-          className="mt-6 max-w-4xl mx-auto text-base md:text-3xl text-white/90 leading-relaxed"
+          className="mt-6 max-w-4xl mx-auto text-base md:text-2xl text-[#efefef] font-medium leading-relaxed"
         >
           {description}
         </motion.p>
@@ -141,7 +140,7 @@ export default function Banner({
           >
             <Button
               onClick={() => setModalOpen(true)}
-              className="inline-flex items-center justify-center rounded-full bg-[#FF0000] px-10 py-4 text-lg font-semibold text-[#F8F8F8] transform transition-all duration-300 ease-in-out hover:scale-105 hover:bg-[#FF0000] cursor-pointer"
+              className="inline-flex items-center justify-center rounded-full bg-[#960018] px-10 py-4 text-lg font-normal text-[#F8F8F8] transform transition-all duration-300 ease-in-out hover:scale-105 hover:bg-[#960018] cursor-pointer"
             >
               {ctaText}
             </Button>

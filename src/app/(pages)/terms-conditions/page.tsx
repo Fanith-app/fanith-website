@@ -2,7 +2,7 @@
 
 import { termsAndConditions } from "@/src/lib/data";
 import { motion } from "framer-motion";
-import { Shield, FileText, Users, AlertTriangle, Copyright, ExternalLink, AlertCircle, Gavel, Scale, Edit, Mail, Calendar } from "lucide-react";
+import { AlertCircle, AlertTriangle, Copyright, Edit, ExternalLink, FileText, Gavel, Mail, Scale, Shield, Users } from "lucide-react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -46,13 +46,13 @@ export default function TermsConditionsPage() {
   } = termsAndConditions
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-100">
+    <div className="min-h-screen bg-[#141414]">
       {/* Hero Section */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="relative bg-linear-to-r from-[#9E1F16] via-[#C2261B] to-[#F03322] text-white py-20"
+        className="relative bg-[#960018] text-white py-20"
       >
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative w-full mx-auto px-4 md:px-6 text-center">
@@ -85,27 +85,27 @@ export default function TermsConditionsPage() {
         className="max-w-7xl mx-auto px-4 md:px-6 py-16 space-y-12"
       >
         {/* Eligibility */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-linear-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
               <Users className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
               {eligibility.title}
             </h2>
           </div>
-          <p className="text-gray-700 leading-relaxed text-lg">
+          <p className="text-[#c3c3c3] leading-relaxed text-lg">
             {eligibility.description}
           </p>
         </motion.div>
 
         {/* User Accounts */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-linear-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
               <Shield className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
               {userAccount.title}
             </h2>
           </div>
@@ -116,27 +116,27 @@ export default function TermsConditionsPage() {
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.3 + index * 0.1 }}
-                className="flex items-start gap-3 p-4 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                className="flex items-start gap-3 p-4 rounded-lg hover:bg-[#960018] transition-colors duration-200"
               >
                 <div className="w-2 h-2 bg-green-500 rounded-full mt-2 shrink-0"></div>
-                <p className="text-gray-700 leading-relaxed">{point}</p>
+                <p className="text-[#c3c3c3] leading-relaxed">{point}</p>
               </motion.li>
             ))}
           </ul>
         </motion.div>
 
         {/* Acceptable Use Policy */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-linear-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center">
+            <div className="w-12 h-12 bg-[#960018] rounded-xl flex items-center justify-center">
               <AlertTriangle className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
               {acceptableUse.title}
             </h2>
           </div>
-          <div className="bg-red-50 p-6 rounded-xl border border-red-100">
-            <h3 className="font-semibold text-gray-900 mb-4">Prohibited Activities:</h3>
+          <div className="bg-white p-6 rounded-xl border border-red-50">
+            <h3 className="font-semibold text-[#202020] mb-4">Prohibited Activities:</h3>
             <ul className="space-y-3">
               {acceptableUse.points.map((point, index) => (
                 <motion.li
@@ -146,8 +146,8 @@ export default function TermsConditionsPage() {
                   transition={{ delay: 0.3 + index * 0.1 }}
                   className="flex items-start gap-3"
                 >
-                  <div className="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 shrink-0"></div>
-                  <span className="text-gray-700">{point}</span>
+                  <div className="w-1.5 h-1.5 bg-[#960018] rounded-full mt-2 shrink-0"></div>
+                  <span className="text-gray-600">{point}</span>
                 </motion.li>
               ))}
             </ul>
@@ -155,16 +155,16 @@ export default function TermsConditionsPage() {
         </motion.div>
 
         {/* Content Ownership */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-linear-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
               <Copyright className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
               {contentOwnership.title}
             </h2>
           </div>
-          <p className="text-gray-700 leading-relaxed mb-6 text-lg">
+          <p className="text-[#c3c3c3] leading-relaxed mb-6 text-lg">
             {contentOwnership.description}
           </p>
           <div className="bg-purple-50 p-6 rounded-xl border border-purple-100">
@@ -186,27 +186,27 @@ export default function TermsConditionsPage() {
         </motion.div>
 
         {/* Third-Party Services */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-linear-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
               <ExternalLink className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
               {thirdPartyServices.title}
             </h2>
           </div>
-          <p className="text-gray-700 leading-relaxed text-lg">
+          <p className="text-[#c3c3c3] leading-relaxed text-lg">
             {thirdPartyServices.description}
           </p>
         </motion.div>
 
         {/* Disclaimers */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-whitye">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-linear-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center">
               <AlertCircle className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
               {disclaimers.title}
             </h2>
           </div>
@@ -231,56 +231,56 @@ export default function TermsConditionsPage() {
         </motion.div>
 
         {/* Limitation of Liability */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-linear-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center">
               <Gavel className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
               {limitationOfLiability.title}
             </h2>
           </div>
-          <p className="text-gray-700 leading-relaxed text-lg">
+          <p className="text-[#c3c3c3] leading-relaxed text-lg">
             {limitationOfLiability.description}
           </p>
         </motion.div>
 
         {/* Termination */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             {termination.title}
           </h2>
-          <p className="text-gray-700 leading-relaxed text-lg">
+          <p className="text-[#c3c3c3] leading-relaxed text-lg">
             {termination.description}
           </p>
         </motion.div>
 
         {/* Governing Law */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-linear-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center">
               <Scale className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
               {governingLaw.title}
             </h2>
           </div>
-          <p className="text-gray-700 leading-relaxed text-lg">
+          <p className="text-[#c3c3c3] leading-relaxed text-lg">
             {governingLaw.description}
           </p>
         </motion.div>
 
         {/* Changes to Terms */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-linear-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center">
               <Edit className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
               {changesToTerms.title}
             </h2>
           </div>
-          <p className="text-gray-700 leading-relaxed text-lg">
+          <p className="text-[#c3c3c3] leading-relaxed text-lg">
             {changesToTerms.description}
           </p>
         </motion.div>
@@ -288,7 +288,7 @@ export default function TermsConditionsPage() {
         {/* Contact Information */}
         <motion.div
           variants={itemVariants}
-          className="bg-linear-to-r from-[#9E1F16] via-[#C2261B] to-[#F03322] text-white rounded-2xl shadow-xl p-8 md:p-10"
+          className="bg-[#960018] text-white rounded-2xl shadow-xl p-8 md:p-10"
         >
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">

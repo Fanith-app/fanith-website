@@ -1,13 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { ReactNode, useState } from "react";
 import EarlyAccessModal from "../modals/EarlyAccessModal";
-import { useState } from "react";
 import { Button } from "../ui/button";
 
 interface CenteredCTAProps {
-  title: string;
+  title: ReactNode;
   description: string;
   buttonText?: string;
   buttonLink?: string;
@@ -22,7 +21,7 @@ export default function CenteredCTA({
 
   const [modalOpen, setModalOpen] = useState(false);
   return (
-    <section className="bg-transparent py-12">
+    <section className="bg-[#141414] py-12">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -58,7 +57,7 @@ export default function CenteredCTA({
               } 
             }
           }}
-          className="text-3xl md:text-4xl font-bold text-black"
+          className="text-3xl md:text-4xl font-bold text-white"
         >
           {title}
         </motion.h2>
@@ -76,7 +75,7 @@ export default function CenteredCTA({
               } 
             }
           }}
-          className="mt-6 text-lg text-gray-700 leading-relaxed"
+          className="mt-6 text-lg text-[#c3c3c3] leading-relaxed"
         >
           {description}
         </motion.p>
@@ -102,10 +101,13 @@ export default function CenteredCTA({
         >
           <Button
           onClick={()=> setModalOpen(true)}
-            className="inline-flex items-center justify-center rounded-full bg-red-600 px-8 py-2 text-base font-semibold text-white transform transition-all duration-300 ease-in-out hover:bg-red-700 hover:scale-105 cursor-pointer"
+            className="inline-flex items-center justify-center rounded-full bg-[#960018] px-8 py-2 text-base font-semibold text-white transform transition-all duration-300 ease-in-out hover:bg-[#960018] hover:scale-105 cursor-pointer"
           >
             {buttonText}
           </Button>
+          {/* <div className="flex justify-center items-center gap-3">
+            <span><img src="/assets/images/Google-Play-Features.png" alt="Google Play Store" className="h-12 w-auto cursor-pointer" /></span>{" "}<span><img src="/assets/images/App-Store-Features.png" alt="App App Store" className="h-12 w-auto cursor-pointer" /></span>
+          </div> */}
         </motion.div>
 
       </motion.div>

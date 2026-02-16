@@ -1,12 +1,7 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
-import { Button } from "../ui/button";
-import EarlyAccessModal from "../modals/EarlyAccessModal";
+import EarlyAccess from "./EarlyAccess";
 
 export default function HomeBanner() {
 
@@ -22,36 +17,40 @@ export default function HomeBanner() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-linear-to-br from-[#f5f0f0] via-[#f8efec] to-[#fde7e2]">
+    <section className="relative overflow-hidden pb-13 h-screen">
       {/* Bg- image */}
       <div
-        className="absolute top-20 right-8 w-60 h-60 hidden lg:block bg-no-repeat bg-contain bg-dots-1024-600"
-        style={{
-          backgroundImage: `url('/assets/svg/Group 732.svg')`
-        }}
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/assets/images/Landing_Page_Banner.webp')" }}
       ></div>
 
-      <div className="mmx-auto px-4 md:px-10 py-20 pb-2">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] xl:grid-cols-[1fr_1.3fr] items-start">
+      <div className="mx-auto px-4 md:px-10 py-20 pb-2">
+        <div className="">
 
           {/* LEFT CONTENT */}
           <motion.div
-            className="max-w-xl"
+            className="max-w-full"
             initial={{ x: -100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h1 className="text-3xl md:text-3xl lg:text-3xl xl:text-4xl font-bold text-[#000000] leading-tight whitespace-normal lg:whitespace-nowrap wrap-break-word">
-              WHERE FANS BECOME LEGENDS
+            <h1 className="relative z-10 text-6xl md:text-3xl lg:text-3xl xl:text-5xl font-bold text-[#ffffff] leading-tight whitespace-normal lg:whitespace-nowrap wrap-break-word pt-10">
+              <span className="text-[#960018]">One</span> Stadium.<br /> Millions of Fans. <br /><span className="text-[#960018]">One</span> Voice.
             </h1>
 
-            <p className="mt-8 text-lg md:text-xl text-[#333333] leading-relaxed">
-              Join live game rooms, earn FanDom points, and celebrate every match with your tribe. Experience the ultimate sports fan platform built for passion.
+            <p className="relative z-10 mt-8 text-lg md:text-xl text-[#c3c3c3] leading-relaxed tracking-wider">
+              Join live fan rooms, support your fan tribe, and experience matches together — in real time.
+            </p>
+
+            {/* <EarlyAccess /> */}
+            <EarlyAccess />
+            <p className="relative z-10 mt-1 text-md text-[#c3c3c3] tracking-wider">
+              <span>Early access + exclusive rewards for first 10K signups</span>
             </p>
 
             {/* CTA BUTTONS */}
-            <div className="mt-10 flex flex-col sm:flex-row gap-4">
+            {/* <div className="relative z-10 mt-10 flex flex-col sm:flex-row gap-4">
               <Button
                 onClick={handleJoinBeta}
                 variant="gradient"
@@ -70,15 +69,23 @@ export default function HomeBanner() {
                   Watch Teaser
                 </Button>
               </Button>
-            </div>
+            </div> */}
 
-            <p className="mt-6 text-md text-[#555555]">
-              Early access + exclusive rewards for first 10K signups
+            {/* <div className="relative z-10 flex justify-start items-center gap-3 pt-5 pb-3">
+            <span><img src="/assets/images/Google-Play-Features.png" alt="Google Play Store" className="h-12 w-auto cursor-pointer" /></span>{" "}<span><img src="/assets/images/App-Store-Features.png" alt="App App Store" className="h-12 w-auto cursor-pointer" /></span>
+          </div>
+
+            <p className="relative z-10 mt-2 mb-0 text-[#c3c3c3] tracking-wider flex justify-start items-center gap-2">
+              <span><img src="/assets/svg/one-big-star.svg" alt="Star" className="w-6 h-6" /></span><span className="text-[22px]">4.8</span><span><img src="/assets/svg/5-star.svg" alt="Star" className="w-23 h-auto" /></span><span><img src="/assets/svg/mobile.svg" alt="Star" className="w-5 h-5" /></span><span className="text-[20px]">Available on Android & iOS</span>
             </p>
+
+            <p className="relative z-10 mt-1 text-lg text-[#c3c3c3] tracking-wider flex justify-start items-center gap-2">
+              <span><img src="/assets/svg/fans-joined.svg" alt="Fans Joined" /></span><span className="">50,000+ fans joined</span>
+            </p> */}
           </motion.div>
 
           {/* RIGHT IMAGE */}
-          <motion.div
+          {/* <motion.div
             className="relative flex justify-center lg:justify-end items-center -mt-12 md:-mt-15 lg:-mt-40"
             initial={{ x: 100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
@@ -96,7 +103,7 @@ export default function HomeBanner() {
                 />
               </div>
             </div>
-          </motion.div>
+          </motion.div> */}
 
         </div>
       </div>

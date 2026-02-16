@@ -1,29 +1,30 @@
 "use client";
 
-import { Suspense } from "react";
 import Banner from "@/src/components/common/Banner";
 import CenteredCTA from "@/src/components/common/ExperienceFanith";
-import HighlightCards from "@/src/components/common/HighlightCards";
-import FeatureTabs from "@/src/components/FeatureTabs";
+import HowItWorks from "@/src/components/home/HowItWorks";
+import LiveMatchEnergy from "@/src/components/home/LiveMatchEnergy";
 
 export default function FeaturesPage() {
   return (
-    <main className="w-full">
+    <main className="w-full bg-[linear-gradient(121deg,rgba(158,29,29,0)_-23.79%,#0E0E0E_18.36%,#0E0E0E_79.09%,rgba(158,29,29,0)_124.81%)]">
       <Banner
         title="The Ultimate Experience for Every Sports Fan"
         description="Explore everything Fanith offers — from live match chat rooms to FanDom rewards and FanPedia player insights."
-        backgroundImage="/assets/images/featurebanner.png"
-        bottomcurve="lg:h-150 lg:[clip-path:ellipse(80%_90%_at_50%_0%)]  "
-        // ctaText="Join Beta"
-        // ctaLink="/join-beta"
+        backgroundImage="/assets/images/Features-Banner-Image.webp"
+        bottomcurve="lg:h-150 lg:[clip-path:ellipse(80%_90%_at_50%_0%)]"
+        ctaText="Join Beta"
+        ctaLink="/join-beta"
       />
 
       {/* ================= FEATURE TABS SECTION ================= */}
-      <Suspense fallback={<div className="text-center py-12">Loading...</div>}>
+      {/* <Suspense fallback={<div className="text-center py-12">Loading...</div>}>
         <FeatureTabs />
-      </Suspense>
+      </Suspense> */}
 
-      <HighlightCards
+      <LiveMatchEnergy />
+
+      {/* <HighlightCards
         items={[
           {
             title: "Pick Your Team",
@@ -41,10 +42,17 @@ export default function FeaturesPage() {
             image: "/assets/images/coin.jpg",
           },
         ]}
-      />
+      /> */}
+
+      <HowItWorks />
 
       <CenteredCTA
-        title="Be the First to Experience Fanith"
+        title={
+          <>
+            Be the First to Experience{" "}
+            <span className="text-[#960018]">Fanith</span>
+          </>
+        }
         description="Explore everything Fanith offers — from live match chat rooms to FanDom rewards and FanPedia player insights."
       />
 
