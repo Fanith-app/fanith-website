@@ -287,6 +287,8 @@ export default function Footer() {
         </div>
         <div className="flex justify-center text-md font-medium text-white/90 pt-4 pb-3 tracking-wide">
           Copyright © {new Date().getFullYear()} MEEDEE DIGITAL LABS PRIVATE LIMITED, All Rights Reserved.
+        <div className="flex justify-center text-sm font-medium text-white/90">
+          Copyright © 2026 MEEDEE DIGITAL LABS PRIVATE LIMITED, All Rights Reserved.
         </div>
       </div>
 
