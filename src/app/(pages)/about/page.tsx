@@ -12,7 +12,7 @@ const page = () => {
         title="About Fanith"
         description="A sports fan platform built to connect fans, celebrate passion, and bring stadium energy to your screen."
         backgroundImage="/assets/images/about-us-page-banner.webp"
-        ctaText="Download App"
+        ctaText="Join Beta"
         ctaLink="/join-beta"
       />
 
@@ -66,11 +66,20 @@ const page = () => {
         ]}
       />
 
-      <CenteredCTA
+      {/* <CenteredCTA
         title={
           <>
             Ready to watch matches the{" "}
             <span className="text-[#960018]">Fanith</span>{" "} way?
+          </>
+        }
+        description="Explore everything Fanith offers — from live match chat rooms to FanDom rewards and FanPedia player insights."
+      /> */}
+      <CenteredCTA
+        title={
+          <>
+            Be the First to Experience{" "}
+            <span className="text-[#960018]">Fanith</span>
           </>
         }
         description="Explore everything Fanith offers — from live match chat rooms to FanDom rewards and FanPedia player insights."

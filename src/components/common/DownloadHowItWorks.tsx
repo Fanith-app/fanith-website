@@ -55,7 +55,7 @@ export default function DownloadHowItWorks() {
       >
         {/* Heading */}
         <motion.h2 
-          className="text-center text-4xl font-bold mb-2 text-[Montserrat]/700 text-white"
+          className="text-center text-4xl font-bold mb-2 font-[Montserrat]/700 text-white"
           variants={{
             hidden: { y: 50, opacity: 0, scale: 0.9 },
             visible: { 

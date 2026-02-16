@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useCenterPopup } from "@/src/context/CenterPopupContext";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { _makePostRequest } from "../api/api";
 import endpoints from "../api/endpoint";
-import { useCenterPopup } from "@/src/context/CenterPopupContext";
 
 interface NewsletterSubscribeProps {
   title?: string;
@@ -86,7 +86,7 @@ export default function NewsletterSubscribe({
         }}
       >
         <motion.div
-          className="flex flex-col lg:flex-row items-center justify-between gap-10 rounded-3xl bg-[#cfcfcf] px-10 py-12"
+          className="flex flex-col lg:flex-row items-center justify-between gap-10 rounded-3xl bg-[#202020] px-10 py-12"
           variants={{
             hidden: { y: 60, opacity: 0, scale: 0.95 },
             visible: {
@@ -104,29 +104,31 @@ export default function NewsletterSubscribe({
         >
           {/* Left Content */}
           <motion.div className="max-w-xl">
-            <motion.h2 className="text-3xl font-extrabold text-black">
+            <motion.h2 className="text-3xl font-extrabold text-white">
               {title}
             </motion.h2>
-            <motion.p className="mt-4 text-lg text-gray-700 leading-relaxed">
+            <motion.p className="mt-4 text-lg text-[#c3c3c3] leading-relaxed">
               {description}
             </motion.p>
           </motion.div>
 
           {/* Right Form */}
           <motion.div className="flex flex-col w-full max-w-xl">
-            <div className="flex flex-col md:flex-row items-center gap-4 w-full">
+            {/* <div className="flex flex-col md:flex-row items-center gap-4 w-full"> */}
+            <div className="flex items-center rounded-full border border-white/20 bg-[#202020] p-1">
               <motion.input
                 type="email"
                 placeholder={placeholder}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 w-full rounded-lg bg-[#2f3338] px-6 py-4 text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-white"
+                className="flex-1 w-full rounded-lg bg-transparent px-6 py-4 text-[#c3c3c3] placeholder:text-[#c3c3c3] focus:outline-none text-md"
               />
 
               <motion.button
                 onClick={handleEmailSubscription}
                 disabled={isSubmitting}
-                className="rounded-lg bg-white w-full md:w-fit px-8 py-3 sm:py-4 text-lg font-semibold text-black disabled:opacity-70"
+                // className="rounded-lg bg-white w-full md:w-fit px-8 py-3 sm:py-4 text-lg font-semibold text-black disabled:opacity-70"
+                className="rounded-full bg-[#960018] px-8 py-4 text-md font-semibold text-white transition-all hover:bg-[#b3001d] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 {isSubmitting ? "Subscribing..." : buttonText}
               </motion.button>

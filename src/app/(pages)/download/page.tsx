@@ -16,23 +16,6 @@ const page = () => {
         ctaLink="/join-beta"
       />
 
-      {/* <VisionMission
-        items={[
-          {
-            title: "Our Vision",
-            description:
-              "To build the world's most engaging digital community for sports fans — where passion, connection, and excitement come alive.",
-            icon: "/assets/images/vision-icon.png",
-          },
-          {
-            title: "Our Mission",
-            description:
-              "To empower fans with real-time engagement tools, community-driven content, and features that transform the way people experience sports digitally.",
-            icon: "/assets/images/mission-icon.png",
-          },
-        ]}
-      /> */}
-
       <DownloadSecondSection
         image="/assets/images/download-second-section.webp"
       />

@@ -7,13 +7,13 @@ import LiveMatchEnergy from "@/src/components/home/LiveMatchEnergy";
 
 export default function FeaturesPage() {
   return (
-    <main className="w-full">
+    <main className="w-full bg-[linear-gradient(121deg,rgba(158,29,29,0)_-23.79%,#0E0E0E_18.36%,#0E0E0E_79.09%,rgba(158,29,29,0)_124.81%)]">
       <Banner
         title="The Ultimate Experience for Every Sports Fan"
         description="Explore everything Fanith offers — from live match chat rooms to FanDom rewards and FanPedia player insights."
         backgroundImage="/assets/images/Features-Banner-Image.webp"
-        bottomcurve="lg:h-150 lg:[clip-path:ellipse(80%_90%_at_50%_0%)]  "
-        ctaText="Download App"
+        bottomcurve="lg:h-150 lg:[clip-path:ellipse(80%_90%_at_50%_0%)]"
+        ctaText="Join Beta"
         ctaLink="/join-beta"
       />
 
@@ -49,8 +49,8 @@ export default function FeaturesPage() {
       <CenteredCTA
         title={
           <>
-            Ready to watch matches the{" "}
-            <span className="text-[#960018]">Fanith</span>{" "} way?
+            Be the First to Experience{" "}
+            <span className="text-[#960018]">Fanith</span>
           </>
         }
         description="Explore everything Fanith offers — from live match chat rooms to FanDom rewards and FanPedia player insights."

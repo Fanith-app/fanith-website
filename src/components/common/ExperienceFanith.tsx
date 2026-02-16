@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ReactNode, useState } from "react";
 import EarlyAccessModal from "../modals/EarlyAccessModal";
+import { Button } from "../ui/button";
 
 interface CenteredCTAProps {
   title: ReactNode;
@@ -98,15 +99,15 @@ export default function CenteredCTA({
           }}
           className="mt-10"
         >
-          {/* <Button
+          <Button
           onClick={()=> setModalOpen(true)}
             className="inline-flex items-center justify-center rounded-full bg-[#960018] px-8 py-2 text-base font-semibold text-white transform transition-all duration-300 ease-in-out hover:bg-[#960018] hover:scale-105 cursor-pointer"
           >
             {buttonText}
-          </Button> */}
-          <div className="flex justify-center items-center gap-3">
+          </Button>
+          {/* <div className="flex justify-center items-center gap-3">
             <span><img src="/assets/images/Google-Play-Features.png" alt="Google Play Store" className="h-12 w-auto cursor-pointer" /></span>{" "}<span><img src="/assets/images/App-Store-Features.png" alt="App App Store" className="h-12 w-auto cursor-pointer" /></span>
-          </div>
+          </div> */}
         </motion.div>
 
       </motion.div>

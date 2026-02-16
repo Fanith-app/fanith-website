@@ -74,9 +74,9 @@ useEffect(() => {
   }
 }, [index]);
   return (
-    <section className="py-20">
+    <section className="py-20 bg-[#141414]">
       <motion.div
-        className="max-w-7xl mx-auto px-4 md:px-15"
+        className="w-full mx-auto px-4 md:px-15"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2, margin: "-50px" }}

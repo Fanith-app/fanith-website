@@ -50,11 +50,11 @@ export default function Header() {
     <>
       {/* TOP ANNOUNCEMENT HEADER */}
       {/* <UpperHeader /> */}
-      {/* <header className="fixed top-0 left-0 right-0 w-full bg-[#141414]/80 rounded-xl border border-[#eeeeee]/18 z-50"> */}
+      <header className="fixed top-5 left-0 right-0 w-full bg-[#141414]/80 rounded-xl border border-[#eeeeee]/18 z-50">
       {/* <header className="absolute overflow-hidden left-50 right-50 mt-5 w-3/4 bg-[#141414]/80 rounded-xl border border-[#eeeeee]/18 z-50 mx-auto"> */}
-      <header className="fixed top-5 left-1/2 -translate-x-1/2 w-3/4 max-w-6xl lg:w-[95%] bg-[#141414]/80 rounded-xl border border-[#eeeeee]/18 z-100 mx-auto">
+      {/* <header className="fixed top-5 left-1/2 -translate-x-1/2 w-full max-w-6xl lg:w-[95%] bg-[#141414]/80 rounded-xl border border-[#eeeeee]/18 z-100 mx-auto"> */}
         {/* <header className="fixed top-5 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl lg:w-3/4 backdrop-blur-md z-50 bg-[#141414]/80 rounded-xl border border-[#eeeeee]/18 mx-auto"> */}
-        <div className="mx-auto max-w-7xl px-4">
+        <div className="mx-auto max-w-8xl px-4">
           <div className="flex h-16 items-center justify-between px-2 ">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2">
@@ -90,7 +90,7 @@ export default function Header() {
                 onClick={handleJoinBeta}
                 className="hidden lg:inline-flex items-center rounded-full bg-[#960018] px-5 py-2 text-sm font-semibold text-white transform transition-all duration-300 ease-in-out hover:scale-105 cursor-pointer"
               >
-                Download App
+                Join Beta
               </button>
 
               {/* Mobile Menu Button */}
@@ -141,7 +141,7 @@ export default function Header() {
                   href={link.href}
                   onClick={() => setOpen(false)}
                   className={`text-base font-medium transition-all duration-200 py-2 px-3 rounded-lg transform hover:translate-x-1 ${isActiveLink(link.href)
-                    ? "text-[#ff0000] bg-red-50" // active
+                    ? "text-[#960018] bg-red-50" // active
                     : "text-gray-700 hover:text-black hover:bg-gray-50" // inactive
                     }`}
                   style={{
@@ -161,7 +161,7 @@ export default function Header() {
                   handleJoinBeta();
                   setOpen(false);
                 }}
-                className="w-full inline-flex justify-center rounded-full bg-linear-to-r from-[#ff0000] to-[#de0000] px-6 py-3 text-sm font-semibold text-white transform transition-all duration-300 ease-in-out hover:scale-105 cursor-pointer shadow-lg"
+                className="w-full inline-flex justify-center rounded-full bg-[#960018] px-6 py-3 text-sm font-semibold text-white transform transition-all duration-300 ease-in-out hover:scale-105 cursor-pointer shadow-lg"
                 style={{
                   animationDelay: `${navLinks.length * 80}ms`,
                   animation: open ? 'slideInFromRight 0.5s ease-out forwards' : 'none'

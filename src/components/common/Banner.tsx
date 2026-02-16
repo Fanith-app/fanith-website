@@ -27,7 +27,7 @@ export default function Banner({
 
   const [modalOpen, setModalOpen] = useState(false);
   return (
-    <section className={`relative overflow-hidden ${bottomcurve} `}>
+    <section className={`relative overflow-hidden ${bottomcurve}`}>
 
       {/* Background Image */}
       <div className="pt-15">

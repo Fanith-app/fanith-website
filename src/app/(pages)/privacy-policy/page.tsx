@@ -2,7 +2,7 @@
 
 import { privacyPolicy } from "@/src/lib/data";
 import { motion } from "framer-motion";
-import { Shield, Lock, Eye, Users, Cookie, Mail, Calendar } from "lucide-react";
+import { Cookie, Eye, Lock, Mail, Shield, Users } from "lucide-react";
 
 
 
@@ -31,13 +31,13 @@ const itemVariants = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-100">
+    <div className="min-h-screen bg-[#141414]">
       {/* Hero Section */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="relative bg-linear-to-r from-[#9E1F16] via-[#C2261B] to-[#F03322] text-white py-20"
+        className="relative bg-[#960018] text-white py-20"
       >
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative w-full mx-auto px-4 md:px-6 text-center">
@@ -70,12 +70,12 @@ export default function PrivacyPolicyPage() {
         className="max-w-7xl mx-auto px-4 md:px-6 py-16 space-y-12"
       >
         {/* Information We Collect */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-linear-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center">
+            <div className="w-12 h-12 bg-[#960018] rounded-xl flex items-center justify-center">
               <Eye className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
               {privacyPolicy.informationCollected.title}
             </h2>
           </div>
@@ -86,7 +86,7 @@ export default function PrivacyPolicyPage() {
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.3 + index * 0.1 }}
-                className="bg-linear-to-r from-gray-50 to-white p-6 rounded-xl border-l-4 border-red-500 hover:shadow-md transition-shadow duration-300"
+                className="bg-linear-to-r from-gray-50 to-white p-6 rounded-xl border-l-4 border-[#960018] hover:shadow-md transition-shadow duration-300"
               >
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {item.type}
@@ -100,12 +100,12 @@ export default function PrivacyPolicyPage() {
         </motion.div>
 
         {/* How We Use Your Information */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-linear-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
               <Users className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
               {privacyPolicy.howWeUseData.title}
             </h2>
           </div>
@@ -116,26 +116,26 @@ export default function PrivacyPolicyPage() {
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.3 + index * 0.1 }}
-                className="flex items-start gap-3 p-4 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                className="flex items-start gap-3 p-4 rounded-lg hover:bg-[#960018] transition-colors duration-200"
               >
-                <div className="w-2 h-2 bg-red-500 rounded-full mt-2 shrink-0"></div>
-                <p className="text-gray-700 leading-relaxed">{use}</p>
+                <div className="w-2 h-2 bg-white rounded-full mt-2 shrink-0"></div>
+                <p className="text-[#c3c3c3] leading-relaxed">{use}</p>
               </motion.li>
             ))}
           </ul>
         </motion.div>
 
         {/* Data Sharing & Disclosure */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-linear-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
               <Lock className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
               {privacyPolicy.dataSharing.title}
             </h2>
           </div>
-          <p className="text-gray-700 leading-relaxed mb-6 text-lg">
+          <p className="text-[#c3c3c3] leading-relaxed mb-6 text-lg">
             {privacyPolicy.dataSharing.description}
           </p>
           <div className="bg-purple-50 p-6 rounded-xl border border-purple-100">
@@ -152,16 +152,16 @@ export default function PrivacyPolicyPage() {
         </motion.div>
 
         {/* Cookies Policy */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-linear-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
               <Cookie className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
               {privacyPolicy.cookiesPolicy.title}
             </h2>
           </div>
-          <p className="text-gray-700 leading-relaxed mb-6 text-lg">
+          <p className="text-[#c3c3c3] leading-relaxed mb-6 text-lg">
             {privacyPolicy.cookiesPolicy.description}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -177,12 +177,12 @@ export default function PrivacyPolicyPage() {
         </motion.div>
 
         {/* Your Rights */}
-        <motion.div variants={itemVariants} className="bg-linear-to-br from-red-50 to-white rounded-2xl shadow-lg p-8 md:p-10 border border-red-100">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-linear-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center">
               <Shield className="w-6 h-6 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
               {privacyPolicy.userRights.title}
             </h2>
           </div>
@@ -205,31 +205,31 @@ export default function PrivacyPolicyPage() {
         </motion.div>
 
         {/* Data Security */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             {privacyPolicy.dataSecurity.title}
           </h2>
-          <p className="text-gray-700 leading-relaxed text-lg">
+          <p className="text-[#c3c3c3] leading-relaxed text-lg">
             {privacyPolicy.dataSecurity.description}
           </p>
         </motion.div>
 
         {/* Third-Party Links */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             {privacyPolicy.thirdPartyLinks.title}
           </h2>
-          <p className="text-gray-700 leading-relaxed text-lg">
+          <p className="text-[#c3c3c3] leading-relaxed text-lg">
             {privacyPolicy.thirdPartyLinks.description}
           </p>
         </motion.div>
 
         {/* Policy Updates */}
-        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             {privacyPolicy.policyUpdates.title}
           </h2>
-          <p className="text-gray-700 leading-relaxed text-lg">
+          <p className="text-[#c3c3c3] leading-relaxed text-lg">
             {privacyPolicy.policyUpdates.description}
           </p>
         </motion.div>
@@ -237,7 +237,7 @@ export default function PrivacyPolicyPage() {
         {/* Contact Information */}
         <motion.div
           variants={itemVariants}
-          className="bg-linear-to-r from-[#9E1F16] via-[#C2261B] to-[#F03322] text-white rounded-2xl shadow-xl p-8 md:p-10"
+          className="bg-[#960018] text-white rounded-2xl shadow-xl p-8 md:p-10"
         >
           <div className="flex items-center gap-3 mb-6">
             <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import EarlyAccess from "./EarlyAccess";
 
 export default function HomeBanner() {
 
@@ -16,7 +17,7 @@ export default function HomeBanner() {
   };
 
   return (
-    <section className="relative overflow-hidden pb-13">
+    <section className="relative overflow-hidden pb-13 h-screen">
       {/* Bg- image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -43,6 +44,10 @@ export default function HomeBanner() {
             </p>
 
             {/* <EarlyAccess /> */}
+            <EarlyAccess />
+            <p className="relative z-10 mt-1 text-md text-[#c3c3c3] tracking-wider">
+              <span>Early access + exclusive rewards for first 10K signups</span>
+            </p>
 
             {/* CTA BUTTONS */}
             {/* <div className="relative z-10 mt-10 flex flex-col sm:flex-row gap-4">
@@ -66,7 +71,7 @@ export default function HomeBanner() {
               </Button>
             </div> */}
 
-            <div className="relative z-10 flex justify-start items-center gap-3 pt-5 pb-3">
+            {/* <div className="relative z-10 flex justify-start items-center gap-3 pt-5 pb-3">
             <span><img src="/assets/images/Google-Play-Features.png" alt="Google Play Store" className="h-12 w-auto cursor-pointer" /></span>{" "}<span><img src="/assets/images/App-Store-Features.png" alt="App App Store" className="h-12 w-auto cursor-pointer" /></span>
           </div>
 
@@ -76,7 +81,7 @@ export default function HomeBanner() {
 
             <p className="relative z-10 mt-1 text-lg text-[#c3c3c3] tracking-wider flex justify-start items-center gap-2">
               <span><img src="/assets/svg/fans-joined.svg" alt="Fans Joined" /></span><span className="">50,000+ fans joined</span>
-            </p>
+            </p> */}
           </motion.div>
 
           {/* RIGHT IMAGE */}
