@@ -1,9 +1,8 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
+import GameRoomCardShape from "../ui/GameRoomCardShape";
 
 const posts = [
   {
@@ -89,7 +88,7 @@ export default function DownloadHowItWorks() {
             </motion.p>
 
         {/* Cards */}
-        <motion.div 
+        {/* <motion.div 
           className="grid grid-cols-1 md:grid-cols-3 gap-10"
           variants={{
             visible: { 
@@ -128,7 +127,7 @@ export default function DownloadHowItWorks() {
               <Card
                 className="relative overflow-hidden rounded-3xl border border-red-600 shadow-2xl bg-gray-100 transform transition-all duration-500 ease-in-out hover:scale-105 cursor-pointer"
               >
-                {/* Image */}
+                Image
                 <motion.div 
                   className="absolute top-0 left-0 h-56 w-full"
                   initial={{ scale: 1.2, opacity: 0 }}
@@ -149,7 +148,7 @@ export default function DownloadHowItWorks() {
                 </motion.div>
 
                 <CardContent className="pt-55">
-                  {/* Category */}
+                  Category
                   <motion.span 
                     className="inline-block mb-4 rounded-full bg-linear-to-r from-[#D60000] to-[#FF0000] px-4 py-1 text-sm font-medium text-white"
                     initial={{ opacity: 0, x: -20 }}
@@ -164,7 +163,7 @@ export default function DownloadHowItWorks() {
                     {post.category}
                   </motion.span>
 
-                  {/* Content */}
+                  Content
                   <motion.h3 
                     className="text-xl text-[#111111] font-semibold mb-3"
                     initial={{ opacity: 0, y: 20 }}
@@ -193,7 +192,7 @@ export default function DownloadHowItWorks() {
                     {post.description}
                   </motion.p>
 
-                  {/* Footer */}
+                  Footer
                   <motion.div 
                     className="flex items-center justify-between text-sm font-medium text-[#8B0000]"
                     initial={{ opacity: 0, y: 20 }}
@@ -217,7 +216,59 @@ export default function DownloadHowItWorks() {
               </Card>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
+        <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+  {posts.map((member, index) => (
+    <motion.div
+      key={index}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      whileHover={{ y: -8 }}
+      className="relative w-full h-105"
+    >
+      {/* SVG Background */}
+      <GameRoomCardShape />
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center pt-16 px-6 text-center">
+
+        {/* Designation */}
+        <div className="absolute -top-3 bg-[#1a1a1a] px-6 py-1 text-sm border border-red-600 text-white">
+          Designation
+        </div>
+
+        {/* Profile Image */}
+        <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-gray-700 mb-6">
+          <Image
+            src={member.image}
+            alt={member.category}
+            width={96}
+            height={96}
+            className="object-cover"
+          />
+        </div>
+
+        {/* Name Badge */}
+        <div className="bg-linear-to-r from-[#9E1D1D] to-[#D60000] text-white px-8 py-2 font-semibold mb-4">
+          {member.title}
+        </div>
+
+        {/* Details */}
+        <p className="text-sm text-red-500 mb-2">
+          <span className="font-semibold">Superpower:</span>{" "}
+          <span className="text-gray-300">Catch</span>
+        </p>
+
+        <p className="text-sm text-red-500">
+          <span className="font-semibold">Favourite Team:</span>{" "}
+          <span className="text-gray-300">RCB</span>
+        </p>
+      </div>
+    </motion.div>
+  ))}
+</motion.div>
       </motion.div>
     </section>
   );
