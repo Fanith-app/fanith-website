@@ -12,7 +12,7 @@ export default function FeaturesPage() {
         title="The Ultimate Experience for Every Sports Fan"
         description="Explore everything Fanith offers — from live match chat rooms to FanDom rewards and FanPedia player insights."
         backgroundImage="/assets/images/Features-Banner-Image.webp"
-        bottomcurve="lg:h-150 lg:[clip-path:ellipse(80%_90%_at_50%_0%)]"
+        // bottomcurve="lg:h-150 lg:[clip-path:ellipse(80%_90%_at_50%_0%)]"
         ctaText="Join Beta"
         ctaLink="/join-beta"
       />

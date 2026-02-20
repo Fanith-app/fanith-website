@@ -1,9 +1,8 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
+import MeetTheTeamCardShape from "../ui/MeetTheTeamCardShape";
 
 const posts = [
   {
@@ -76,7 +75,81 @@ export default function FanCommunity() {
         </motion.h2>
 
         {/* Cards */}
-        <motion.div 
+        <motion.div
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={{
+        visible: { transition: { staggerChildren: 0.2 } },
+      }}
+    >
+      {posts.map((post, index) => (
+        <motion.div
+          key={index}
+          className="relative w-full h-107.5 overflow-hidden"
+          variants={{
+            hidden: { opacity: 0, y: 60 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.8 },
+            },
+          }}
+        >
+          {/* SVG Background */}
+          <MeetTheTeamCardShape />
+
+          {/* Main Content */}
+          <div className="relative z-10 flex flex-col h-full">
+
+            {/* Category (Top Label Proper Position) */}
+            <div className="absolute -top-0.5 left-1/2 -translate-x-1/2 text-white text-lg font-medium pointer-events-none">
+              {post.category}
+            </div>
+
+            {/* Image */}
+            <div className="w-full h-52.5 mt-9 pr-2">
+              <div className="w-full h-full overflow-hidden">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  width={400}
+                  height={250}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Text Content */}
+            <div className="flex flex-col justify-between flex-1 px-6 pt-6 pb-6">
+              <div>
+                <h3 className="text-white text-lg font-semibold mb-3">
+                  {post.title}
+                </h3>
+
+                <p className="text-[#c3c3c3] text-sm leading-relaxed">
+                  {post.description}
+                </p>
+              </div>
+
+              {/* Bottom Row */}
+              <div className="flex justify-between items-center mt-6 text-sm">
+                <span className="text-[#960018]">
+                  {post.date}
+                </span>
+
+                <button className="text-[#960018] hover:underline">
+                  Read More
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </motion.div>
+      ))}
+    </motion.div>
+        {/* <motion.div 
           className="grid grid-cols-1 md:grid-cols-3 gap-10"
           variants={{
             visible: { 
@@ -115,7 +188,7 @@ export default function FanCommunity() {
               <Card
                 className="relative overflow-hidden shadow-2xl transform transition-all duration-500 ease-in-out hover:scale-105 cursor-pointer bg-[#202020] [clip-path:polygon(20px_0,calc(100%-30px)_0,100%_30px,100%_calc(100%-20px),calc(100%-20px)_100%,0_100%,0_20px)] rounded-none border-2 border-[#FFFFFF]"
               >
-                {/* Image */}
+                Image
                 <motion.div 
                   className="absolute top-0 left-0 h-56 w-full"
                   initial={{ scale: 1.2, opacity: 0 }}
@@ -136,7 +209,7 @@ export default function FanCommunity() {
                 </motion.div>
 
                 <CardContent className="pt-55">
-                  {/* Category */}
+                  Category
                   <motion.span 
                     className="inline-block mb-4 rounded-full bg-linear-to-r from-[#D60000] to-[#FF0000] px-4 py-1 text-sm font-medium text-white"
                     initial={{ opacity: 0, x: -20 }}
@@ -151,7 +224,7 @@ export default function FanCommunity() {
                     {post.category}
                   </motion.span>
 
-                  {/* Content */}
+                  Content
                   <motion.h3 
                     className="text-xl text-[#FFFFFF] font-semibold mb-3"
                     initial={{ opacity: 0, y: 20 }}
@@ -180,7 +253,7 @@ export default function FanCommunity() {
                     {post.description}
                   </motion.p>
 
-                  {/* Footer */}
+                  Footer
                   <motion.div 
                     className="flex items-center justify-between text-sm font-medium text-[#8B0000]"
                     initial={{ opacity: 0, y: 20 }}
@@ -204,7 +277,7 @@ export default function FanCommunity() {
               </Card>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
       </motion.div>
     </section>
   );

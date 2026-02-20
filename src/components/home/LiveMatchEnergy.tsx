@@ -90,9 +90,9 @@ export default function LiveMatchEnergy() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[linear-gradient(121deg,rgba(158,29,29,0)_-23.79%,#0E0E0E_18.36%,#0E0E0E_79.09%,rgba(158,29,29,0)_124.81%)] h-screen"
+      className="relative overflow-hidden bg-[linear-gradient(121deg,rgba(158,29,29,0)_-23.79%,#0E0E0E_18.36%,#0E0E0E_79.09%,rgba(158,29,29,0)_124.81%)] h-auto"
     >
-      <div className="flex items-center max-w-7xl mx-auto px-6 sticky top-0 h-screen justify-center overflow-hidden">
+      <div className="flex items-center max-w-7xl mx-auto px-6 py-10 sticky top-0 h-auto justify-center overflow-hidden">
 
         {/* MAIN CONTENT */}
         <motion.div
@@ -108,20 +108,20 @@ export default function LiveMatchEnergy() {
               {slide.title}
             </h2>
 
-            <p className="text-gray-300 mb-6 max-w-xl">
+            <p className="text-gray-300 text-xl/relaxed mb-6 max-w-xl ">
               {slide.desc}
             </p>
 
-            <ul className="space-y-3 mb-8">
+            <ul className="space-y-3 mb-8 text-lg">
               {slide.points.map((p) => (
-                <li key={p} className="flex gap-3 text-sm md:text-base">
+                <li key={p} className="flex gap-3 text-sm md:text-lg">
                   <span className="text-[#960018]">●</span>
                   <span className="text-gray-300">{p}</span>
                 </li>
               ))}
             </ul>
 
-            <button className="bg-[#960018] px-6 py-3 rounded-full text-sm hover:bg-red-700 transition">
+            <button className="bg-[#960018] px-6 py-3 rounded-full text-base hover:bg-red-700 transition">
               Watch Video
             </button>
           </div>

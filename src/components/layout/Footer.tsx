@@ -117,7 +117,7 @@ export default function Footer() {
     <footer className="rounded-t-3xl bg-[#0E0E0E] text-white">
 
       <div className="mx-auto max-w-7xl px-4 md:px-6 py-6">
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-0 mb-5">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 sm:gap-5 mb-5">
           <motion.div>
             <h5 className="text-white text-[19px] font-bold leading-snug mb-1">Stay in the game.</h5>
             <p className="max-w-md text-sm text-white/90 mb-2">
@@ -171,7 +171,7 @@ export default function Footer() {
               </div>
             </form>
           </motion.div>
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3 mb-5">
             <Image
               src="/assets/images/Footer-Logo-Fanith.png"
               alt="Fanith Logo"
@@ -269,23 +269,23 @@ export default function Footer() {
           </motion.div>
         </div> */}
         <div className="pt-7">
-          <div className="flex justify-center text-md font-medium text-white/90 gap-5">
+          <div className="flex justify-center text-center text-sm sm:text-base font-medium text-white/90 gap-3 sm:gap-5">
             <Link href="/features">Fan Room</Link> <span>|</span> <Link href="/features?tab=fanpedia">Fan Pedia</Link> <span>|</span> <Link href="/features?tab=tribe">F Points</Link> <span>|</span> <Link href="/features?tab=fandom">Fanboard</Link>
           </div>
         </div>
         <div className="pt-7">
-          <div className="flex justify-center text-md font-medium text-white/90 gap-5">
-            <Link href="/about">About Us</Link> <span>|</span> <Link href="/blog">Blog</Link> <span>|</span> <Link href="/faq">FAQ</Link> <span>|</span> <Link href="/contact">Contact</Link>
+          <div className="font-medium text-white/90">
+            <p className="flex justify-center gap-3 sm:gap-5 text-center text-sm sm:text-base"><Link href="/about">About Us</Link> <span>|</span> <Link href="/blog">Blog</Link> <span>|</span> <Link href="/faq">FAQ</Link> <span>|</span> <Link href="/contact">Contact</Link></p>
           </div>
         </div>
 
         <div className="my-6 h-px w-full bg-white/30" />
 
-        <div className="flex justify-center text-md font-medium text-white/90 gap-5">
+        <div className="flex justify-center text-center text-sm sm:text-base font-medium text-white/90 gap-5">
           {/* <Link href="/privacy-policy">Privacy Policy</Link> <span>•</span> © 2026 Fanith <span>•</span> <Link href="/terms-conditions">Terms & Conditions</Link> */}
           <Link href="/privacy-policy">Privacy Policy</Link> <span>•</span> <Link href="/terms-conditions">Terms & Conditions</Link>
         </div>
-        <div className="flex justify-center text-md font-medium text-white/90 pt-4 pb-3 tracking-wide">
+        <div className="flex justify-center text-center text-sm sm:text-base font-medium text-white/90 pt-4 pb-3 tracking-wide">
           Copyright © {new Date().getFullYear()} MEEDEE DIGITAL LABS PRIVATE LIMITED, All Rights Reserved.
       </div>
       </div>

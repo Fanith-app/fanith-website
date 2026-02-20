@@ -43,21 +43,21 @@ const page = () => {
       <MeetTheTeam
         members={[
           {
-            name: "Full Name",
+            name: "First Name",
             designation: "Designation",
             superpower: "Data Crunching",
             favouriteTeam: "RCB",
             image: "/assets/images/member1.jpg",
           },
           {
-            name: "Full Name",
+            name: "First Name",
             designation: "Designation",
             superpower: "Data Crunching",
             favouriteTeam: "RCB",
             image: "/assets/images/member2.jpg",
           },
           {
-            name: "Full Name",
+            name: "First Name",
             designation: "Designation",
             superpower: "Data Crunching",
             favouriteTeam: "RCB",

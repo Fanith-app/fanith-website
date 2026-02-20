@@ -17,7 +17,7 @@ export default function HomeBanner() {
   };
 
   return (
-    <section className="relative overflow-hidden pb-13 h-screen">
+    <section className="relative overflow-hidden pb-13 h-auto">
       {/* Bg- image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -35,7 +35,7 @@ export default function HomeBanner() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h1 className="relative z-10 text-6xl md:text-3xl lg:text-3xl xl:text-5xl font-bold text-[#ffffff] leading-tight whitespace-normal lg:whitespace-nowrap wrap-break-word pt-10">
+            <h1 className="relative z-10 text-5xl sm:text-6xl font-bold text-[#ffffff] leading-tight whitespace-normal lg:whitespace-nowrap wrap-break-word pt-10">
               <span className="text-[#960018]">One</span> Stadium.<br /> Millions of Fans. <br /><span className="text-[#960018]">One</span> Voice.
             </h1>
 
