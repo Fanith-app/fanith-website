@@ -15,8 +15,8 @@ export default function PartnersAndFeatures() {
         <div className="flex items-center justify-center gap-14 flex-wrap">
           {/* Replace src with your actual logos */}
           {[
-            "/assets/svg/partner1.svg",
-            "/assets/svg/partner2.svg",
+            "/assets/images/partners/barkspider.webp",
+            "/assets/images/partners/Holistic_Learning.webp",
             "/assets/svg/partner3.svg",
             "/assets/svg/partner4.svg",
             "/assets/svg/partner1.svg",
@@ -26,7 +26,7 @@ export default function PartnersAndFeatures() {
                 src={logo}
                 alt="Partner logo"
                 fill
-                className="object-contain"
+                className="object-contain h-auto w-full"
               />
             </div>
           ))}

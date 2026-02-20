@@ -125,14 +125,14 @@ export default function EarlyAccess() {
 
         <form
           onSubmit={handleEarlyAccess}
-          className="mt-5 flex flex-col md:flex-row items-start gap-4"
+          className="mt-5 flex flex-row flex-wrap items-start gap-4"
         >
-          <input
+            <input
             type="text"
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="h-full w-full md:w-72 rounded-full border border-white bg-white/20 backdrop-blur-md px-6 py-2.5 text-sm text-[#bfbfbf]"
+            className="h-full w-full sm:w-72 md:w-72 rounded-full border border-white bg-white/20 backdrop-blur-md px-6 py-2.5 text-sm text-[#bfbfbf]"
           />
 
           <input
@@ -140,12 +140,12 @@ export default function EarlyAccess() {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="h-full w-full md:w-72 rounded-full border border-white bg-white/20 backdrop-blur-md px-6 py-2.5 text-sm text-[#bfbfbf]"
+            className="h-full w-full sm:w-72 md:w-72 rounded-full border border-white bg-white/20 backdrop-blur-md px-6 py-2.5 text-sm text-[#bfbfbf]"
           />
 
-          <div className="w-full md:w-72">
+          <div className="w-full sm:w-72 md:w-72">
             <Select value={selectedTeam} onValueChange={setSelectedTeam}>
-              <SelectTrigger className="h-full w-full md:w-72 rounded-full border border-white bg-white/20 backdrop-blur-md px-6 py-2.5 text-sm text-[#bfbfbf]">
+              <SelectTrigger className="h-full w-full sm:w-72 md:w-72 rounded-full border border-white bg-white/20 backdrop-blur-md px-6 py-2.5 text-sm text-[#bfbfbf]">
                 <SelectValue placeholder="Select Team " />
               </SelectTrigger>
               <SelectContent>
@@ -161,12 +161,13 @@ export default function EarlyAccess() {
           <button
             type="submit"
             disabled={loading}
-            className={`rounded-full bg-[#960018] px-8 py-3 text-sm font-semibold text-white ${
+            className={`h-full w-full sm:w-72 md:w-72 lg:w-50 rounded-full bg-[#960018] px-8 py-3 text-sm font-semibold text-white ${
               loading ? "opacity-70 cursor-not-allowed" : "hover:bg-black"
             }`}
           >
             {loading ? "Joining..." : "Get Early Access"}
           </button>
+
         </form>
       </motion.div>
     </section>
