@@ -3,11 +3,6 @@ name: Deploy Website
 on:
   workflow_dispatch:
     inputs:
-      branch:
-        description: 'Branch to deploy'
-        required: true
-        type: string
-        default: 'main'
       environment:
         description: 'Target server'
         required: true
@@ -26,13 +21,11 @@ env:
 
 jobs:
   deploy:
-    name: Deploy ${{ inputs.branch }} → ${{ inputs.environment }}
+    name: Deploy → ${{ inputs.environment }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout ${{ inputs.branch }}
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.branch }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -80,7 +73,7 @@ jobs:
       - name: Summary
         run: |
           echo "### Deployment Summary" >> $GITHUB_STEP_SUMMARY
-          echo "- **Branch**: ${{ inputs.branch }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Server**: ${{ inputs.environment }}" >> $GITHUB_STEP_SUMMARY
           echo "- **API URL**: ${{ steps.env.outputs.api_url }}" >> $GITHUB_STEP_SUMMARY
           echo "- **S3 Bucket**: ${{ steps.env.outputs.bucket }}" >> $GITHUB_STEP_SUMMARY
