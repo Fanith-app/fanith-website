@@ -19,7 +19,7 @@ export default function FAQSidebar({ activeTab, onChange }: Props) {
         <button
           key={tab}
           onClick={() => onChange(tab)}
-          className={`whitespace-nowrap w-50 text-center px-5 py-4 font-medium rounded-full transform transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 bg-[#202020] text-[#c3c3c3]
+          className={`whitespace-nowrap w-auto sm:w-50 text-center px-5 py-4 font-medium rounded-full transform transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 bg-[#202020] text-[#c3c3c3]
             ${
               activeTab === tab
                 ? "bg-[#960018] text-[#FFFFFF]"

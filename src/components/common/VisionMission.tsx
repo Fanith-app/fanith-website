@@ -16,9 +16,9 @@ interface VisionMissionProps {
 
 export default function VisionMission({ items }: VisionMissionProps) {
   return (
-    <section className="relative pt-10 sm:pt-30 lg:pt-40 pb-10 sm:pb-24 overflow-hidden lg:-mt-50">
+    <section className="relative pt-10 sm:pt-10 md:pt-10 lg:pt-40 pb-10 sm:pb-24 overflow-hidden lg:-mt-30">
       <motion.div
-      className="grid grid-cols-1 md:grid-cols-2 gap-10"
+      className="grid grid-cols-1 lg:grid-cols-2 gap-10"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
@@ -54,15 +54,15 @@ export default function VisionMission({ items }: VisionMissionProps) {
           <GameRoomCardShape />
 
           {/* Content */}
-          <div className="relative z-10 flex flex-col items-center text-center px-10 pt-16">
+          <div className="relative z-10 flex flex-col items-center text-center px-10 pt-16 justify-center h-full">
 
             {/* Title Badge */}
-            <div className="absolute -top-1.5 px-8 py-2 text-white text-lg font-semibold">
+            <div className="absolute top-0 mt-6 sm:-mt-1.5 md:-mt-1.25 lg:-mt-0.5 xl:-mt-1.25 px-8 py-2 text-white text-lg font-semibold">
               {item.title}
             </div>
 
             {/* Icon Circle */}
-            <div className="mb-11 flex items-center justify-center mx-auto sm:mb-8 h-16 w-16 sm:h-20 sm:w-20 rounded-full overflow-hidden shadow-lg transform transition-all duration-500 group-hover:scale-115 group-hover:rotate-6">
+            <div className="mb-5 sm:-mt-20 md:-mt-20 lg:-mt-5 xl:-mt-5 flex items-center justify-center mx-auto sm:mb-8 h-16 w-16 sm:h-20 sm:w-20 rounded-full overflow-hidden shadow-lg transform transition-all duration-500 group-hover:scale-115 group-hover:rotate-6">
               <Image
                 src={item.icon}
                 alt={item.title}
@@ -73,7 +73,7 @@ export default function VisionMission({ items }: VisionMissionProps) {
             </div>
 
             {/* Description */}
-            <p className="text-[#c3c3c3] leading-relaxed text-lg/relaxed sm:text-lg/relaxed font-medium mb-4 sm:mb-6 transform transition-all duration-500 group-hover:scale-102">
+            <p className="text-[#c3c3c3] leading-relaxed text-lg/relaxed sm:text-lg/relaxed font-medium mb-4 sm:mb-6 transform transition-all duration-500 group-hover:scale-102 px-0 sm:px-16 md:mx-35 lg:mx-0 md:px-16 lg:px-3 xl:px-16">
               {item.description}
             </p>
 

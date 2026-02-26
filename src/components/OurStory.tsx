@@ -41,7 +41,7 @@ export default function OurStory({
       >
         {/* Pill Heading */}
         <motion.div
-          className="flex justify-center mb-12"
+          className="flex justify-center mb-6 md:mb-6 lg:mb-12"
           variants={{
             hidden: { y: 60, opacity: 0 },
             visible: {
@@ -57,7 +57,7 @@ export default function OurStory({
           {/* Gradient Border */}
           <span className="p-0.5">
             {/* Inner content */}
-            <span className="block px-20 py-3 text-md md:text-xl xl:text-[32px] font-bold text-white">
+            <span className="block px-20 py-3 text-2xl md:text-2xl xl:text-[32px] font-bold text-white">
               {title}
             </span>
           </span>
@@ -65,7 +65,7 @@ export default function OurStory({
 
         {/* Story Text */}
         <motion.p
-          className="text-center text-md md:text-xl xl:text-[21px] leading-relaxed text-[#c3c3c3] mb-24 tracking-wider"
+          className="text-center text-md md:text-xl xl:text-[21px] leading-relaxed text-[#c3c3c3] mb-10 sm:mb-11 md:mb-15 lg:md-20  tracking-wider"
           variants={{
             hidden: { y: 50, opacity: 0 },
             visible: {
@@ -126,7 +126,7 @@ export default function OurStory({
             }}
           >
             <motion.h3
-              className="text-md md:text-xl xl:text-[32px] font-bold mb-6 text-white"
+              className="text-xl md:text-xl xl:text-[32px] font-bold mb-6 text-white"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

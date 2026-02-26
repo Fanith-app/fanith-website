@@ -11,7 +11,7 @@ const posts = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
     date: "24 April 2025",
-    image: "/assets/images/fan-img1.png",
+    image: "/assets/images/BLOG_CARD_Landing_Page_1.webp",
   },
   {
     category: "Fan Stories",
@@ -19,7 +19,7 @@ const posts = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
     date: "24 April 2025",
-    image: "/assets/images/fan-img2.png",
+    image: "/assets/images/BLOG_CARD_Landing_Page_1.webp",
   },
   {
     category: "Commentary",
@@ -27,7 +27,7 @@ const posts = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco",
     date: "24 April 2025",
-    image: "/assets/images/fan-img3.png",
+    image: "/assets/images/BLOG_CARD_Landing_Page_1.webp",
   },
 ];
 
@@ -109,7 +109,7 @@ export default function FanCommunity() {
             </div>
 
             {/* Image */}
-            <div className="w-full h-52.5 mt-9 pr-2">
+            <div className="w-full h-52.5 mt-3.25 pr-2">
               <div className="w-full h-full overflow-hidden">
                 <Image
                   src={post.image}
