@@ -11,7 +11,7 @@ interface Props {
 
 export default function FAQContent({ items }: Props) {
   return (
-    <Accordion type="single" collapsible className="space-y-5 pl-10">
+    <Accordion type="single" collapsible className="space-y-5 pl-0 sm:pl-10">
       {items.map((item, index) => (
         <AccordionItem
           key={index}
