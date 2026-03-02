@@ -7,7 +7,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import EarlyAccessModal from "../modals/EarlyAccessModal";
-import UpperHeader from "./UpperHeader";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -50,12 +49,10 @@ export default function Header() {
   return (
     <>
       {/* TOP ANNOUNCEMENT HEADER */}
-      <UpperHeader />
+      {/* <UpperHeader /> */}
       {/* Below one is the final code for header */}
-      {/* <header className="fixed top-5 left-0 right-0 w-full bg-[#141414]/80 rounded-xl border border-[#eeeeee]/18 z-50"> */}
-      <header className="w-full bg-[#141414]/80 rounded-xl border border-[#eeeeee]/18">
-      {/* <header className="absolute overflow-hidden left-50 right-50 mt-5 w-3/4 bg-[#141414]/80 rounded-xl border border-[#eeeeee]/18 z-50 mx-auto"> */}
-      {/* <header className="fixed top-5 left-1/2 -translate-x-1/2 w-full max-w-6xl lg:w-[95%] bg-[#141414]/80 rounded-xl border border-[#eeeeee]/18 z-100 mx-auto"> */}
+      <header className="fixed top-0 left-0 right-0 w-full bg-[#141414]/80 rounded-xl border border-[#eeeeee]/18 z-50">
+      {/* <header className="w-full bg-[#141414]/80 rounded-xl border border-[#eeeeee]/18"> */}
         <div className="mx-auto max-w-8xl px-4">
           <div className="flex h-16 items-center justify-between px-2 ">
             {/* Logo */}
