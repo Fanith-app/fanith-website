@@ -45,7 +45,6 @@ export default function LiveMatchEnergy() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
 
-  // ✅ FIX — reliable scroll locking using section visibility ratio
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       if (!sectionRef.current) return;
@@ -86,7 +85,7 @@ export default function LiveMatchEnergy() {
   const slide = slides[index];
 
   return (
-    // ✅ FIX — TRUE FULL HEIGHT
+    
     <section
       ref={sectionRef}
       className="relative w-full min-h-screen flex items-center overflow-hidden bg-[linear-gradient(121deg,rgba(158,29,29,0)_-23.79%,#0E0E0E_18.36%,#0E0E0E_79.09%,rgba(158,29,29,0)_124.81%)]"
@@ -139,7 +138,7 @@ export default function LiveMatchEnergy() {
         </motion.div>
       </div>
 
-      {/* ✅ FIX — VISIBLE CIRCLE POSITIONS + MOVING BALL */}
+      
       <div className="hidden md:flex absolute right-14 top-1/2 -translate-y-1/2 flex-col gap-8">
         {slides.map((_, i) => (
           <button
