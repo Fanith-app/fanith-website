@@ -13,7 +13,7 @@ export default function FeaturesPage() {
         description="Explore everything Fanith offers — from live match chat rooms to FanDom rewards and FanPedia player insights."
         backgroundImage="/assets/images/Features-Banner-Image.webp"
         // bottomcurve="lg:h-150 lg:[clip-path:ellipse(80%_90%_at_50%_0%)]"
-        ctaText="Join Beta"
+        ctaText="Download App"
         ctaLink="/join-beta"
       />
 
@@ -49,8 +49,8 @@ export default function FeaturesPage() {
       <CenteredCTA
         title={
           <>
-            Be the First to Experience{" "}
-            <span className="text-[#960018]">Fanith</span>
+            Ready to watch matches the{" "}
+            <span className="text-[#960018]">Fanith</span> way?
           </>
         }
         description="Explore everything Fanith offers — from live match chat rooms to FanDom rewards and FanPedia player insights."
