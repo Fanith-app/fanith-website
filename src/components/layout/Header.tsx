@@ -89,7 +89,7 @@ export default function Header() {
                 onClick={handleJoinBeta}
                 className="hidden lg:inline-flex items-center rounded-full bg-[#960018] px-5 py-2 text-sm font-semibold text-white transform transition-all duration-300 ease-in-out hover:scale-105 cursor-pointer"
               >
-                Join Beta
+                Download App
               </button>
 
               {/* Mobile Menu Button */}

@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import EarlyAccess from "./EarlyAccess";
 
 export default function HomeBanner() {
 
@@ -39,15 +38,15 @@ export default function HomeBanner() {
               <span className="text-[#960018]">One</span> Stadium.<br /> Millions of Fans. <br /><span className="text-[#960018]">One</span> Voice.
             </h1>
 
-            <p className="relative z-10 mt-8 text-lg md:text-xl text-[#c3c3c3] leading-relaxed tracking-wider">
-              Join live fan rooms, support your fan tribe, and experience matches together — in real time.
+            <p className="relative z-10 mt-8 text-lg md:text-2xl text-[#c3c3c3] leading-relaxed tracking-wider">
+              Join live fan rooms, support your fan tribe, and <br />experience matches together — in real time.
             </p>
 
             {/* <EarlyAccess /> */}
-            <EarlyAccess />
+            {/* <EarlyAccess />
             <p className="relative z-10 mt-1 text-md text-[#c3c3c3] tracking-wider">
               <span>Early access + exclusive rewards for first 10K signups</span>
-            </p>
+            </p> */}
 
             {/* CTA BUTTONS */}
             {/* <div className="relative z-10 mt-10 flex flex-col sm:flex-row gap-4">
@@ -71,7 +70,7 @@ export default function HomeBanner() {
               </Button>
             </div> */}
 
-            {/* <div className="relative z-10 flex justify-start items-center gap-3 pt-5 pb-3">
+            <div className="relative z-10 flex justify-start items-center gap-3 pt-5 pb-3">
             <span><img src="/assets/images/Google-Play-Features.png" alt="Google Play Store" className="h-12 w-auto cursor-pointer" /></span>{" "}<span><img src="/assets/images/App-Store-Features.png" alt="App App Store" className="h-12 w-auto cursor-pointer" /></span>
           </div>
 
@@ -80,8 +79,8 @@ export default function HomeBanner() {
             </p>
 
             <p className="relative z-10 mt-1 text-lg text-[#c3c3c3] tracking-wider flex justify-start items-center gap-2">
-              <span><img src="/assets/svg/fans-joined.svg" alt="Fans Joined" /></span><span className="">50,000+ fans joined</span>
-            </p> */}
+              <span><img src="/assets/svg/fans-joined.svg" alt="Fans Joined" /></span><span className="text-xl">50,000+ fans joined</span>
+            </p>
           </motion.div>
 
           {/* RIGHT IMAGE */}

@@ -4,14 +4,13 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { ReactNode, useState } from "react";
 import EarlyAccessModal from "../modals/EarlyAccessModal";
-import { Button } from "../ui/button";
 
 interface PageHeroProps {
     title: string;
     description: string;
     backgroundImage: string;
-    ctaText?: string;
-    ctaLink?: string;
+    // ctaText?: string;
+    // ctaLink?: string;
     children?: ReactNode;
     bottomcurve?: string;
 }
@@ -20,7 +19,7 @@ export default function DownloadBanner({
     title,
     description,
     backgroundImage,
-    ctaText,
+    // ctaText,
     bottomcurve = "lg:h-180 ",
     children,
 }: PageHeroProps) {
@@ -117,12 +116,12 @@ export default function DownloadBanner({
                     {children}
                 </motion.div>
 
-                <div className=" flex justify-center items-center gap-3 pt-4 pb-1">
+                <div className=" flex justify-center items-center gap-3 pt-9 pb-1">
                     <span><img src="/assets/images/Google-Play-Features.png" alt="Google Play Store" className="h-9 w-auto cursor-pointer" /></span>{" "}<span><img src="/assets/images/App-Store-Features.png" alt="App App Store" className="h-9 w-auto cursor-pointer" /></span>
                 </div>
 
                 {/* CTA (Optional) */}
-                {ctaText && (
+                {/* {ctaText && (
                     <motion.div
                         variants={{
                             hidden: { y: 30, opacity: 0, scale: 0.9 },
@@ -149,7 +148,7 @@ export default function DownloadBanner({
                             {ctaText}
                         </Button>
                     </motion.div>
-                )}
+                )} */}
 
             </motion.div>
 

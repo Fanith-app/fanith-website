@@ -12,8 +12,8 @@ const page = () => {
         title="Download Fanith"
         description="Follow the match, chat live, and share moments — all in one place."
         backgroundImage="/assets/images/download-banner.webp"
-        ctaText="Download App"
-        ctaLink="/join-beta"
+        // ctaText="Download App"
+        // ctaLink="/join-beta"
       />
 
       <DownloadSecondSection
@@ -26,7 +26,7 @@ const page = () => {
         title={
           <>
             Ready to watch matches the{" "}
-            <span className="text-[#960018]">Fanith</span>{" "} way?
+            <span className="text-[#960018]">Fanith</span> way?
           </>
         }
         description="Explore everything Fanith offers — from live match chat rooms to FanDom rewards and FanPedia player insights."
