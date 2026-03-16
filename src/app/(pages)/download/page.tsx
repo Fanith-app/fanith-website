@@ -12,8 +12,6 @@ const page = () => {
         title="Download Fanith"
         description="Follow the match, chat live, and share moments — all in one place."
         backgroundImage="/assets/images/download-banner.webp"
-        // ctaText="Download App"
-        // ctaLink="/join-beta"
       />
 
       <DownloadSecondSection

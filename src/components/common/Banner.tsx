@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
 import EarlyAccessModal from "../modals/EarlyAccessModal";
 import { Button } from "../ui/button";
+import { RedirectToStore } from "./RedirectToStore";
 
 interface PageHeroProps {
   title: string;
@@ -142,20 +143,7 @@ export default function Banner({
             className="mt-10"
           >
             <Button
-            onClick={() => {
-    const userAgent = navigator.userAgent.toLowerCase();
-
-    if (userAgent.includes("android")) {
-      window.location.href =
-        "https://play.google.com/store/apps/details?id=com.fanithapp";
-    } else if (userAgent.includes("iphone") || userAgent.includes("ipad")) {
-      window.location.href =
-        "https://apps.apple.com/"; // Apple App Store link
-    } else {
-      // desktop fallback
-      window.location.href = "https://play.google.com/store/apps/details?id=com.fanithapp";
-    }
-  }}
+            onClick={RedirectToStore}
               className="inline-flex items-center justify-center rounded-full bg-[#960018] px-10 py-4 text-lg font-normal text-[#F8F8F8] transform transition-all duration-300 ease-in-out hover:scale-105 hover:bg-[#960018] cursor-pointer"
             >
               {ctaText}

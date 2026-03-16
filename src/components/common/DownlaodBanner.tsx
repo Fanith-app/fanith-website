@@ -9,8 +9,6 @@ interface PageHeroProps {
     title: string;
     description: string;
     backgroundImage: string;
-    // ctaText?: string;
-    // ctaLink?: string;
     children?: ReactNode;
     bottomcurve?: string;
 }
@@ -19,7 +17,6 @@ export default function DownloadBanner({
     title,
     description,
     backgroundImage,
-    // ctaText,
     bottomcurve = "lg:h-180 ",
     children,
 }: PageHeroProps) {
@@ -37,8 +34,6 @@ export default function DownloadBanner({
                     fill
                     className="w-full h-50"
                 />
-                {/* Dark Red Overlay */}
-                {/* <div className="absolute inset-0 bg-linear-to-b from-black/60 via-red-900/60 to-black/70" /> */}
             </div>
 
             {/* Content */}
@@ -117,38 +112,8 @@ export default function DownloadBanner({
                 </motion.div>
 
                 <div className=" flex justify-center items-center gap-3 pt-9 pb-1">
-                    <span><img src="/assets/images/Google-Play-Features.png" alt="Google Play Store" className="h-9 w-auto cursor-pointer" /></span>{" "}<span><img src="/assets/images/App-Store-Features.png" alt="App App Store" className="h-9 w-auto cursor-pointer" /></span>
+                    <span><a href="https://play.google.com/store/apps/details?id=com.fanithapp" rel="noopener noreferrer" target="_blank" className="href"><img src="/assets/images/Google-Play-Features.png" alt="Google Play Store" className="h-auto w-auto cursor-pointer" /></a></span>{" "}<span><img src="/assets/images/App-Store-Features.png" alt="App Store" className="h-auto w-auto cursor-pointer" /></span>
                 </div>
-
-                {/* CTA (Optional) */}
-                {/* {ctaText && (
-                    <motion.div
-                        variants={{
-                            hidden: { y: 30, opacity: 0, scale: 0.9 },
-                            visible: {
-                                y: 0,
-                                opacity: 1,
-                                scale: 1,
-                                transition: {
-                                    duration: 0.6,
-                                    ease: [0.25, 0.46, 0.45, 0.94],
-                                    delay: 0.3,
-                                    type: "spring",
-                                    stiffness: 120,
-                                    damping: 12
-                                }
-                            }
-                        }}
-                        className="mt-7"
-                    >
-                        <Button
-                            onClick={() => setModalOpen(true)}
-                            className="inline-flex items-center justify-center rounded-full bg-[#960018] px-10 py-2 pb-4 text-lg text-center font-normal text-[#F8F8F8] transform transition-all duration-300 ease-in-out hover:scale-105 hover:bg-[#960018] cursor-pointer"
-                        >
-                            {ctaText}
-                        </Button>
-                    </motion.div>
-                )} */}
 
             </motion.div>
 

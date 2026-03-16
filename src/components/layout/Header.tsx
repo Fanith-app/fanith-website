@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { RedirectToStore } from "../common/RedirectToStore";
 import EarlyAccessModal from "../modals/EarlyAccessModal";
 
 export default function Header() {
@@ -86,7 +87,7 @@ export default function Header() {
             {/* CTA + Mobile Toggle */}
             <div className="flex items-center gap-3">
               <button
-                onClick={handleJoinBeta}
+                onClick={RedirectToStore}
                 className="hidden lg:inline-flex items-center rounded-full bg-[#960018] px-5 py-2 text-sm font-semibold text-white transform transition-all duration-300 ease-in-out hover:scale-105 cursor-pointer"
               >
                 Download App

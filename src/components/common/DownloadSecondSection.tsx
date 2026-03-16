@@ -45,8 +45,8 @@ export default function DownloadSecondSection({
             }
           }}
         >
-               {/* Image */}
-        <motion.div
+          {/* Image */}
+          <motion.div
             className="relative h-130 w-full"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -100,20 +100,20 @@ export default function DownloadSecondSection({
             >
               <ul className="space-y-4 text-md md:text-xl xl:text-[25px] leading-relaxed text-[#c3c3c3] tracking-wider">
                 <li className="flex items-center gap-3">
-                    <img src="/assets/svg/right-arrrow.svg" className="w-5 h-5 mt-1" />
-                    <span>Live fan rooms during matches</span>
+                  <img src="/assets/svg/right-arrrow.svg" className="w-5 h-5 mt-1" />
+                  <span>Live fan rooms during matches</span>
                 </li>
                 <li className="flex items-center gap-3">
-                    <img src="/assets/svg/right-arrrow.svg" className="w-5 h-5 mt-1" />
-                    <span>Real-time chat & reactions</span>
+                  <img src="/assets/svg/right-arrrow.svg" className="w-5 h-5 mt-1" />
+                  <span>Real-time chat & reactions</span>
                 </li>
                 <li className="flex items-center gap-3">
-                    <img src="/assets/svg/right-arrrow.svg" className="w-5 h-5 mt-1" />
-                    <span>Match stats alongside discussion</span>
+                  <img src="/assets/svg/right-arrrow.svg" className="w-5 h-5 mt-1" />
+                  <span>Match stats alongside discussion</span>
                 </li>
                 <li className="flex items-center gap-3">
-                    <img src="/assets/svg/right-arrrow.svg" className="w-5 h-5 mt-1" />
-                    <span>Memes, clips, and moments instantly</span>
+                  <img src="/assets/svg/right-arrrow.svg" className="w-5 h-5 mt-1" />
+                  <span>Memes, clips, and moments instantly</span>
                 </li>
               </ul>
             </motion.div>
@@ -142,37 +142,18 @@ export default function DownloadSecondSection({
             </span>
           </span>
         </motion.div>
-
-        {/* Story Text */}
-        {/* <motion.div
-          className="text-center text-md md:text-xl xl:text-[21px] leading-relaxed text-[#c3c3c3] mb-24 tracking-wider"
-          variants={{
-            hidden: { y: 50, opacity: 0 },
-            visible: {
-              y: 0,
-              opacity: 1,
-              transition: {
-                duration: 0.8,
-                ease: [0.25, 0.46, 0.45, 0.94],
-                delay: 0.1
-              }
-            }
+        <motion.div
+          className="relative mx-auto max-w-5xl px-6"
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.8,
+            ease: [0.25, 0.46, 0.45, 0.94],
+            delay: 0.1
           }}
         >
-          
-        </motion.div> */}
-        <motion.div
-  className="relative mx-auto max-w-5xl px-6"
-  initial={{ y: 50, opacity: 0 }}
-  whileInView={{ y: 0, opacity: 1 }}
-  viewport={{ once: true }}
-  transition={{
-    duration: 0.8,
-    ease: [0.25, 0.46, 0.45, 0.94],
-    delay: 0.1
-  }}
->
-  <div className="
+          <div className="
     relative
     rounded-2xl
     border border-[rgba(238,238,238,0.18)]
@@ -180,46 +161,44 @@ export default function DownloadSecondSection({
     backdrop-blur-[2px]
     px-8 py-6
   ">
-    
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center items-center">
 
-      {/* Item 1 */}
-      <div className="flex flex-col items-center justify-center space-y-2 md:border-r md:border-white/10 px-2">
-        {/* <div className="text-yellow-400 text-2xl">⭐</div> */}
-        {/* <p className="text-white font-semibold text-lg"><span></span>4.8 ★★★★★</p> */}
-        <p className="text-[#c3c3c3] tracking-wider flex justify-start items-center gap-2">
-              <span><img src="/assets/svg/one-big-star.svg" alt="Star" className="w-6 h-auto" /></span><span className="text-[22px]">4.8</span><span><img src="/assets/svg/5-star.svg" alt="Star" className="w-23 h-auto" /></span>
-            </p>
-        <p className="text-[#c3c3c3] text-md tracking-wider">App Store rating</p>
-      </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center items-center items-stretch">
 
-      {/* Item 2 */}
-      <div className="flex flex-col items-center justify-center space-y-2 md:border-r md:border-white/10 px-2">
-        <div><img src="/assets/svg/watch-matches.svg" alt="Best place to watch matches together" className="w-11 h-full" /></div>
-        <p className="text-[#c3c3c3] text-md tracking-wider">
-          Best place to watch matches together
-        </p>
-      </div>
+              {/* Item 1 */}
+              <div className="flex flex-col items-center justify-center space-y-2 md:border-r-2 md:border-white/50 px-2 h-full">
+                <p className="text-[#c3c3c3] tracking-wider flex justify-start items-center gap-2">
+                  <span><img src="/assets/svg/one-big-star.svg" alt="Star" className="w-6 h-auto" /></span><span className="text-[22px]">4.8</span><span><img src="/assets/svg/5-star.svg" alt="Star" className="w-23 h-auto" /></span>
+                </p>
+                <p className="text-[#c3c3c3] text-md tracking-wider">App Store rating</p>
+              </div>
 
-      {/* Item 3 */}
-      <div className="flex flex-col items-center justify-center space-y-2 md:border-r md:border-white/10 px-2">
-        <div><img src="/assets/svg/stats-and-chats.svg" alt="Stats + chat in one screen" className="w-11 h-full" /></div>
-        <p className="text-[#c3c3c3] text-md tracking-wider">
-          Stats + chat in one screen
-        </p>
-      </div>
+              {/* Item 2 */}
+              <div className="flex flex-col items-center justify-center space-y-2 md:border-r-2 md:border-white/50 px-2 h-full">
+                <div><img src="/assets/svg/watch-matches.svg" alt="Best place to watch matches together" className="w-11 h-full" /></div>
+                <p className="text-[#c3c3c3] text-md tracking-wider">
+                  Best place to watch matches together
+                </p>
+              </div>
 
-      {/* Item 4 */}
-      <div className="flex flex-col items-center justify-center space-y-2 px-2">
-        <div><img src="/assets/svg/watching-with-friends.svg" alt="Feels like watching with friends" className="w-11 h-full" /></div>
-        <p className="text-[#c3c3c3] text-md tracking-wider">
-          Feels like watching with friends
-        </p>
-      </div>
+              {/* Item 3 */}
+              <div className="flex flex-col items-center justify-center space-y-2 md:border-r-2 md:border-white/50 px-2 h-full">
+                <div><img src="/assets/svg/stats-and-chats.svg" alt="Stats + chat in one screen" className="w-11 h-full" /></div>
+                <p className="text-[#c3c3c3] text-md tracking-wider">
+                  Stats + chat in one screen
+                </p>
+              </div>
 
-    </div>
-  </div>
-</motion.div>
+              {/* Item 4 */}
+              <div className="flex flex-col items-center justify-center space-y-2 px-2 h-full">
+                <div><img src="/assets/svg/watching-with-friends.svg" alt="Feels like watching with friends" className="w-11 h-full" /></div>
+                <p className="text-[#c3c3c3] text-md tracking-wider">
+                  Feels like watching with friends
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </motion.div>
 
       </motion.div>
     </section>
