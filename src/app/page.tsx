@@ -2,8 +2,8 @@ import FanCommunity from '../components/home/FanCommunity'
 import HomeBanner from '../components/home/HomeBanner'
 import LiveMatchEnergy from '../components/home/LiveMatchEnergy'
 import PartnersAndFeatures from '../components/home/PartnersAndFeatures'
-import StadiumCTA from '../components/home/StadiumCTA'
 import WhatYouCanDo from '../components/home/WhatYouCanDo'
+import WhyPeopleLoveFanith from '../components/home/WhyPeopleLoveFanith'
 
 const page = () => {
   return (
@@ -11,7 +11,8 @@ const page = () => {
       <HomeBanner />
       <LiveMatchEnergy />
       <WhatYouCanDo />
-      <StadiumCTA filledPercentage={64} joinedFans={48000} />
+      {/* <StadiumCTA filledPercentage={64} joinedFans={48000} /> */}
+      <WhyPeopleLoveFanith />
       {/* <LaunchCountdown /> */}
       {/* <EarlyAccess /> */}
       <PartnersAndFeatures />
