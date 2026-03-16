@@ -12,8 +12,8 @@ const page = () => {
         title="About Fanith"
         description="A sports fan platform built to connect fans, celebrate passion, and bring stadium energy to your screen."
         backgroundImage="/assets/images/about-us-page-banner.webp"
-        ctaText="Join Beta"
-        ctaLink="/join-beta"
+        ctaText="Download App"
+        ctaLink="/download"
       />
 
       {/* <VisionMission

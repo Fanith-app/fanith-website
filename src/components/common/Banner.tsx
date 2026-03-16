@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ReactNode, useState } from "react";
 import EarlyAccessModal from "../modals/EarlyAccessModal";
 import { Button } from "../ui/button";
@@ -21,11 +22,13 @@ export default function Banner({
   description,
   backgroundImage,
   ctaText,
+  // ctaLink,
   bottomcurve = "lg:h-180 ",
   children,
 }: PageHeroProps) {
 
   const [modalOpen, setModalOpen] = useState(false);
+  const router = useRouter();
   return (
     <section className={`relative overflow-hidden ${bottomcurve}`}>
 
@@ -139,7 +142,20 @@ export default function Banner({
             className="mt-10"
           >
             <Button
-              onClick={() => setModalOpen(true)}
+            onClick={() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+
+    if (userAgent.includes("android")) {
+      window.location.href =
+        "https://play.google.com/store/apps/details?id=com.fanithapp";
+    } else if (userAgent.includes("iphone") || userAgent.includes("ipad")) {
+      window.location.href =
+        "https://apps.apple.com/"; // Apple App Store link
+    } else {
+      // desktop fallback
+      window.location.href = "https://play.google.com/store/apps/details?id=com.fanithapp";
+    }
+  }}
               className="inline-flex items-center justify-center rounded-full bg-[#960018] px-10 py-4 text-lg font-normal text-[#F8F8F8] transform transition-all duration-300 ease-in-out hover:scale-105 hover:bg-[#960018] cursor-pointer"
             >
               {ctaText}
