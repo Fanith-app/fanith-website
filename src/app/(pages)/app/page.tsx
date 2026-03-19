@@ -19,18 +19,9 @@ export default function AppDownloadPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#141414] flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-[#141414] flex flex-col items-center justify-start sm:justify-center p-6 pt-28 pb-12">
       {/* Main Card */}
       <div className="bg-[#202020] p-8 rounded-3xl shadow-xl max-w-sm w-full text-center border border-[#960018]">
-        
-        {/* Logo Section - Responsive & Centered */}
-        {/* <div className="flex justify-center py-6"> 
-          <img 
-            src="assets/images/Fanith_New_Header_Logo.png" 
-            alt="Fanith Logo" 
-            className="w-full max-w-37.5 h-auto object-contain"
-          />
-        </div> */}
 
         {/* Text Section */}
         <h1 className="text-2xl font-bold text-[#960018] mb-2">Get the Fanith App</h1>
@@ -49,7 +40,7 @@ export default function AppDownloadPage() {
               className="rounded-lg"
             />
           ) : (
-            <div className="w-50 h-50 flex items-center justify-center text-gray-400">
+            <div className="w-50 h-50 flex items-center justify-center text-[#141414] font-bold text-2xl">
               Loading QR...
             </div>
           )}
