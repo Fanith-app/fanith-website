@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.fanith.com/api/v1/"
+export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.fanith.com/api/v1/"
 
 const endpoints = {
    SUPPORT_FORM: "website/support-form",
