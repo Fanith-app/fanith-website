@@ -3,7 +3,6 @@
 import Banner from "@/src/components/common/Banner";
 import { CommunitySearch } from "@/src/components/common/SearchInput";
 import CommunityArticles from "@/src/components/CommunityArticles";
-import CommunityContent from "@/src/components/CommunityContent";
 import CommunityHeroTabs from "@/src/components/CommunityHeroTabs";
 import NewsletterSubscribe from "@/src/components/NewsletterSubscribe";
 import { useEffect, useState } from "react";
@@ -20,7 +19,7 @@ const page = () => {
       );
       const data = await res.json();
 
-      const formatted = data.data.blogs.map((blog: any) => ({
+      const formatted = data.data.data.map((blog: any) => ({
         category: blog.category?.name || "General",
         title: blog.title,
         description: blog.description,
@@ -49,8 +48,6 @@ const page = () => {
         <CommunitySearch />
         <CommunityHeroTabs active={activeTab} onChange={setActiveTab} />
       </Banner>
-
-      <CommunityContent activeTab={activeTab} />
 
       <CommunityArticles
         articles={articles}
