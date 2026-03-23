@@ -24,7 +24,7 @@ export default function CommunityArticles({
   onLoadMore,
 }: CommunityArticlesProps) {
   return (
-    <section className="bg-white py-24">
+    <section className="py-24">
       <motion.div
         className="mx-auto max-w-7xl px-4 md:px-6"
         initial="hidden"
@@ -54,16 +54,16 @@ export default function CommunityArticles({
             <motion.div
               key={index}
               variants={{
-                hidden: { opacity: 0 },
+                // hidden: { opacity: 0 },
                 visible: {
-                  opacity: 1,
+                  // opacity: 1,
                   transition: { duration: 0.6 },
                 },
               }}
             >
               {/* ✅ FULL CARD CLICKABLE */}
               <Link href={`/blog/${article.slug}`}>
-                <Card className="group overflow-hidden rounded-3xl border border-red-600 bg-[#eeeeee] shadow-[0_10px_60px_-20px_#000000] transform transition-all duration-500 hover:scale-105 cursor-pointer">
+                <Card className="group overflow-hidden rounded-3xl border border-[#960018] bg-[#202020] shadow-[0_10px_60px_-20px_#000000] transform transition-all duration-500 hover:scale-105 cursor-pointer">
                   
                   {/* Image */}
                   <div className="relative h-56 w-full overflow-hidden -mt-8">
@@ -77,27 +77,27 @@ export default function CommunityArticles({
 
                   <CardContent className="px-4">
                     {/* Category */}
-                    <span className="inline-block rounded-full bg-red-600 px-4 py-1 text-sm font-semibold text-white mb-4">
+                    <span className="inline-block rounded-full bg-[#960018] px-4 py-1 text-sm font-semibold text-white mb-4">
                       {article.category}
                     </span>
 
                     {/* Title */}
-                    <h3 className="text-xl font-bold mb-3">
+                    <h3 className="text-xl font-bold mb-3 text-white">
                       {article.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-sm text-gray-700 leading-relaxed mb-6">
+                    <p className="text-sm text-[#c3c3c3] leading-relaxed mb-6">
                       {article.description}
                     </p>
 
                     {/* Footer */}
                     <div className="flex items-center justify-between text-sm">
-                      <span className="font-medium text-red-600">
+                      <span className="font-medium text-[#960018]">
                         {article.date}
                       </span>
 
-                      <span className="font-semibold text-red-600 hover:underline">
+                      <span className="font-semibold text-[#960018] hover:underline">
                         Read More
                       </span>
                     </div>
