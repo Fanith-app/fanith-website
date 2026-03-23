@@ -24,7 +24,7 @@ export default function CommunityArticles({
   onLoadMore,
 }: CommunityArticlesProps) {
   return (
-    <section className="py-24">
+    <section className="bg-[#202020] py-24">
       <motion.div
         className="mx-auto max-w-7xl px-4 md:px-6"
         initial="hidden"
@@ -63,7 +63,7 @@ export default function CommunityArticles({
             >
               {/* ✅ FULL CARD CLICKABLE */}
               <Link href={`/blog/${article.slug}`}>
-                <Card className="group overflow-hidden rounded-3xl border border-[#960018] bg-[#202020] shadow-[0_10px_60px_-20px_#000000] transform transition-all duration-500 hover:scale-105 cursor-pointer">
+                <Card className="group overflow-hidden rounded-3xl border border-[#960018] bg-[#141414] transform transition-all duration-500 hover:scale-105 cursor-pointer">
                   
                   {/* Image */}
                   <div className="relative h-56 w-full overflow-hidden -mt-8">
@@ -113,7 +113,7 @@ export default function CommunityArticles({
           <div className="mt-20 flex justify-center">
             <button
               onClick={onLoadMore}
-              className="rounded-lg border border-[#9E1D1D] px-10 py-4 font-semibold text-[#9E1D1D] transition-all duration-300 hover:bg-red-600 hover:text-white hover:scale-105"
+              className="rounded-lg border border-[#9E1D1D] px-10 py-4 font-semibold text-[#9E1D1D] transition-all duration-300 hover:bg-red-600 hover:text-white hover:scale-105 cursor-pointer"
             >
               Load More Articles
             </button>
