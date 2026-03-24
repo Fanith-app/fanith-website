@@ -1,13 +1,12 @@
 import BlogDetail from "./BlogDetail";
-export const dynamic = "force-dynamic";
 
-// export async function generateStaticParams() {
-//   const res = await fetch(
-//     "https://live.fanith.com/api/v1/public/blogs?limit=100"
-//   );
-//   const data = await res.json();
-//   return data.data.data.map((blog: any) => ({ slug: blog.slug }));
-// }
+export async function generateStaticParams() {
+  const res = await fetch(
+    "https://live.fanith.com/api/v1/public/blogs?limit=100"
+  );
+  const data = await res.json();
+  return data.data.data.map((blog: any) => ({ slug: blog.slug }));
+}
 
 export default async function Page({
   params,
