@@ -1,5 +1,4 @@
 import BlogDetail from "./BlogDetail";
-// export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
   const res = await fetch(
