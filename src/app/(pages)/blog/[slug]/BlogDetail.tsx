@@ -28,7 +28,7 @@ const BlogDetail = ({ slug }: { slug: string }) => {
   if (!blog) return <p className="text-center py-10">Loading...</p>;
 
   return (
-    <div className="max-w-4xl mx-auto pt-23 pb-10 px-4 text-white leading-8.25 text-justify">
+    <div className="max-w-4xl mx-auto pt-24 pb-10 px-4 text-white leading-8.25 text-justify">
       <h1 className="text-3xl font-bold mb-4">{blog.title}</h1>
 
       <p className="text-[#c3c3c3] mb-4">
