@@ -24,7 +24,7 @@ export default function CommunityArticles({
   onLoadMore,
 }: CommunityArticlesProps) {
   return (
-    <section className="bg-[#202020] py-24">
+    <section className="bg-[#141414] py-24">
       <motion.div
         className="mx-auto max-w-7xl px-4 md:px-6"
         initial="hidden"
@@ -63,7 +63,7 @@ export default function CommunityArticles({
             >
               {/* ✅ FULL CARD CLICKABLE */}
               <Link href={`/blog/${article.slug}`}>
-                <Card className="group overflow-hidden rounded-3xl border border-[#960018] bg-[#141414] transform transition-all duration-500 hover:scale-105 cursor-pointer">
+                <Card className="group h-full overflow-hidden rounded-3xl border border-[#960018] bg-[#202020] transform transition-all duration-500 hover:scale-105 cursor-pointer">
                   
                   {/* Image */}
                   <div className="relative h-56 w-full overflow-hidden -mt-8">
@@ -87,7 +87,7 @@ export default function CommunityArticles({
                     </h3>
 
                     {/* Description */}
-                    <p className="text-sm text-[#c3c3c3] leading-relaxed mb-6">
+                    <p className="text-sm text-[#c3c3c3] leading-relaxed mb-6 line-clamp-3">
                       {article.description}
                     </p>
 

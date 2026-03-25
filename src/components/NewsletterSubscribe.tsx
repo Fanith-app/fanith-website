@@ -67,7 +67,7 @@ export default function NewsletterSubscribe({
   };
 
   return (
-    <section className="py-4 md:py-20">
+    <section className="py-4 md:py-20 bg-[#202020]">
       <motion.div
         className="mx-auto max-w-7xl px-4 md:px-6"
         initial="hidden"
@@ -86,7 +86,7 @@ export default function NewsletterSubscribe({
         }}
       >
         <motion.div
-          className="flex flex-col lg:flex-row items-center justify-between gap-10 rounded-3xl bg-[#202020] px-10 py-12"
+          className="flex flex-col lg:flex-row items-center justify-between gap-10 rounded-3xl bg-[#141414] px-10 py-12"
           variants={{
             hidden: { y: 60, opacity: 0, scale: 0.95 },
             visible: {

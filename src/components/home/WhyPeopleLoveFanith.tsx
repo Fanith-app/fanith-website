@@ -125,7 +125,7 @@ export default function WhyPeopleLoveFanith() {
           className="mt-7"
         >
           <div className="flex justify-center items-center gap-3">
-            <span><a href="https://play.google.com/store/apps/details?id=com.fanithapp" rel="noopener noreferrer" target="_blank" className="href"><img src="/assets/images/Google-Play-Features.png" alt="Google Play Store" className="h-auto w-auto cursor-pointer" /></a></span>{" "}<span><img src="/assets/images/App-Store-Features.png" alt="App Store" className="h-auto w-auto cursor-pointer" /></span>
+            <span><a href="https://play.google.com/store/apps/details?id=com.fanithapp" rel="noopener noreferrer" target="_blank" className="href"><img src="/assets/images/Google-Play-Features.png" alt="Google Play Store" className="h-auto w-auto cursor-pointer" /></a></span>{" "}<span><a href="https://apps.apple.com/in/app/fanith/id6760101126" className="href" rel="noopener noreferrer" target="_blank"><img src="/assets/images/App-Store-Features.png" alt="App Store" className="h-auto w-auto cursor-pointer" /></a></span>
           </div>
         </motion.div>
 

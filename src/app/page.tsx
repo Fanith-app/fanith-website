@@ -1,3 +1,4 @@
+
 import FanCommunity from '../components/home/FanCommunity'
 import HomeBanner from '../components/home/HomeBanner'
 import LiveMatchEnergy from '../components/home/LiveMatchEnergy'
@@ -5,7 +6,7 @@ import PartnersAndFeatures from '../components/home/PartnersAndFeatures'
 import WhatYouCanDo from '../components/home/WhatYouCanDo'
 import WhyPeopleLoveFanith from '../components/home/WhyPeopleLoveFanith'
 
-const page = () => {
+export default async function page() {
   return (
     <div className="min-h-screen">
       <HomeBanner />
@@ -22,5 +23,3 @@ const page = () => {
     </div>
   )
 }
-
-export default page
