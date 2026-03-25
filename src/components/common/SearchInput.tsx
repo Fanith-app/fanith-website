@@ -1,7 +1,7 @@
 "use client";
 
-import { Search } from "lucide-react";
 import { motion } from "framer-motion";
+import { Search } from "lucide-react";
 
 export function CommunitySearch() {
   return (
@@ -40,7 +40,7 @@ export function CommunitySearch() {
           <Search className="h-5 w-5 text-white" />
         </motion.div>
         <motion.input
-          placeholder="Search articles"
+          placeholder="Search Articles"
           className="w-full bg-transparent text-white placeholder-white/70 outline-none"
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}

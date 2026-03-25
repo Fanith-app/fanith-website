@@ -64,7 +64,7 @@ const page = () => {
       <Banner
         title="From the Fan Community"
         description="Match highlights, fan stories, commentary recaps, and updates from the Fanith universe."
-        backgroundImage="/assets/images/blog-banner.jpg"
+        backgroundImage="/assets/images/blog-page-banner.webp"
       >
         <CommunitySearch />
         <CommunityHeroTabs
