@@ -71,7 +71,7 @@ export default function HomeBanner() {
             </div> */}
 
             <div className="relative z-10 flex justify-start items-center gap-3 pt-5 pb-3">
-            <span><a href="https://play.google.com/store/apps/details?id=com.fanithapp" rel="noopener noreferrer" target="_blank" className="href"><img src="/assets/images/Google-Play-Features.png" alt="Google Play Store" className="h-auto w-auto cursor-pointer" /></a></span>{" "}<span><a href="https://apps.apple.com/in/app/fanith/id6760101126" className="href" rel="noopener noreferrer" target="_blank"><img src="/assets/images/App-Store-Features.png" alt="App Store" className="h-12 w-auto cursor-pointer" /></a></span>
+            <span><a href="https://play.google.com/store/apps/details?id=com.fanithapp" rel="noopener noreferrer" target="_blank" className="href"><img src="/assets/images/Google-Play-Features.png" alt="Google Play Store" className="h-auto w-auto cursor-pointer" /></a></span>{" "}<span><a href="https://apps.apple.com/in/app/fanith/id6760101126" className="href" rel="noopener noreferrer" target="_blank"><img src="/assets/images/App-Store-Features.png" alt="App Store" className="h-auto w-auto cursor-pointer" /></a></span>
           </div>
 
             <p className="relative z-10 mt-2 mb-0 text-[#c3c3c3] tracking-wider flex justify-start items-center gap-2">
