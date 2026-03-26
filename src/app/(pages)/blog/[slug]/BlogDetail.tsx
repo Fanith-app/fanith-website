@@ -24,6 +24,17 @@ const BlogDetail = ({ slug }: { slug: string }) => {
 
     fetchBlog();
   }, [slug]);
+  const getReadTime = (html = "") => {
+  const text = html.replace(/<[^>]*>/g, "");
+  const words = text.trim().split(/\s+/).filter(Boolean).length;
+
+  if (words === 0) return 1;
+
+  return Math.ceil(words / 200);
+};
+const readTime = blog?.readTime
+  ? blog.readTime
+  : getReadTime(blog?.contentHtml || "");
 
   if (!blog) return <p className="text-center py-10">Loading...</p>;
 
@@ -32,7 +43,7 @@ const BlogDetail = ({ slug }: { slug: string }) => {
       <h1 className="text-3xl font-bold mb-4">{blog.title}</h1>
 
       <p className="text-[#c3c3c3] mb-4">
-        {new Date(blog.publishedAt).toDateString()} • {blog.readTime} min read
+        {new Date(blog.publishedAt).toDateString()} • {readTime} min read
       </p>
 
       <img
