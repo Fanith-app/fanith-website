@@ -3,6 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { BASE_URL } from "@/src/api/endpoint";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -24,7 +25,7 @@ export default function FanCommunity() {
     const fetchBlogs = async () => {
       try {
         const res = await fetch(
-          "https://live.fanith.com/api/v1/public/blogs?page=1&limit=6",
+          `${BASE_URL}public/blogs?page=1&limit=6`,
         );
         const data = await res.json();
 

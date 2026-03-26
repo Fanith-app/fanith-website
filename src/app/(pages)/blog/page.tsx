@@ -5,6 +5,7 @@ import { CommunitySearch } from "@/src/components/common/SearchInput";
 import CommunityArticles from "@/src/components/CommunityArticles";
 import CommunityHeroTabs from "@/src/components/CommunityHeroTabs";
 import NewsletterSubscribe from "@/src/components/NewsletterSubscribe";
+import { BASE_URL } from "@/src/api/endpoint";
 import { useEffect, useState } from "react";
 
 const page = () => {
@@ -16,7 +17,7 @@ const page = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       const res = await fetch(
-        "https://live.fanith.com/api/v1/public/blogs/categories"
+        `${BASE_URL}public/blogs/categories`
       );
       const data = await res.json();
       setCategories(data.data);
@@ -27,7 +28,7 @@ const page = () => {
 
   const fetchBlogs = async (pageNumber = 1, categoryId?: string) => {
         try {
-      let url = `https://live.fanith.com/api/v1/public/blogs?page=${pageNumber}&limit=6`;
+      let url = `${BASE_URL}public/blogs?page=${pageNumber}&limit=6`;
 
       if (categoryId && categoryId !== "all") {
         url += `&categoryId=${categoryId}`;
