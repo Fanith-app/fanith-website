@@ -1,8 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function HomeBanner() {
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   const scrollToEarlyAccess = () => {
     const earlyAccessSection = document.getElementById('early-access');
@@ -16,12 +18,32 @@ export default function HomeBanner() {
   };
 
   return (
-    <section className="relative overflow-hidden pb-13 h-auto">
-      {/* Bg- image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/assets/images/Landing_Page_Banner.webp')" }}
-      ></div>
+    <section className="relative w-full overflow-hidden pb-13 h-auto">
+      {/* FALLBACK IMAGE */}
+      {!videoLoaded && (
+        <div
+          className="absolute inset-0 bg-cover bg-center z-0"
+          style={{
+            backgroundImage: "url('/assets/images/Landing_Page_Banner.webp')",
+          }}
+        />
+      )}
+      {/* VIDEO BACKGROUND */}
+      <video
+        className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000 ${
+          videoLoaded ? "opacity-100" : "opacity-0"
+        }`}
+        autoPlay
+        muted
+        loop
+        playsInline
+        onCanPlayThrough={() => setVideoLoaded(true)}
+      >
+        <source src="/assets/videos/Welcome-To-Fanith.mp4" type="video/mp4" />
+      </video>
+
+      {/* DARK OVERLAY */}
+      <div className="absolute inset-0 bg-black/50 z-10" />
 
       <div className="mx-auto px-4 md:px-10 py-20 pb-2">
         <div className="">
@@ -41,12 +63,6 @@ export default function HomeBanner() {
             <p className="relative z-10 mt-8 text-lg md:text-2xl text-[#c3c3c3] leading-relaxed tracking-wider">
               Join live fan rooms, support your fan tribe, and <br />experience matches together — in real time.
             </p>
-
-            {/* <EarlyAccess /> */}
-            {/* <EarlyAccess />
-            <p className="relative z-10 mt-1 text-md text-[#c3c3c3] tracking-wider">
-              <span>Early access + exclusive rewards for first 10K signups</span>
-            </p> */}
 
             {/* CTA BUTTONS */}
             {/* <div className="relative z-10 mt-10 flex flex-col sm:flex-row gap-4">

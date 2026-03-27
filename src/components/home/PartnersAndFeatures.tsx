@@ -2,6 +2,7 @@
 
 import { ChevronRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function PartnersAndFeatures() {
   return (
@@ -12,14 +13,12 @@ export default function PartnersAndFeatures() {
       <div className="text-center space-y-10 w-full">
         <h2 className="text-4xl font-semibold text-white text-center">Our Partners</h2>
 
-        <div className="flex items-center justify-center gap-14 flex-wrap">
-          {/* Replace src with your actual logos */}
+        {/* <div className="flex items-center justify-center gap-14 flex-wrap">
           {[
             "/assets/images/partners/barkspider.webp",
             "/assets/images/partners/Holistic_Learning.webp",
-            "/assets/svg/partner3.svg",
-            "/assets/svg/partner4.svg",
-            "/assets/svg/partner1.svg",
+            "/assets/images/partners/minimalisTee.jpeg",
+            "/assets/images/partners/get-you-at.jpeg",
           ].map((logo, index) => (
             <div key={index} className="relative h-30 w-50">
               <Image
@@ -30,7 +29,44 @@ export default function PartnersAndFeatures() {
               />
             </div>
           ))}
-        </div>
+        </div> */}
+        <div className="flex items-center justify-center gap-14 flex-wrap">
+
+  {[
+    {
+      src: "/assets/images/partners/barkspider.webp",
+      url: "https://barkspider.com/",
+    },
+    {
+      src: "/assets/images/partners/Holistic_Learning.webp",
+      url: "https://www.holisitclearning.com/",
+    },
+    {
+      src: "/assets/images/partners/minimalisTee.jpeg",
+      url: "https://www.minimalistee.com/?srsltid=AfmBOopjxYJUXHIjWvILqteJ3NjlLTAlJ7QLo6yIXn6_Clotdj1kVcy0",
+    },
+    {
+      src: "/assets/images/partners/get-you-at.jpeg",
+      url: "https://www.getyouat.com/",
+    },
+  ].map((item, index) => (
+    <Link
+      key={index}
+      href={item.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="relative h-30 w-50 cursor-pointer hover:scale-105 transition"
+    >
+      <Image
+        src={item.src}
+        alt="Partner logo"
+        fill
+        className="object-contain"
+      />
+    </Link>
+  ))}
+
+</div>
       </div>
 
       {/* ===================== */}
