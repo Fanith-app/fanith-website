@@ -1,5 +1,6 @@
 "use client";
 
+import { BASE_URL } from "@/src/api/endpoint";
 import { useEffect, useRef, useState } from "react";
 
 const BlogDetail = ({ slug }: { slug: string }) => {
@@ -13,7 +14,7 @@ const BlogDetail = ({ slug }: { slug: string }) => {
     const fetchBlog = async () => {
       try {
         const res = await fetch(
-          `https://live.fanith.com/api/v1/public/blogs/${slug}`
+          `${BASE_URL}public/blogs/${slug}`
         );
         const data = await res.json();
         setBlog(data.data);
