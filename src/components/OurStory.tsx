@@ -6,7 +6,6 @@ import VisionMission from "./common/VisionMission";
 
 interface OurStoryProps {
   title?: string;
-  storyText: string;
   founderTitle: string;
   founderMessage: string;
   image: string;
@@ -14,7 +13,6 @@ interface OurStoryProps {
 
 export default function OurStory({
   title = "Our Story",
-  storyText,
   founderTitle,
   founderMessage,
   image,
@@ -65,7 +63,7 @@ export default function OurStory({
 
         {/* Story Text */}
         <motion.p
-          className="text-center text-md md:text-xl xl:text-[21px] leading-relaxed text-[#c3c3c3] mb-10 sm:mb-11 md:mb-15 lg:md-20  tracking-wider"
+          className="text-justify text-md md:text-xl xl:text-[21px] leading-relaxed text-[#c3c3c3] mb-10 sm:mb-11 md:mb-15 lg:md-20  tracking-wider"
           variants={{
             hidden: { y: 50, opacity: 0 },
             visible: {
@@ -79,7 +77,8 @@ export default function OurStory({
             }
           }}
         >
-          {storyText}
+          For every fan who has ever cheered alone in front of a screen, or felt the ache of a missed connection during a match-winning six—Fanith was built for you. We believe that the true pulse of sports isn't just on the field; it’s in the collective roar of the fans.<br /><br />
+          Fanith was born to unite that energy. We’ve moved beyond static scores to create a digital stadium where every fan has a home. Through Game Rooms that crackle with real-time life, FanPedia that honors our shared sporting history, and FanDom rewards that finally value your loyalty, we are bringing fans closer to the action—and to each other—than ever before.
         </motion.p>
 
         <VisionMission
@@ -87,13 +86,13 @@ export default function OurStory({
                   {
                     title: "Our Vision",
                     description:
-                      "To build the world's most engaging digital community for sports fans — where passion, connection, and excitement come alive.",
+                      "To ignite the world’s most passionate digital community, where every sports fan—no matter where they are—can experience the electrifying connection of the stadium in the palm of their hand.",
                     icon: "/assets/images/vision-icon.png",
                   },
                   {
                     title: "Our Mission",
                     description:
-                      "To empower fans with real-time engagement tools, community-driven content, and features that transform the way people experience sports digitally.",
+                      "To revolutionize the digital sporting experience by providing fans with real-time engagement tools, community-driven content, and gamified 'Fan Tribe' features that turn every match into a shared celebration of passion and pride.",
                     icon: "/assets/images/mission-icon.png",
                   },
                 ]}
@@ -140,7 +139,7 @@ export default function OurStory({
             </motion.h3>
 
             <motion.p
-              className="text-md md:text-xl xl:text-[21px] leading-relaxed text-[#c3c3c3] tracking-wider"
+              className="text-md text-justify md:text-xl xl:text-[21px] leading-relaxed text-[#c3c3c3] tracking-wider"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
