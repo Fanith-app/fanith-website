@@ -34,34 +34,54 @@ const page = () => {
       /> */}
 
       <OurStory
-        storyText="Fanith was created to solve a simple problem — fans had no single place to celebrate matches together online. With live game rooms, FanDom points, and FanPedia knowledge, Fanith brings fans closer to the action and to each other, no matter where they are."
         founderTitle="A Message from Our Founder"
-        founderMessage="A short paragraph about why Fanith exists, belief in fan communities, passion for sports, and aim of building India's strongest sports fan platform."
-        image="/assets/images/ourstory.jpg"
+        founderMessage="Fanith was born from a simple belief: sports are better when shared. My passion is to bridge the gap between the screen and the stands, creating a high-energy home where every fan's voice contributes to the global 'Live Match Energy'. We aren't just building an app; we are building India’s strongest community where your loyalty finally has a leaderboard."
+        image="/assets/images/team/DEEPAK-BAID.webp"
       />
 
       <MeetTheTeam
         members={[
           {
-            name: "First Name",
-            designation: "Designation",
-            superpower: "Data Crunching",
-            favouriteTeam: "RCB",
-            image: "/assets/images/member1.jpg",
+            name: "Deepak Baid",
+            designation: "Founder",
+            superpower: "Catalyst",
+            favouriteTeam: "MI",
+            image: "/assets/images/team/DEEPAK-BAID.webp",
           },
           {
-            name: "First Name",
-            designation: "Designation",
-            superpower: "Data Crunching",
+            name: "Meenal Jain",
+            designation: "Tech Lead & Co-Founder ",
+            superpower: "Architect",
             favouriteTeam: "RCB",
-            image: "/assets/images/member2.jpg",
+            image: "/assets/images/team/Meenal-Jain.jpeg",
           },
           {
-            name: "First Name",
-            designation: "Designation",
+            name: "Punith Raj",
+            designation: "Operation",
+            superpower: "Data Crunching",
+            favouriteTeam: "CSK",
+            image: "/assets/images/team/Punith-Raj.jpeg",
+          },
+          {
+            name: "Swarnali B",
+            designation: "User on Boarding",
+            superpower: "Data Crunching",
+            favouriteTeam: "KKR",
+            image: "/assets/images/team/Swarnali-B.jpeg",
+          },
+          {
+            name: "Shailaja VB",
+            designation: "Digital Marketing",
             superpower: "Data Crunching",
             favouriteTeam: "RCB",
-            image: "/assets/images/member3.jpg",
+            image: "/assets/images/team/Shailaja-B.webp",
+          },
+          {
+            name: "Faisal Khan",
+            designation: "Full-Stack",
+            superpower: "Data Crunching",
+            favouriteTeam: "CSK",
+            image: "/assets/images/team/Faisal-Jawed-Khan.jpeg",
           },
         ]}
       />

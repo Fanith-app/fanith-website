@@ -1,8 +1,8 @@
 "use client";
 
+import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import MeetTheTeamCardShape from "./ui/MeetTheTeamCardShape";
 
 type TeamMember = {
   name: string;
@@ -56,7 +56,7 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
         </motion.h2>
 
         {/* Cards */}
-        <motion.div
+        {/* <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
           initial="hidden"
           whileInView="visible"
@@ -89,18 +89,18 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
                 transition: { duration: 0.3 },
               }}
             >
-              {/* SVG Border */}
+              SVG Border
               <MeetTheTeamCardShape />
 
-              {/* Content */}
+              Content
               <div className="relative z-10 flex flex-col items-center text-center px-6 h-full justify-center">
 
-                {/* Designation Badge (Responsive Safe) */}
+                Designation Badge (Responsive Safe)
                 <div className="absolute -top-1.5 px-4 py-1 text-white text-lg text-center">
                   {member.designation}
                 </div>
 
-                {/* Profile Image */}
+                Profile Image
                 <div className="w-28 h-28 -m-2 rounded-full overflow-hidden border-4 border-gray-400 mt-0 mb-7">
                   <Image
                     src={member.image}
@@ -111,7 +111,7 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
                   />
                 </div>
 
-                {/* Name Ribbon */}
+                Name Ribbon
                 <div className="relative mb-6">
                   <div className="bg-[#960018] text-white px-10 py-2 font-semibold text-lg relative"
                   style={{
@@ -123,7 +123,7 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
                   </div>
                 </div>
 
-                {/* Details */}
+                Details
                 <p className="text-lg mb-4 text-left">
                   <span className="text-[#960018] font-medium">Superpower:</span>{" "}
                   <span className="text-[#c3c3c3]">{member.superpower}</span>
@@ -137,9 +137,9 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
               </div>
             </motion.div>
           ))}
-        </motion.div>
-        {/* <motion.div
-          className="grid grid-cols-1 lg:grid-cols-3 gap-14"
+        </motion.div> */}
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14"
           variants={{
             visible: { 
               transition: { 
@@ -164,10 +164,10 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
                 }
               }}
             >
-              <Card className="group relative rounded-none bg-[#202020] shadow-2xl transform ease-in-out cursor-pointer transition-transform duration-300 hover:scale-105">
+              <Card className="group relative rounded-xl bg-[#202020] shadow-2xl transform ease-in-out cursor-pointer transition-transform duration-300 hover:scale-105">
                 <CardContent className="px-10 text-center">
 
-                  Avatar
+                  {/* Avatar */}
                   <motion.div
                     className="mx-auto mb-6 h-32 w-32 overflow-hidden rounded-full bg-white transform transition-all duration-500"
                     initial={{ opacity: 0 }}
@@ -188,7 +188,7 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
                     />
                   </motion.div>
 
-                  Name Banner
+                  {/* Name Banner */}
                   <motion.div
                     className="mx-auto mb-4 w-fit bg-[#960018] px-8 py-2 text-white text-lg font-bold [clip-path:polygon(0%_0%,100%_0%,85%_100%,15%_100%)] transform transition-all duration-500"
                     initial={{ opacity: 0 }}
@@ -199,11 +199,16 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
                       ease: [0.25, 0.46, 0.45, 0.94],
                       delay: 0.4 + index * 0.1
                     }}
+                    style={{
+                background: "linear-gradient(90deg, #a00015, #e00022)",
+                clipPath:
+                  "polygon(8% 0, 92% 0, 100% 50%, 92% 100%, 8% 100%, 0% 50%)",
+              }}
                   >
                     {member.name}
                   </motion.div>
 
-                  Designation
+                  {/* Designation */}
                   <motion.p
                     className="text-xl font-semibold mb-8 transform transition-all duration-500 text-white"
                     initial={{ opacity: 0 }}
@@ -218,7 +223,7 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
                     {member.designation}
                   </motion.p>
 
-                  Details
+                  {/* Details */}
                   <motion.div
                     className="space-y-4 text-lg transform transition-all duration-500"
                     initial={{ opacity: 0 }}
@@ -248,7 +253,7 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
               </Card>
             </motion.div>
           ))}
-        </motion.div> */}
+        </motion.div>
       </motion.div>
 
       {/* Custom clip path */}
