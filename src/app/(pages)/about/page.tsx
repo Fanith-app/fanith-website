@@ -37,24 +37,13 @@ const page = () => {
         founderTitle="A Message from Our Founder"
         founderMessage="Fanith was born from a simple belief: sports are better when shared. My passion is to bridge the gap between the screen and the stands, creating a high-energy home where every fan's voice contributes to the global 'Live Match Energy'. We aren't just building an app; we are building India’s strongest community where your loyalty finally has a leaderboard."
         image="/assets/images/team/DEEPAK-BAID.webp"
+        coFounderTitle="A Message from Our Co-Founder"
+        coFounderMessage="My mission is to translate the raw emotion of a stadium into a seamless digital experience. By engineering real-time Game Rooms and gamified 'FanPedia' statistics, we ensure that the technology behind Fanith is as fast and dynamic as the sports we love. We are committed to a platform that is robust, interactive, and built for the future of digital fandom."
+        coFounderImage="/assets/images/team/meenal-jain.webp"
       />
 
       <MeetTheTeam
         members={[
-          {
-            name: "Deepak Baid",
-            designation: "Founder",
-            superpower: "Catalyst",
-            favouriteTeam: "MI",
-            image: "/assets/images/team/DEEPAK-BAID.webp",
-          },
-          {
-            name: "Meenal Jain",
-            designation: "Tech Lead & Co-Founder ",
-            superpower: "Architect",
-            favouriteTeam: "RCB",
-            image: "/assets/images/team/Meenal-Jain.jpeg",
-          },
           {
             name: "Punith Raj",
             designation: "Operation",
