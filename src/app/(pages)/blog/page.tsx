@@ -14,8 +14,13 @@ async function getBlogs() {
   );
 
   const data = await res.json();
+   const blogs =
+      data?.data?.blogs ||
+      data?.data?.data ||
+      data?.blogs ||
+      [];
 
-  return data?.data?.blogs?.map((blog: any) => ({
+  return blogs.map((blog: any) => ({
     category: blog.category?.name || "General",
     title: blog.title,
     description: blog.description,
