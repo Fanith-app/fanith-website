@@ -25,8 +25,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fanith: The Global Fan Engagement Platform",
-  description: "Experience live matches like never before. From real-time chat rooms to detailed TeamPedia stats, Fanith is the home for fans to connect, compete, and celebrate every moment.",
+  title: "Fanith – Live IPL Fan Rooms, Chat & Cricket Fan Community App",
+  description: "Join Fanith — India's #1 cricket fan app. Chat live in IPL Fan Rooms, support your Fan Tribe, earn FanDom points, and experience every match with fans like you. Download free on Android & iOS.",
   icons: {
     icon: "/favicon.ico",
   },

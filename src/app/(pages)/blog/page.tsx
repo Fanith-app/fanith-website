@@ -163,7 +163,13 @@ import { CommunitySearch } from "@/src/components/common/SearchInput";
 import CommunityArticles from "@/src/components/CommunityArticles";
 import CommunityHeroTabs from "@/src/components/CommunityHeroTabs";
 import NewsletterSubscribe from "@/src/components/NewsletterSubscribe";
+import { Metadata } from "next";
 import { useEffect, useState } from "react";
+
+export const metadata: Metadata = {
+  title: "Fanith Blog – IPL Match Highlights, Fan Stories & Cricket Updates",
+  description: "Read IPL match highlights, fan stories, commentary recaps, and Fanith platform news. Stay in the game with fresh cricket content from the Fanith community.",
+}
 
 const page = () => {
   const [activeTab, setActiveTab] = useState("All");
