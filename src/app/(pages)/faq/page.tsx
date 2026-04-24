@@ -5,7 +5,13 @@ import FAQSidebar from "@/src/components/faq/FAQSidebar";
 import PopularQuestions from "@/src/components/faq/PopularQuestion";
 import SupportCard from "@/src/components/SupportCard";
 import { faqData } from "@/src/lib/data";
+import { Metadata } from "next";
 import { useState } from "react";
+
+export const metadata: Metadata = {
+  title: "Fanith FAQ – Fan Room, FanDom, App Install & Feature Help",
+  description: "Got questions about Fanith? Find answers on how to download the app, join live IPL Fan Rooms, earn FanDom badges, set up your profile, and brand partnership info.",
+}
 
 const page = () => {
   const [activeTab, setActiveTab] =

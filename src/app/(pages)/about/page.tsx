@@ -4,6 +4,12 @@ import Banner from '@/src/components/common/Banner';
 import CenteredCTA from '@/src/components/common/ExperienceFanith';
 import MeetTheTeam from '@/src/components/MeetTheTeam';
 import OurStory from '@/src/components/OurStory';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "About Fanith – The Story Behind India's Cricket Fan Community App",
+  description: "Learn about Fanith's mission to bring stadium energy to every cricket fan's screen. Meet the founders and team building India's most passionate sports fan community.",
+}
 
 const page = () => {
   return (

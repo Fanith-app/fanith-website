@@ -4,6 +4,12 @@ import Banner from "@/src/components/common/Banner";
 import CenteredCTA from "@/src/components/common/ExperienceFanith";
 import HowItWorks from "@/src/components/home/HowItWorks";
 import LiveMatchEnergy from "@/src/components/home/LiveMatchEnergy";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Fanith Features – Fan Room, FanPedia, FanDom & Live Match Chat",
+  description: "Explore Fanith's features — live IPL match chat rooms, real-time polls, FanPedia player stats, FanDom badges, and Fan Tribe leaderboards. Everything a cricket fan needs in one app.",
+};
 
 export default function FeaturesPage() {
   return (
