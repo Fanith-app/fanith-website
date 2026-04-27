@@ -54,14 +54,14 @@ const page = () => {
           {
             name: "Swarnali B",
             designation: "User on Boarding",
-            superpower: "Data Crunching",
+            superpower: "Content Editor",
             favouriteTeam: "KKR",
             image: "/assets/images/team/Swarnali-B.jpeg",
           },
           {
             name: "Shailaja VB",
             designation: "Digital Marketing",
-            superpower: "Data Crunching",
+            superpower: "Marketing",
             favouriteTeam: "RCB",
             image: "/assets/images/team/Shailaja-B.webp",
           },
@@ -74,16 +74,6 @@ const page = () => {
           },
         ]}
       />
-
-      {/* <CenteredCTA
-        title={
-          <>
-            Ready to watch matches the{" "}
-            <span className="text-[#960018]">Fanith</span>{" "} way?
-          </>
-        }
-        description="Explore everything Fanith offers — from live match chat rooms to FanDom rewards and FanPedia player insights."
-      /> */}
       <CenteredCTA
         title={
           <>
