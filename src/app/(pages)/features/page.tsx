@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import Banner from "@/src/components/common/Banner";
 import CenteredCTA from "@/src/components/common/ExperienceFanith";
