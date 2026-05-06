@@ -9,6 +9,9 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Fanith Features – Fan Room, FanPedia, FanDom & Live Match Chat",
   description: "Explore Fanith's features — live IPL match chat rooms, real-time polls, FanPedia player stats, FanDom badges, and Fan Tribe leaderboards. Everything a cricket fan needs in one app.",
+  alternates: {
+    canonical: "https://www.fanith.com/features",
+  },
 };
 
 export default function FeaturesPage() {

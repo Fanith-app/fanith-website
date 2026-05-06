@@ -285,8 +285,19 @@ export default function Footer() {
           {/* <Link href="/privacy-policy">Privacy Policy</Link> <span>•</span> © 2026 Fanith <span>•</span> <Link href="/terms-conditions">Terms & Conditions</Link> */}
           <Link href="/privacy-policy">Privacy Policy</Link> <span>•</span> <Link href="/terms-conditions">Terms & Conditions</Link>
         </div>
-        <div className="flex justify-center text-center text-sm sm:text-base font-medium text-white/90 pt-4 pb-3 tracking-wide">
-          Copyright © {new Date().getFullYear()} MEEDEE DIGITAL LABS PRIVATE LIMITED, All Rights Reserved.
+        {/* <div className="flex justify-center text-center text-sm sm:text-base font-medium text-white/90 pt-4 pb-3 tracking-wide">
+          Copyright © {new Date().getFullYear()} {" "} <span><a href="https://www.meedeedigital.com/" className="href" rel="noopener noreferrer" target="_blank"> MEEDEE DIGITAL LABS PRIVATE LIMITED</a></span>, All Rights Reserved.
+      </div> */}
+      <div className="flex justify-center text-center text-sm sm:text-base font-medium text-white/90 pt-4 pb-3 tracking-wide">
+        Copyright © {new Date().getFullYear()}{" "}
+        <a
+          href="https://www.meedeedigital.com/"
+          className="underline hover:text-[#960018] transition-colors ml-1"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          MEEDEE DIGITAL LABS PRIVATE LIMITED
+        </a>, All Rights Reserved.
       </div>
       </div>
 

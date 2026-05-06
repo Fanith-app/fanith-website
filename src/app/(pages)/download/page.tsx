@@ -9,6 +9,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: "Download Fanith App – Live Cricket Fan Chat for Android & iOS",
   description: "Download the Fanith app on Android or iOS. Join live IPL Fan Rooms, chat with cricket fans in real time, earn badges, and never miss a match moment. Free to download.",
+  alternates: {
+    canonical: "https://www.fanith.com/download",
+  },
 }
 
 const page = () => {
