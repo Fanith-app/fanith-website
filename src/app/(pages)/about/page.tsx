@@ -9,6 +9,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: "About Fanith – The Story Behind India's Cricket Fan Community App",
   description: "Learn about Fanith's mission to bring stadium energy to every cricket fan's screen. Meet the founders and team building India's most passionate sports fan community.",
+  alternates: {
+    canonical: "https://www.fanith.com/about",
+  },
 }
 
 const page = () => {

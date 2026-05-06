@@ -6,6 +6,9 @@ import { Suspense } from 'react'
 export const metadata: Metadata = {
   title: "Contact Fanith – Support, Partnerships & Brand Sponsorships",
   description: "Reach out to the Fanith team for app support, brand partnerships, or sponsorship opportunities. We're here to help cricket fans and partners alike.",
+  alternates: {
+    canonical: "https://www.fanith.com/contact",
+  },
 }
 
 const page = () => {

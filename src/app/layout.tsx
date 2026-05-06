@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  alternates: {
+    canonical: "https://www.fanith.com",
+  },
   verification: {
     google: "NuzrfCBkMnKxUWqtc90k75r1a0AmcO4Fq7sfQNDU0XM",
   },
