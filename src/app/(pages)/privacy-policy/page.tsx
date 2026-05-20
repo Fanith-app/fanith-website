@@ -207,6 +207,18 @@ export default function PrivacyPolicyPage() {
         {/* Data Security */}
         <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+            {privacyPolicy.marketingAndPromotional.title}
+          </h2>
+          <p className="text-[#c3c3c3] leading-relaxed text-lg">
+            {privacyPolicy.marketingAndPromotional.description1}
+          </p>
+          <p className="text-[#c3c3c3] leading-relaxed text-lg">
+            {privacyPolicy.marketingAndPromotional.description2}
+          </p>
+        </motion.div>
+        {/* Data Security */}
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             {privacyPolicy.dataSecurity.title}
           </h2>
           <p className="text-[#c3c3c3] leading-relaxed text-lg">
