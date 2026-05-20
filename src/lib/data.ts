@@ -4,6 +4,8 @@ export const navLinks = [
   { label: "Features", href: "/features" },
   { label: "Download", href: "/download" },
   { label: "About Us", href: "/about" },
+  { label: "Brand Collaboration", href: "/brand-collaboration" },
+  { label: "Fan Pedia", href: "/fanpedia" },
   // { label: "Brand Partnership", href: "/partnership" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },
