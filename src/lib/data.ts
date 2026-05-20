@@ -303,6 +303,13 @@ export const privacyPolicy = {
     ]
   },
 
+  marketingAndPromotional: {
+    title: "Marketing and Promotional Communications",
+    description1:
+      "To send you promotional offers, partner discounts, rewards, and updates regarding exclusive platform perks.",
+    description2:
+      "To communicate marketing materials regarding third-party sports products, services, or sponsorships that we believe may be of interest to our fan community."
+  },
   dataSecurity: {
     title: "Data Security",
     description:
