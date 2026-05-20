@@ -2,8 +2,9 @@
 
 import { BASE_URL } from "@/src/api/endpoint";
 import axios from "axios";
-import { Search, Shield, Users, Radio, BarChart3, Share2, ChevronRight, Heart, Eye, MessageCircle } from "lucide-react";
+import { Search, Shield, Users, Radio, BarChart3, Share2, ChevronRight, Heart, Eye, MessageCircle, Smartphone } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { PieChart, Pie, Cell } from "recharts";
 
@@ -261,7 +262,7 @@ export default function FanPediaPage() {
       <div className="w-full px-4">
         <section className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#090B10]/65 p-3 md:p-5">
 
-          <div className="relative grid gap-4 lg:grid-cols-[280px_1fr_280px]">
+          <div className="relative grid gap-4 lg:grid-cols-[330px_1fr_280px]">
             <aside className="rounded-xl border border-white/10 bg-black/40 p-4 backdrop-blur-md">
               <div className="mb-5 rounded-md bg-white/5 px-3 py-1 text-[10px]">FAN PEDIA</div>
               <h1 className="text-5xl font-bold leading-[0.95]">
@@ -282,6 +283,32 @@ export default function FanPediaPage() {
                 <div><Shield className="mb-1 h-3.5 w-3.5" /> Fan Driven Content</div>
                 <div><Users className="mb-1 h-3.5 w-3.5" /> Tribe Rankings</div>
                 <div><Radio className="mb-1 h-3.5 w-3.5" /> Live Updates</div>
+              </div>
+              <div className="relative mt-7 overflow-hidden rounded-[28px] border border-white/15 bg-[#06080D]/95 p-8 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03)]">
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(140deg,rgba(255,255,255,0.12)_0%,rgba(255,255,255,0.05)_18%,rgba(8,10,16,0.94)_52%,rgba(3,4,8,1)_100%)]" />
+                <div className="pointer-events-none absolute -left-20 -top-24 h-72 w-72 rounded-full bg-white/12 blur-3xl" />
+                <div className="pointer-events-none absolute -right-24 -bottom-24 h-72 w-72 rounded-full bg-black/70 blur-2xl" />
+                <div className="relative">
+                  <h4 className="text-[24px] font-semibold leading-tight text-white">All this and more in the Fanith App</h4>
+                  <p className="mt-3 text-[14px] leading-relaxed text-white/60">Dive deeper. Engage more. Earn points. Be part of the ultimate fan experience.</p>
+                </div>
+                <div className="relative mt-6 flex items-end justify-between gap-5">
+                  <div className="space-y-2">
+                    <Image src="/assets/images/Google-Play-Features.png" alt="Get it on Google Play" width={180} height={53} className="h-auto w-[180px]" />
+                    <Image src="/assets/images/App-Store-Features.png" alt="Download on the App Store" width={180} height={53} className="h-auto w-[180px]" />
+                  </div>
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="flex h-[104px] w-[104px] items-center justify-center rounded-md border border-white/35 bg-white p-1">
+                      <Image
+                        src="/assets/images/fanpedia-page/fanith-live-qr.png"
+                        alt="Scan Fanith QR Code"
+                        width={96}
+                        height={96}
+                        className="aspect-square h-full w-full object-contain"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </aside>
 
@@ -370,6 +397,11 @@ export default function FanPediaPage() {
                         </>
                       )}
                     </div>
+                    <Link href="/download" className="mt-3 grid grid-cols-[20px_1fr_20px] items-center gap-3 rounded-2xl border border-white/15 bg-black/25 px-4 py-3 transition hover:bg-black/35">
+                      <Smartphone className="h-5 w-5 text-white/90" />
+                      <p className="text-base text-white/90">Add more stats in the application</p>
+                      <ChevronRight className="h-6 w-6 justify-self-end text-white/90" />
+                    </Link>
                   </>
                 )}
               </div>
@@ -603,6 +635,24 @@ export default function FanPediaPage() {
                 </div>
               </div>
             </aside>
+          </div>
+        </section>
+        <section className="mt-5 rounded-2xl border border-white/10 bg-[#06080D]/90 px-4 py-4 backdrop-blur-md md:px-6">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div className="flex items-start gap-3">
+              <Smartphone className="mt-0.5 h-5 w-5 text-white/90" />
+              <div>
+                <h3 className="text-2xl font-semibold leading-none text-white">Want More? It&apos;s All in the Fanith App.</h3>
+                <p className="mt-1 text-sm text-white/60">Unlock detailed stats, live chats, polls, trivia, leaderboards and earn Fanith Points!</p>
+              </div>
+            </div>
+            <Link
+              href="/download"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#ED232A] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#d41f25]"
+            >
+              Download the App
+              <span aria-hidden>→</span>
+            </Link>
           </div>
         </section>
       </div>
