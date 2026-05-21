@@ -113,6 +113,10 @@ export default function Footer() {
     }
   };
 
+  if (pathname === "/brand-collaboration") {
+    return null;
+  }
+
   return (
     <footer className="rounded-t-3xl bg-[#0E0E0E] text-white">
 

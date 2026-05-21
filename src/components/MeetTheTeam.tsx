@@ -18,9 +18,9 @@ interface MeetTheTeamProps {
 
 export default function MeetTheTeam({ members }: MeetTheTeamProps) {
   return (
-    <section className="px-4 md:px-10 pt-10 pb-15 shadow-2xl">
+    <section className="px-4 md:px-5 pt-10 pb-15 shadow-2xl">
       <motion.div
-        className="mx-auto max-w-7xl md:px-6"
+        className="mx-auto max-w-8xl md:px-6"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
@@ -139,7 +139,7 @@ export default function MeetTheTeam({ members }: MeetTheTeamProps) {
           ))}
         </motion.div> */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-9"
           variants={{
             visible: { 
               transition: { 

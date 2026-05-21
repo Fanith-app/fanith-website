@@ -9,6 +9,9 @@ interface OurStoryProps {
   founderTitle: string;
   founderMessage: string;
   image: string;
+  coFounderImage: string;
+  coFounderMessage: string;
+  coFounderTitle: string;
 }
 
 export default function OurStory({
@@ -16,6 +19,9 @@ export default function OurStory({
   founderTitle,
   founderMessage,
   image,
+  coFounderTitle,
+  coFounderMessage,
+  coFounderImage
 }: OurStoryProps) {
   return (
     <section className="bg-transparent py-20">
@@ -181,6 +187,93 @@ export default function OurStory({
             >
               <Image src={image} alt="Founder" fill className="object-cover rounded-xl" />
             </motion.div>
+          </motion.div>
+        </motion.div>
+
+        {/* Co-Founder Section */}
+        <motion.div
+          className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-40 items-center pt-20"
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.2,
+                delayChildren: 0.2
+              }
+            }
+          }}
+        >
+          
+
+          {/* Image */}
+          <motion.div
+            className="relative h-90 w-full "
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.6,
+              ease: [0.25, 0.46, 0.45, 0.94],
+              delay: 0.2
+            }}
+            whileHover={{
+              scale: 1.02,
+              transition: { duration: 0.3, ease: "easeOut" }
+            }}
+          >
+            <motion.div
+              initial={{ scale: 1.2, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.8,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                delay: 0.3
+              }}
+            >
+              <Image src={coFounderImage} alt="Founder" fill className="object-cover rounded-xl" />
+            </motion.div>
+          </motion.div>
+          {/* Text */}
+          <motion.div
+            variants={{
+              hidden: { y: 80, opacity: 0 },
+              visible: {
+                y: 0,
+                opacity: 1,
+                transition: {
+                  duration: 0.8,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }
+              }
+            }}
+          >
+            <motion.h3
+              className="text-xl md:text-xl xl:text-[32px] font-bold mb-6 text-white"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.6,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                delay: 0.1
+              }}
+            >
+              {coFounderTitle}
+            </motion.h3>
+
+            <motion.p
+              className="text-md text-justify md:text-xl xl:text-[21px] leading-relaxed text-[#c3c3c3] tracking-wider"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.6,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                delay: 0.2
+              }}
+            >
+              {coFounderMessage}
+            </motion.p>
           </motion.div>
         </motion.div>
       </motion.div>
