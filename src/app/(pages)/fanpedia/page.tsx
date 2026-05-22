@@ -2,11 +2,11 @@
 
 import { BASE_URL } from "@/src/api/endpoint";
 import axios from "axios";
-import { Search, Shield, Users, Radio, BarChart3, Share2, ChevronRight, Heart, Eye, MessageCircle, Smartphone } from "lucide-react";
+import { BarChart3, ChevronRight, Eye, Heart, MessageCircle, Radio, Search, Share2, Shield, Smartphone, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { PieChart, Pie, Cell } from "recharts";
+import { Cell, Pie, PieChart } from "recharts";
 
 type Player = {
   id: string;
@@ -17,6 +17,7 @@ type Player = {
   battingStyle?: string;
   totalPoints?: number;
   followersCount?: number;
+  rank?: number;
 };
 
 type Team = {
@@ -25,6 +26,7 @@ type Team = {
   shortName?: string;
   logoUrl?: string;
   lifetimePoints?: number;
+
 };
 
 type Post = {
@@ -184,7 +186,8 @@ export default function FanPediaPage() {
       const profileData = unwrap<Partial<Player>>(profileRes);
       const statsData = unwrap<CareerStat[]>(careerRes);
       if (profileData && typeof profileData === "object") {
-        setSelectedPlayer((prev) => ({ ...prev, ...profileData }));
+        setSelectedPlayer((prev) => ({ ...(prev ?? {}), ...profileData } as Player));
+        // setSelectedPlayer((prev) => ({ ...prev, ...profileData }));
       }
       if (Array.isArray(statsData)) setCareerStats(statsData);
       setLoadingPlayerStats(false);
@@ -294,11 +297,11 @@ export default function FanPediaPage() {
                 </div>
                 <div className="relative mt-6 flex items-end justify-between gap-5">
                   <div className="space-y-2">
-                    <Image src="/assets/images/Google-Play-Features.png" alt="Get it on Google Play" width={180} height={53} className="h-auto w-[180px]" />
-                    <Image src="/assets/images/App-Store-Features.png" alt="Download on the App Store" width={180} height={53} className="h-auto w-[180px]" />
+                    <Image src="/assets/images/Google-Play-Features.png" alt="Get it on Google Play" width={180} height={53} className="h-auto w-45" />
+                    <Image src="/assets/images/App-Store-Features.png" alt="Download on the App Store" width={180} height={53} className="h-auto w-45" />
                   </div>
                   <div className="flex flex-col items-center gap-2">
-                    <div className="flex h-[104px] w-[104px] items-center justify-center rounded-md border border-white/35 bg-white p-1">
+                    <div className="flex h-26 w-26 items-center justify-center rounded-md border border-white/35 bg-white p-1">
                       <Image
                         src="/assets/images/fanpedia-page/fanith-live-qr.png"
                         alt="Scan Fanith QR Code"
@@ -332,12 +335,12 @@ export default function FanPediaPage() {
                     <div className="mt-3">
                       {selectedPost.mediaUrl ? (
                         selectedPost.mediaType?.toUpperCase() === "VIDEO" ? (
-                          <video src={selectedPost.mediaUrl} controls className="h-[310px] w-full rounded-lg bg-black object-cover" />
+                          <video src={selectedPost.mediaUrl} controls className="h-77.5 w-full rounded-lg bg-black object-cover" />
                         ) : (
-                          <Image src={selectedPost.mediaUrl} alt={selectedPost.caption || "Trending post media"} width={960} height={540} className="h-[310px] w-full rounded-lg object-cover" />
+                          <Image src={selectedPost.mediaUrl} alt={selectedPost.caption || "Trending post media"} width={960} height={540} className="h-77.5 w-full rounded-lg object-cover" />
                         )
                       ) : (
-                        <div className="flex min-h-[180px] items-center rounded-lg bg-black/35 p-4">
+                        <div className="flex min-h-45 items-center rounded-lg bg-black/35 p-4">
                           <p className="text-sm text-white/90">{selectedPost.caption || "No caption available"}</p>
                         </div>
                       )}
@@ -538,7 +541,7 @@ export default function FanPediaPage() {
                             outline: none !important;
                           }
                         `}</style>
-                        <div className="absolute inset-x-0 top-[78px] text-center">
+                        <div className="absolute inset-x-0 top-19.5 text-center">
                           <p className="text-3xl font-semibold">{milestone.total}</p>
                           <p className="text-[10px] text-white/60">TOTAL MILESTONES</p>
                         </div>
