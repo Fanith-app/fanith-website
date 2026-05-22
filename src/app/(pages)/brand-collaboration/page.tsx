@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { Inter, Outfit } from 'next/font/google';
 import React from 'react';
+import BrandCollaborationForm from '@/src/components/BrandCollaborationForm';
 
 const outfitExtraBold = Outfit({
   subsets: ['latin'],
@@ -213,42 +214,7 @@ const page = () => {
             <p className="mt-2 text-[15px] leading-[1.6] text-[#9CA3AF]">
               Fill out the form and our team will get in touch with you shortly.
             </p>
-            <form className="mt-6 space-y-4">
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  className="h-11 rounded-md border border-white/10 bg-[#0E0F12] px-3 text-[14px] text-white outline-none placeholder:text-[#6B7280] focus:border-[#E31E24]"
-                />
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  className="h-11 rounded-md border border-white/10 bg-[#0E0F12] px-3 text-[14px] text-white outline-none placeholder:text-[#6B7280] focus:border-[#E31E24]"
-                />
-              </div>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <input
-                  type="text"
-                  placeholder="Brand/Company Name"
-                  className="h-11 rounded-md border border-white/10 bg-[#0E0F12] px-3 text-[14px] text-white outline-none placeholder:text-[#6B7280] focus:border-[#E31E24]"
-                />
-                <select className="h-11 rounded-md border border-white/10 bg-[#0E0F12] px-3 text-[14px] text-[#9CA3AF] outline-none focus:border-[#E31E24]">
-                  <option>Select Partnership Type</option>
-                  <option>Brand Takeover</option>
-                  <option>General Chat Sponsorship</option>
-                  <option>Rewards & Coupons</option>
-                  <option>Contests & Challenges</option>
-                  <option>Affiliate Marketing</option>
-                </select>
-              </div>
-              <button
-                type="button"
-                className="flex h-11 w-full items-center justify-center gap-2 rounded-md bg-[#E31E24] text-[14px] font-bold text-white transition-opacity hover:opacity-90"
-              >
-                Submit Inquiry
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </form>
+            <BrandCollaborationForm />
           </div>
 
           <div className="border-l border-white/10 pl-0 lg:pl-8">
