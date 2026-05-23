@@ -129,6 +129,116 @@ function Skel({ className = "" }: { className?: string }) {
   return <div className={`animate-pulse rounded bg-white/10 ${className}`} />;
 }
 
+function PlayerSearchBox({
+  placeholder,
+  variant = "default",
+  onSelect,
+}: {
+  placeholder: string;
+  variant?: "default" | "compact";
+  onSelect: (player: Player) => void;
+}) {
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<Player[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const q = query.trim();
+    if (q.length < 2) {
+      setResults([]);
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+    const handle = setTimeout(async () => {
+      const headers = tokenHeaders();
+      const res = await axios
+        .get(apiUrl(`players/search?query=${encodeURIComponent(q)}&limit=5`), { headers })
+        .catch(() => null);
+      const data = unwrap<Player[]>(res) || [];
+      setResults(Array.isArray(data) ? data.slice(0, 5) : []);
+      setLoading(false);
+    }, 300);
+    return () => clearTimeout(handle);
+  }, [query]);
+
+  const wrapperClass =
+    variant === "compact"
+      ? "flex items-center gap-1.5 rounded-md border border-white/15 bg-black/40 px-2 py-1 text-[11px] text-white/85 focus-within:border-white/35"
+      : "flex items-center gap-2 rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-xs text-white/85 focus-within:border-white/35";
+  const inputClass =
+    variant === "compact"
+      ? "w-28 bg-transparent text-[11px] text-white placeholder-white/45 outline-none focus:w-36 transition-[width] duration-200"
+      : "flex-1 bg-transparent text-xs text-white placeholder-white/50 outline-none";
+
+  return (
+    <div className="relative">
+      <div className={wrapperClass}>
+        <Search className={variant === "compact" ? "h-3 w-3 text-white/55" : "h-3.5 w-3.5 text-white/60"} />
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
+          onFocus={() => setOpen(true)}
+          onBlur={() => setTimeout(() => setOpen(false), 150)}
+          placeholder={placeholder}
+          className={inputClass}
+        />
+      </div>
+      {open && query.trim().length >= 2 ? (
+        <div className="absolute right-0 top-full z-30 mt-2 w-72 max-w-[80vw] overflow-hidden rounded-lg border border-white/15 bg-[#0B0E15]/95 shadow-xl backdrop-blur-md">
+          {loading ? (
+            <div className="space-y-2 p-2">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <div key={`s-skel-${i}`} className="flex items-center gap-2 rounded-md bg-white/5 p-2">
+                  <Skel className="h-8 w-8 rounded-full" />
+                  <div className="flex-1">
+                    <Skel className="h-3 w-32" />
+                    <Skel className="mt-1.5 h-2.5 w-20" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : results.length === 0 ? (
+            <div className="px-3 py-4 text-center text-[11px] text-white/55">No players found</div>
+          ) : (
+            <ul className="max-h-80 overflow-y-auto py-1">
+              {results.map((p) => (
+                <li key={p.id}>
+                  <button
+                    type="button"
+                    onMouseDown={(e) => e.preventDefault()}
+                    onClick={() => {
+                      onSelect(p);
+                      setOpen(false);
+                      setQuery("");
+                    }}
+                    className="flex w-full items-center gap-2.5 px-2.5 py-2 text-left transition hover:bg-white/8"
+                  >
+                    <div className="h-8 w-8 shrink-0 overflow-hidden rounded-full bg-white/10">
+                      {p.imageUrl ? (
+                        <Image src={p.imageUrl} alt={p.fullName} width={32} height={32} className="h-full w-full object-cover" />
+                      ) : null}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-xs font-medium text-white">{p.fullName}</p>
+                      <p className="truncate text-[10px] text-white/55">{p.currentTeamName || "—"}</p>
+                    </div>
+                    {p.role ? (
+                      <span className="shrink-0 rounded bg-white/10 px-1.5 py-0.5 text-[9px] text-white/70">{p.role.replaceAll("_", " ")}</span>
+                    ) : null}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 export default function FanPediaPage() {
   const [topPlayers, setTopPlayers] = useState<Player[]>([]);
   const [topTeams, setTopTeams] = useState<Team[]>([]);
@@ -139,6 +249,11 @@ export default function FanPediaPage() {
   const [loadingOverview, setLoadingOverview] = useState(true);
   const [loadingPlayerStats, setLoadingPlayerStats] = useState(false);
   const [hoveredRunLabel, setHoveredRunLabel] = useState<string | null>(null);
+
+  const handleSearchSelect = (p: Player) => {
+    setSelectedPost(null);
+    setSelectedPlayer((prev) => ({ ...(prev ?? {}), ...p } as Player));
+  };
 
   useEffect(() => {
     const load = async () => {
@@ -278,8 +393,11 @@ export default function FanPediaPage() {
                 <span className="text-[#E6252A]">Fandom.</span>
               </h1>
               <p className="mt-4 text-xs text-white/65">Dive into player, team, league and tribe stats.</p>
-              <div className="mt-5 flex items-center gap-2 rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-xs text-white/60">
-                <Search className="h-3.5 w-3.5" /> Search for players, teams, leagues...
+              <div className="mt-5">
+                <PlayerSearchBox
+                  placeholder="Search for players, teams, leagues..."
+                  onSelect={handleSearchSelect}
+                />
               </div>
               <div className="mt-6 grid grid-cols-2 gap-3 text-[10px] text-white/70">
                 <div><BarChart3 className="mb-1 h-3.5 w-3.5" /> In-depth Stats</div>
@@ -567,7 +685,14 @@ export default function FanPediaPage() {
 
             <aside className="space-y-4">
               <div className="rounded-xl border border-white/10 bg-black/45 p-3 backdrop-blur-lg">
-                <div className="mb-3 flex items-center justify-between"><h3 className="text-sm font-semibold">Top Players (Fanith Points)</h3><span className="text-xs text-[#3E8BFF]">View All</span></div>
+                <div className="relative mb-3 flex items-center justify-between gap-2">
+                  <h3 className="text-sm font-semibold">Top Players (Fanith Points)</h3>
+                  <PlayerSearchBox
+                    placeholder="Search player"
+                    variant="compact"
+                    onSelect={handleSearchSelect}
+                  />
+                </div>
                 <div className="space-y-2">
                   {loadingOverview ? (
                     Array.from({ length: 5 }).map((_, i) => (
