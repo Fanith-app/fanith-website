@@ -297,8 +297,12 @@ export default function FanPediaPage() {
                 </div>
                 <div className="relative mt-6 flex items-end justify-between gap-5">
                   <div className="space-y-2">
-                    <Image src="/assets/images/Google-Play-Features.png" alt="Get it on Google Play" width={180} height={53} className="h-auto w-45" />
-                    <Image src="/assets/images/App-Store-Features.png" alt="Download on the App Store" width={180} height={53} className="h-auto w-45" />
+                    <a href="https://play.google.com/store/apps/details?id=com.fanithapp" target="_blank" rel="noopener noreferrer">
+                      <Image src="/assets/images/Google-Play-Features.png" alt="Get it on Google Play" width={180} height={53} className="h-auto w-45" />
+                    </a>
+                    <a href="https://apps.apple.com/in/app/fanith/id6760101126" target="_blank" rel="noopener noreferrer">
+                      <Image src="/assets/images/App-Store-Features.png" alt="Download on the App Store" width={180} height={53} className="h-auto w-45" />
+                    </a>
                   </div>
                   <div className="flex flex-col items-center gap-2">
                     <div className="flex h-26 w-26 items-center justify-center rounded-md border border-white/35 bg-white p-1">

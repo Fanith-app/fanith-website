@@ -6,19 +6,24 @@ import {
   CalendarDays,
   Crosshair,
   Eye,
+  Facebook,
   Gift,
   Headphones,
+  Instagram,
+  Linkedin,
   Mail,
   MessageCircle,
   MessageSquare,
   ShoppingBag,
   Trophy,
   TrendingUp,
+  Twitter,
   UserRound,
   UsersRound,
   Zap,
 } from 'lucide-react';
 import { Inter, Outfit } from 'next/font/google';
+import Link from 'next/link';
 import React from 'react';
 import BrandCollaborationForm from '@/src/components/BrandCollaborationForm';
 
@@ -226,10 +231,21 @@ const page = () => {
 
             <p className="mt-8 text-[14px] text-[#9CA3AF]">Follow Us</p>
             <div className="mt-3 flex gap-3">
-              <span className="h-9 w-9 rounded-md border border-white/10 bg-[#0E0F12]" />
-              <span className="h-9 w-9 rounded-md border border-white/10 bg-[#0E0F12]" />
-              <span className="h-9 w-9 rounded-md border border-white/10 bg-[#0E0F12]" />
-              <span className="h-9 w-9 rounded-md border border-white/10 bg-[#0E0F12]" />
+              <Link href="https://www.facebook.com/people/Fanith/61585037715830/" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-[#0E0F12] hover:opacity-80 transition">
+                <Facebook size={18} className="text-white" />
+              </Link>
+              <Link href="https://x.com/fanith_app/" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-[#0E0F12] hover:opacity-80 transition">
+                <Twitter size={18} className="text-white" />
+              </Link>
+              <Link href="https://www.instagram.com/fanith.app/" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-[#0E0F12] hover:opacity-80 transition">
+                <Instagram size={18} className="text-white" />
+              </Link>
+              <Link href="https://www.linkedin.com/showcase/fanith/" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-[#0E0F12] hover:opacity-80 transition">
+                <Linkedin size={18} className="text-white" />
+              </Link>
+              <Link href="https://www.reddit.com/user/FanithApp/" target="_blank" rel="noopener noreferrer" className="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-[#0E0F12] hover:opacity-80 transition">
+                <Image src="/assets/svg/boticon.svg" alt="Reddit" width={18} height={18} />
+              </Link>
             </div>
           </div>
         </div>
