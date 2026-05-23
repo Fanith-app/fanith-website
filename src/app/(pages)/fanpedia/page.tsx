@@ -131,11 +131,9 @@ function Skel({ className = "" }: { className?: string }) {
 
 function PlayerSearchBox({
   placeholder,
-  variant = "default",
   onSelect,
 }: {
   placeholder: string;
-  variant?: "default" | "compact";
   onSelect: (player: Player) => void;
 }) {
   const [query, setQuery] = useState("");
@@ -163,19 +161,10 @@ function PlayerSearchBox({
     return () => clearTimeout(handle);
   }, [query]);
 
-  const wrapperClass =
-    variant === "compact"
-      ? "flex items-center gap-1.5 rounded-md border border-white/15 bg-black/40 px-2 py-1 text-[11px] text-white/85 focus-within:border-white/35"
-      : "flex items-center gap-2 rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-xs text-white/85 focus-within:border-white/35";
-  const inputClass =
-    variant === "compact"
-      ? "w-28 bg-transparent text-[11px] text-white placeholder-white/45 outline-none focus:w-36 transition-[width] duration-200"
-      : "flex-1 bg-transparent text-xs text-white placeholder-white/50 outline-none";
-
   return (
     <div className="relative">
-      <div className={wrapperClass}>
-        <Search className={variant === "compact" ? "h-3 w-3 text-white/55" : "h-3.5 w-3.5 text-white/60"} />
+      <div className="flex items-center gap-2 rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-xs text-white/85 focus-within:border-white/35">
+        <Search className="h-3.5 w-3.5 text-white/60" />
         <input
           type="text"
           value={query}
@@ -183,7 +172,7 @@ function PlayerSearchBox({
           onFocus={() => setOpen(true)}
           onBlur={() => setTimeout(() => setOpen(false), 150)}
           placeholder={placeholder}
-          className={inputClass}
+          className="flex-1 bg-transparent text-xs text-white placeholder-white/50 outline-none"
         />
       </div>
       {open && query.trim().length >= 2 ? (
@@ -249,10 +238,21 @@ export default function FanPediaPage() {
   const [loadingOverview, setLoadingOverview] = useState(true);
   const [loadingPlayerStats, setLoadingPlayerStats] = useState(false);
   const [hoveredRunLabel, setHoveredRunLabel] = useState<string | null>(null);
+  const [topSearchOpen, setTopSearchOpen] = useState(false);
+  const [topSearchClipped, setTopSearchClipped] = useState(true);
 
   const handleSearchSelect = (p: Player) => {
     setSelectedPost(null);
     setSelectedPlayer((prev) => ({ ...(prev ?? {}), ...p } as Player));
+  };
+
+  const toggleTopSearch = () => {
+    if (topSearchOpen) {
+      setTopSearchClipped(true);
+      setTopSearchOpen(false);
+    } else {
+      setTopSearchOpen(true);
+    }
   };
 
   useEffect(() => {
@@ -685,13 +685,30 @@ export default function FanPediaPage() {
 
             <aside className="space-y-4">
               <div className="rounded-xl border border-white/10 bg-black/45 p-3 backdrop-blur-lg">
-                <div className="relative mb-3 flex items-center justify-between gap-2">
+                <div className="mb-3 flex items-center justify-between gap-2">
                   <h3 className="text-sm font-semibold">Top Players (Fanith Points)</h3>
-                  <PlayerSearchBox
-                    placeholder="Search player"
-                    variant="compact"
-                    onSelect={handleSearchSelect}
-                  />
+                  <button
+                    type="button"
+                    onClick={toggleTopSearch}
+                    aria-label={topSearchOpen ? "Close search" : "Search players"}
+                    aria-expanded={topSearchOpen}
+                    className={`rounded-md p-1 transition hover:bg-white/10 ${topSearchOpen ? "bg-white/10 text-white" : "text-white/65 hover:text-white"}`}
+                  >
+                    <Search className="h-4 w-4" />
+                  </button>
+                </div>
+                <div
+                  onTransitionEnd={() => { if (topSearchOpen) setTopSearchClipped(false); }}
+                  className={`grid transition-[grid-template-rows] duration-300 ease-out ${topSearchOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+                >
+                  <div className={topSearchClipped ? "overflow-hidden" : "overflow-visible"}>
+                    <div className={`pb-3 transition-opacity duration-200 ${topSearchOpen ? "opacity-100" : "opacity-0"}`}>
+                      <PlayerSearchBox
+                        placeholder="Search players..."
+                        onSelect={(p) => { handleSearchSelect(p); toggleTopSearch(); }}
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div className="space-y-2">
                   {loadingOverview ? (
