@@ -1,5 +1,5 @@
 import Banner from '@/src/components/common/Banner'
-import SupportTabs from '@/src/components/SupportTabs'
+import ContactSupportTabs from '@/src/components/ui/ContactSupportTabs'
 import { Metadata } from 'next'
 import { Suspense } from 'react'
 
@@ -41,7 +41,7 @@ const page = () => {
       </div>
 
       <Suspense fallback={<div className="text-center py-12">Loading...</div>}>
-        <SupportTabs />
+        <ContactSupportTabs />
       </Suspense>
     </main>
   )
