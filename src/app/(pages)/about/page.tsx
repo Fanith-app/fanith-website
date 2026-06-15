@@ -74,13 +74,13 @@ const page = () => {
             favouriteTeam: "RCB",
             image: "/assets/images/team/Shailaja-B.webp",
           },
-          {
-            name: "Faisal Khan",
-            designation: "Full-Stack",
-            superpower: "Data Crunching",
-            favouriteTeam: "CSK",
-            image: "/assets/images/team/Faisal-Jawed-Khan.jpeg",
-          },
+          // {
+          //   name: "Faisal Khan",
+          //   designation: "Full-Stack",
+          //   superpower: "Data Crunching",
+          //   favouriteTeam: "CSK",
+          //   image: "",
+          // },
         ]}
       />
       <CenteredCTA
