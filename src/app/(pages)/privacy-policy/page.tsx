@@ -91,8 +91,17 @@ export default function PrivacyPolicyPage() {
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {item.type}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed mb-2">
                   {item.description}
+                </p>
+                <p className="text-gray-600 leading-relaxed mb-2">
+                  {item.description1}
+                </p>
+                <p className="text-gray-600 leading-relaxed mb-2">
+                  {item.description2}
+                </p>
+                <p className="text-gray-600 text-sm leading-relaxed mb-2">
+                  {item.description3}
                 </p>
               </motion.div>
             ))}
@@ -151,6 +160,83 @@ export default function PrivacyPolicyPage() {
           </div>
         </motion.div>
 
+        {/* Data Fiduciary & Grievance Officer */}
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-12 h-12 bg-linear-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <Lock className="w-6 h-6 text-white" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
+              {privacyPolicy.dataFiduciary.title}
+            </h2>
+          </div>
+          <p className="text-[#c3c3c3] leading-relaxed mb-6 text-lg">
+            {privacyPolicy.dataFiduciary.description}
+          </p>
+          <div className="bg-purple-50 p-6 rounded-xl border border-purple-100">
+            <h3 className="font-semibold text-gray-900 mb-4">We may share data with:</h3>
+            <ul className="space-y-3">
+              {privacyPolicy.dataFiduciary.sharedWith.map((entity, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 bg-purple-500 rounded-full mt-2 shrink-0"></div>
+                  <span className="text-gray-700">{entity}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <p className="text-[#c3c3c3] leading-relaxed mt-5 mb-6 text-lg">
+            {privacyPolicy.dataFiduciary.acknowledge}
+          </p>
+        </motion.div>
+
+        {/* Data Retention */}
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-12 h-12 bg-linear-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <Lock className="w-6 h-6 text-white" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
+              {privacyPolicy.dataRetention.title}
+            </h2>
+          </div>
+          <p className="text-[#c3c3c3] leading-relaxed mb-3 text-lg">
+            {privacyPolicy.dataRetention.description}
+          </p>
+          <p className="text-[#c3c3c3] leading-relaxed mb-6 text-sm">
+            {privacyPolicy.dataRetention.acknowledge}
+          </p>
+        </motion.div>
+
+        {/* Consent Withdrawl */}
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-12 h-12 bg-linear-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <Lock className="w-6 h-6 text-white" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
+              {privacyPolicy.consentWithdrawl.title}
+            </h2>
+          </div>
+          <p className="text-[#c3c3c3] leading-relaxed mb-6 text-lg">
+            {privacyPolicy.consentWithdrawl.description}
+          </p>
+        </motion.div>
+
+        {/* Data Breach Notification */}
+        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-12 h-12 bg-linear-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <Lock className="w-6 h-6 text-white" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">
+              {privacyPolicy.dataBreachNotification.title}
+            </h2>
+          </div>
+          <p className="text-[#c3c3c3] leading-relaxed mb-6 text-lg">
+            {privacyPolicy.dataBreachNotification.description}
+          </p>
+        </motion.div>
+
         {/* Cookies Policy */}
         <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
           <div className="flex items-center gap-3 mb-6">
@@ -202,6 +288,9 @@ export default function PrivacyPolicyPage() {
               </motion.div>
             ))}
           </div>
+          <p className="text-[#c3c3c3] leading-relaxed mt-6 mb-6 text-lg">
+            {privacyPolicy.userRights.description}
+          </p>
         </motion.div>
 
         {/* Data Security */}
@@ -209,7 +298,7 @@ export default function PrivacyPolicyPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
             {privacyPolicy.marketingAndPromotional.title}
           </h2>
-          <p className="text-[#c3c3c3] leading-relaxed text-lg">
+          <p className="text-[#c3c3c3] leading-relaxed text-lg mb-3">
             {privacyPolicy.marketingAndPromotional.description1}
           </p>
           <p className="text-[#c3c3c3] leading-relaxed text-lg">
