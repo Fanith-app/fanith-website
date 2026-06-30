@@ -231,7 +231,7 @@ export const privacyPolicy = {
   introduction: {
     title: "Privacy Policy",
     description:
-      "Fanith respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data while you enjoy IPL cricket content, live updates, and fan engagement features."
+      "MeeDee Digital Labs Private Limited (“Company”, “we”, “us”), operating the Fanith platform, respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data while you enjoy IPL cricket content, live updates, and fan engagement features."
   },
 
   informationCollected: {
@@ -239,8 +239,12 @@ export const privacyPolicy = {
     items: [
       {
         type: "Personal Information",
-        description:
-          "Name, email address, mobile number, and account login details when you register on Fanith."
+        description1:
+          "Name, email address, mobile number, and account login details when you register on Fanith.",
+        description2:
+          "By registering, you consent to MeeDee Digital Labs Private Limited contacting you via the email address and/or mobile number provided, for account-related communication, service updates, and the marketing purposes described in the “Marketing and Promotional Communications” section below.",
+        description3:
+          "Note: this clause banks the right to contact via phone number. It does not by itself authorize SMS/WhatsApp marketing campaigns, which remain subject to separate TRAI Distributed Ledger Technology (DLT) sender registration before any such channel can be activated."
       },
       {
         type: "Usage Data",
@@ -282,6 +286,39 @@ export const privacyPolicy = {
     ]
   },
 
+  dataFiduciary: {
+    title: "Data Fiduciary & Grievance Officer",
+    description:
+      "MeeDee Digital Labs Private Limited is the Data Fiduciary for personal data processed on Fanith.",
+    sharedWith: [
+      "Grievance Officer: Punith Raj",
+      "Email: support@fanith.com",
+      "Address: Krishna Arcade, 2nd Floor, 12th Cross, Wilson Garden, Bangalore, 560027"
+    ],
+    acknowledge:
+      "We will acknowledge data-related grievances within 45 days and resolve within 90 days as required under applicable Indian data protection law."
+  },
+
+  dataRetention: {
+    title: "Data Retention",
+    description:
+      "We retain your personal data for as long as your account remains active. Following account deletion or 12 months of continuous inactivity, we will delete or anonymize your personal data, except where longer retention is required for legal, regulatory, audit, or fraud-prevention purposes.",
+    acknowledge:
+      "Source: Logical Deduction/General Knowledge — this is a conservative, commonly used retention period for Indian consumer apps, not a figure mandated by a specific notified DPDP rule that we have verified against Fanith's exact data categories. Confirm this is workable against actual fraud/dispute-history needs (e.g., affiliate clickout records) before finalizing."
+  },
+
+  consentWithdrawl: {
+    title: "Consent Withdrawl",
+    description:
+      "You may withdraw consent for any processing purpose, including marketing communications, at any time via in-app settings or by emailing support@fanith.com. Withdrawal does not affect the lawfulness of processing carried out before withdrawal and may limit your ability to use certain features of the platform.",
+  },
+
+  dataBreachNotification: {
+    title: "Data Breach Notification",
+    description:
+      "In the event of a personal data breach likely to affect you, we will notify you and the relevant regulatory authority as required under applicable Indian law, within the timeframe prescribed by such law.",
+  },
+
   cookiesPolicy: {
     title: "Cookies Policy",
     description:
@@ -300,15 +337,17 @@ export const privacyPolicy = {
       "Request correction or deletion of your data",
       "Opt-out of marketing communications",
       "Disable cookies through browser settings"
-    ]
+    ],
+    description:
+      "See “Consent Withdrawal” above for the mechanism to exercise the opt-out right."
   },
 
   marketingAndPromotional: {
     title: "Marketing and Promotional Communications",
     description1:
-      "To send you promotional offers, partner discounts, rewards, and updates regarding exclusive platform perks.",
+      "By registering an account, you consent to receive marketing communications via email and/or mobile number, covering:",
     description2:
-      "To communicate marketing materials regarding third-party sports products, services, or sponsorships that we believe may be of interest to our fan community."
+      "(a) Fanith's own features, product launches, updates, and platform perks; and (b) offers, discounts, and promotions from third-party brands, sponsors, and affiliate partners (including but not limited to Cuelinks-affiliated merchants) that we believe may be relevant to your interests. You may withdraw this consent at any time as described in the “Consent Withdrawal” section."
   },
   dataSecurity: {
     title: "Data Security",
@@ -331,7 +370,7 @@ export const privacyPolicy = {
   contactInformation: {
     title: "Contact Us",
     email: "support@fanith.com",
-    address: "Fanith Sports Pvt Ltd, India"
+    address: "MeeDee Digital Labs Private Limited, Krishna Arcade, 2nd Floor, 12th Cross, Wilson Garden, Bangalore, 560027"
   }
 };
 
@@ -348,7 +387,7 @@ export const termsAndConditions = {
   introduction: {
     title: "Terms & Conditions",
     description:
-      "Welcome to Fanith. By accessing or using our website and services related to IPL cricket content, live updates, and fan engagement features, you agree to comply with and be bound by the following Terms & Conditions."
+      "Welcome to Fanith, operated by MeeDee Digital Labs Private Limited (“Company”, “we”, “us”). By accessing or using our website and services related to IPL cricket content, live updates, and fan engagement features, you agree to comply with and be bound by the following Terms & Conditions."
   },
 
   eligibility: {
@@ -363,7 +402,15 @@ export const termsAndConditions = {
       "You are responsible for maintaining the confidentiality of your account credentials",
       "You must provide accurate and complete registration information",
       "Fanith reserves the right to suspend or terminate accounts that violate these terms"
-    ]
+    ],
+    description:
+      "All references to “Fanith reserves the right…” are revised to “the Company reserves the right…” — Fanith is the platform/brand name; the contracting party is MeeDee Digital Labs Private Limited."
+  },
+
+   communications: {
+    title: "Communications",
+    description:
+      "By creating an account, you consent to receive transactional, service, and marketing communications via the email and mobile number provided at registration, as further described in our Privacy Policy. You may opt out of marketing communications at any time without affecting your access to core platform features."
   },
 
   acceptableUse: {
@@ -374,6 +421,13 @@ export const termsAndConditions = {
       "Do not use Fanith for unlawful activities",
       "Respect other users and community guidelines"
     ]
+  },
+
+  gameRoomConduct: {
+    title: "Game Room Conduct",
+    description:
+      "Game Room chat may include both user-generated content and platform-generated automated content (including simulated fan accounts). The Company reserves the right to moderate, remove, or restrict any content or account at its sole discretion. Automated or simulated content does not constitute factual claims, advice, or platform endorsement.",
+
   },
 
   contentOwnership: {
@@ -411,7 +465,7 @@ export const termsAndConditions = {
   termination: {
     title: "Termination",
     description:
-      "We reserve the right to suspend or terminate access to Fanith at any time for violations of these Terms & Conditions."
+      "We reserve the right to suspend or terminate access to the company at any time for violations of these Terms & Conditions."
   },
 
   governingLaw: {
@@ -429,7 +483,7 @@ export const termsAndConditions = {
   contactInformation: {
     title: "Contact Us",
     email: "support@fanith.com",
-    address: "Fanith Sports Pvt Ltd, India"
+    address: "MeeDee Digital Labs Private Limited, Krishna Arcade, 2nd Floor, 12th Cross, Wilson Garden, Bangalore, 560027"
   }
 };
 
