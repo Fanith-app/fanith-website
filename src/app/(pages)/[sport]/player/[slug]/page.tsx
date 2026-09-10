@@ -7,12 +7,13 @@ import {
   PlayerProfile,
   SITE_URL,
   compactNumber,
+  fetchAllPlayerSlugs,
   fetchPlayerBySlug,
   fetchPlayerCareerStats,
-  fetchTopPlayerParams,
   isSportSegment,
   playerUrl,
   sportLabel,
+  sportSegment,
   summarizeCareer,
   titleCaseEnum,
 } from "@/src/lib/players";
@@ -36,28 +37,31 @@ import {
  */
 
 /**
- * Re-render at most hourly, in the background, per player. This is what
- * replaces the old static export for ~25k players: the first request for a
- * slug renders it, every request after that is served from cache.
- *
- * Written as a literal because Next statically analyses this export at build
- * time and rejects an imported constant. Keep it in step with
- * PLAYER_REVALIDATE_SECONDS, which governs the underlying fetch caching.
+ * The site is a static export served from S3 (see next.config.ts), so there is
+ * no server to render a slug on its first request — a page not built here does
+ * not exist. Anything outside generateStaticParams is a 404.
  */
-export const revalidate = 3600;
-
-/** Slugs outside generateStaticParams render on demand rather than 404. */
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 type RouteParams = { sport: string; slug: string };
 
 /**
- * Only the leaderboard's top players are prebuilt. Prerendering all ~25k would
- * make every deploy render 25k pages; the rest arrive through ISR on their
- * first request, which is indistinguishable to a visitor and to a crawler.
+ * Every player in the slug feed is prebuilt on every deploy — the same feed the
+ * player sitemap lists, so every URL the sitemap advertises has a page. A
+ * publish or unpublish in the admin panel shows up on the next deploy.
+ *
+ * An empty feed fails the build instead of shipping without player pages: the
+ * deploy syncs with --delete, so a build that quietly lost the API would wipe
+ * every player page off the live site.
  */
 export async function generateStaticParams(): Promise<RouteParams[]> {
-  return fetchTopPlayerParams(100);
+  const rows = await fetchAllPlayerSlugs();
+  if (rows.length === 0) {
+    throw new Error(
+      "Player slug feed returned no players — refusing to build without player pages. Check NEXT_PUBLIC_API_URL and that the API is up.",
+    );
+  }
+  return rows.map((row) => ({ sport: sportSegment(row.sport), slug: row.slug }));
 }
 
 function describe(player: PlayerProfile, stats: CareerStat[]): string {

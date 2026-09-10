@@ -8,11 +8,10 @@ module.exports = {
     "/partnership",
     "/joinBeta",
 
-    // Player pages are NOT listed here — they live in their own runtime
-    // sitemap (see additionalSitemaps below). next-sitemap only sees pages
-    // that exist in the build output, which for players is just the ~100
-    // prebuilt top-of-leaderboard pages; listing those would publish an
-    // arbitrary 100 out of ~25k and hide the rest.
+    // Player pages are NOT listed here — they have their own sitemap tree
+    // (/sitemap-players.xml, see additionalSitemaps below), split into
+    // 5,000-URL chunks. Listing them here too would publish every player
+    // twice.
     "/cricket/*",
     "/football/*",
     "/kabaddi/*",
@@ -29,8 +28,7 @@ module.exports = {
   sitemapSize: 5000,
 
   robotsTxtOptions: {
-    // ~25k player URLs are generated at request time rather than at build
-    // time, so Google is pointed at the live index instead.
+    // Player URLs live in their own index, built alongside the player pages.
     additionalSitemaps: ["https://www.fanith.com/sitemap-players.xml"],
   },
 

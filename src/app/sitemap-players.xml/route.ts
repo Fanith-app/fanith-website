@@ -1,7 +1,6 @@
 import {
-  PLAYER_SITEMAP_CHUNK_SIZE,
   SITE_URL,
-  countPlayerSlugs,
+  countPlayerSitemapChunks,
   xmlResponse,
 } from "@/src/lib/player-sitemap";
 
@@ -13,15 +12,15 @@ import {
  * easier to read when players sit in their own tree. So this is an index, and
  * the actual URLs live in /sitemap-players/{n}.xml chunks.
  *
- * Served at runtime rather than written at build time so a player synced this
- * afternoon is crawlable this afternoon, without a redeploy.
+ * Written to out/ at build time with the rest of the static export, so it
+ * lists exactly the chunks built beside it. A newly published player becomes
+ * crawlable on the next deploy.
  */
 
-export const revalidate = 3600;
+export const dynamic = "force-static";
 
 export async function GET() {
-  const total = await countPlayerSlugs();
-  const chunks = Math.max(1, Math.ceil(total / PLAYER_SITEMAP_CHUNK_SIZE));
+  const chunks = await countPlayerSitemapChunks();
   const lastmod = new Date().toISOString();
 
   const entries = Array.from({ length: chunks }, (_, i) => {
