@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import {
+  countPlayerSitemapChunks,
   fetchPlayerSlugChunk,
   urlsetXml,
   xmlResponse,
@@ -11,9 +12,18 @@ import {
  * Listed by /sitemap-players.xml. Split rather than served as one file because
  * ~25k URLs in a single sitemap is unwieldy to inspect, and the protocol caps a
  * file at 50,000 anyway.
+ *
+ * Static export: every chunk the index lists is written to out/ at build time,
+ * and there is no server to answer for any other number.
  */
 
-export const revalidate = 3600;
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+export async function generateStaticParams(): Promise<{ chunk: string }[]> {
+  const chunks = await countPlayerSitemapChunks();
+  return Array.from({ length: chunks }, (_, i) => ({ chunk: `${i}.xml` }));
+}
 
 export async function GET(
   _request: Request,

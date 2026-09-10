@@ -1,16 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Was `export`. A static export bakes every route at build time, which does
-  // not survive ~25k player pages: the build would have to render all of them
-  // on every deploy, and a player synced after the build would stay invisible
-  // until someone triggered another one.
+  // Static export: `next build` writes the whole site to `out/`, which the
+  // deploy workflow syncs to S3 behind CloudFront. S3 only serves files, so
+  // nothing here may need a running server — no ISR, no on-demand pages, no
+  // POST route handlers.
   //
-  // `standalone` runs the Node server the existing Dockerfile already expects
-  // (it copies .next/standalone and boots server.js), which unlocks ISR — a
-  // player page is rendered on first request, cached, and refreshed on the
-  // revalidate window declared by the route.
-  output: "standalone",
+  // Player pages are therefore all prebuilt from the player slug feed on every
+  // deploy (see [sport]/player/[slug]/page.tsx), and a publish or unpublish in
+  // the admin panel reaches the site on the next deploy.
+  //
+  // `standalone` (what the Dockerfile expects) would bring back ISR and the
+  // on-demand purge route, but only once the site runs as a Node server rather
+  // than out of the S3 bucket. Switching this line alone breaks the deploy,
+  // because `out/` stops being produced.
+  output: "export",
 
   // No remote image loader is configured, and player/team art comes straight
   // from the provider CDN, so images stay unoptimized as before.

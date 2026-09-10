@@ -159,20 +159,20 @@ function unwrap<T>(payload: unknown): T | undefined {
 }
 
 /**
- * How long a rendered player page stays cached before Next re-renders it in the
- * background. An hour: player bios and career totals move slowly, and a page
- * that regenerates too eagerly gives up most of the benefit of caching 25k of
- * them.
+ * How long a player fetch stays cached. Under the static export this has no
+ * effect on the live site — pages change only when a deploy rebuilds them —
+ * but it becomes the ISR window again if the site moves to a Node server (see
+ * next.config.ts).
  */
 export const PLAYER_REVALIDATE_SECONDS = 3600;
 
 /**
  * Cache tag on every player fetch.
  *
- * Publishing is a switch, not slow-moving content, so the hour-long window is
- * wrong for it — /api/revalidate-player purges this tag when an admin flips a
- * player, and every profile page, career-stats fetch and sitemap chunk goes
- * with it.
+ * Unused while the site is a static export. On a Node server it let a single
+ * on-demand purge (the /api/revalidate-player route, removed for the export)
+ * drop every profile page, career-stats fetch and sitemap chunk at once when
+ * an admin published or unpublished a player.
  */
 export const PLAYER_CACHE_TAG = "players";
 
@@ -225,8 +225,8 @@ export async function fetchPlayerCareerStats(
 /**
  * Walk the whole slug feed for a sport, or stop early at `max`.
  *
- * Used by the sitemap (no cap — it wants all ~25k) and by generateStaticParams
- * (capped — see the route for why only the top slice is prebuilt).
+ * The player route's generateStaticParams calls it uncapped: the site is a
+ * static export, so every player it returns is prebuilt on each deploy.
  */
 export async function fetchAllPlayerSlugs(
   sport?: string,
@@ -251,43 +251,6 @@ export async function fetchAllPlayerSlugs(
   }
 
   return rows;
-}
-
-export type LeaderboardPlayer = {
-  id: string;
-  rank?: number;
-  fullName: string;
-  slug?: string;
-  sport?: string;
-  imageUrl?: string;
-  currentTeamName?: string;
-  role?: string;
-  totalPoints?: number;
-};
-
-/**
- * The players worth paying build time for.
- *
- * 25k player pages cannot all be prerendered on every deploy, so the build
- * prebuilds only the leaderboard's top slice — the pages that actually get
- * traffic — and leaves the long tail to ISR, which renders each one on its
- * first request and caches it from then on.
- *
- * `publishedOnly` keeps unpublished players out: prerendering a page the API
- * will 404 is wasted build time, and the slug would never be reachable anyway.
- */
-export async function fetchTopPlayerParams(
-  limit = 100,
-): Promise<{ sport: SportSegment; slug: string }[]> {
-  const players = await getJson<LeaderboardPlayer[]>(
-    `players/leaderboard?page=1&limit=${limit}&sortBy=totalPoints&publishedOnly=true`,
-    PLAYER_REVALIDATE_SECONDS,
-  );
-  if (!Array.isArray(players)) return [];
-
-  return players
-    .filter((p): p is LeaderboardPlayer & { slug: string } => Boolean(p.slug))
-    .map((p) => ({ sport: sportSegment(p.sport), slug: p.slug }));
 }
 
 // ---------------------------------------------------------------------------
