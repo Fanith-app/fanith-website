@@ -28,19 +28,17 @@ const itemVariants = {
 };
 
 export default function TermsConditionsPage() {
-  const { 
-    website, 
-    introduction, 
-    eligibility, 
+  const {
+    website,
+    introduction,
+    eligibility,
     userAccount,
-    communications, 
     acceptableUse,
-    gameRoomConduct, 
-    contentOwnership, 
-    thirdPartyServices, 
-    disclaimers, 
-    limitationOfLiability, 
-    termination, 
+    contentOwnership,
+    thirdPartyServices,
+    disclaimers,
+    limitationOfLiability,
+    termination,
     governingLaw, 
     changesToTerms, 
     contactInformation,
@@ -111,7 +109,7 @@ export default function TermsConditionsPage() {
               {userAccount.title}
             </h2>
           </div>
-          <ul className="space-y-2">
+          <ul className="space-y-4">
             {userAccount.points.map((point, index) => (
               <motion.li
                 key={index}
@@ -125,24 +123,6 @@ export default function TermsConditionsPage() {
               </motion.li>
             ))}
           </ul>
-          <p className="text-[#c3c3c3] leading-relaxed text-base mt-3">
-            {userAccount.description}
-          </p>
-        </motion.div>
-
-        {/* Communications */}
-        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-linear-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
-              <Shield className="w-6 h-6 text-white" />
-            </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-white">
-              {communications.title}
-            </h2>
-          </div>
-          <p className="text-[#c3c3c3] leading-relaxed text-base mt-3">
-            {communications.description}
-          </p>
         </motion.div>
 
         {/* Acceptable Use Policy */}
@@ -172,21 +152,6 @@ export default function TermsConditionsPage() {
               ))}
             </ul>
           </div>
-        </motion.div>
-
-        {/* Acceptable Use Policy */}
-        <motion.div variants={itemVariants} className="bg-[#202020] rounded-2xl shadow-lg p-8 md:p-10 border border-white">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-12 h-12 bg-[#960018] rounded-xl flex items-center justify-center">
-              <AlertTriangle className="w-6 h-6 text-white" />
-            </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-white">
-              {gameRoomConduct.title}
-            </h2>
-          </div>
-          <p className="text-[#c3c3c3] leading-relaxed text-base mt-3">
-            {gameRoomConduct.description}
-          </p>
         </motion.div>
 
         {/* Content Ownership */}
