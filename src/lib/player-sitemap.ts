@@ -68,16 +68,6 @@ export async function countPlayerSlugs(): Promise<number> {
   return total;
 }
 
-/**
- * How many chunk files exist. Shared by the index (which lists them) and the
- * chunk route (which builds them) so the two cannot drift apart. At least one,
- * so the index never points at nothing.
- */
-export async function countPlayerSitemapChunks(): Promise<number> {
-  const total = await countPlayerSlugs();
-  return Math.max(1, Math.ceil(total / PLAYER_SITEMAP_CHUNK_SIZE));
-}
-
 export async function fetchPlayerSlugChunk(
   chunk: number,
 ): Promise<PlayerSlugRow[]> {
