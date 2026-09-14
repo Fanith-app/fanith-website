@@ -1,0 +1,16 @@
+node_modules
+.next
+out
+dist
+build
+.git
+.github
+.env*
+*.log
+*.pem
+*.key
+.DS_Store
+fanith-website.zip
+coverage
+tmp
+temp

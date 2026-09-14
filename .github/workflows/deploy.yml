@@ -1,34 +1,41 @@
-name: Deploy Website
+name: Deploy Website (ECS)
+
+run-name: ECS deploy / ${{ inputs.environment }} / ${{ github.ref_name }}
 
 on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'Target server'
+        description: Target ECS environment
         required: true
-        default: 'dev'
+        default: dev
         type: choice
         options:
           - dev
           - prod
 
-env:
-  AWS_REGION: ap-south-1
-  DEV_BUCKET: fanith-website-dev
-  PROD_BUCKET: fanith-website-prod
-  DEV_CF_DIST: ${{ vars.DEV_CF_DISTRIBUTION_ID }}
-  PROD_CF_DIST: ${{ vars.PROD_CF_DISTRIBUTION_ID }}
+permissions:
+  contents: read
+
+concurrency:
+  group: fanith-website-${{ inputs.environment }}
+  cancel-in-progress: false
 
 jobs:
-  deploy:
-    name: Deploy → ${{ inputs.environment }}
-    runs-on: ubuntu-latest
+  validate:
+    name: Validate (no AWS credentials)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    permissions:
+      contents: read
+    env:
+      TARGET_ENV: ${{ inputs.environment }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout selected ref
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 22
           cache: npm
@@ -36,44 +43,412 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Set deploy target
-        id: env
-        run: |
-          if [ "${{ inputs.environment }}" = "prod" ]; then
-            echo "bucket=${{ env.PROD_BUCKET }}" >> $GITHUB_OUTPUT
-            echo "cf_dist=${{ env.PROD_CF_DIST }}" >> $GITHUB_OUTPUT
-            echo "api_url=https://live.fanith.com/api/v1/" >> $GITHUB_OUTPUT
-          else
-            echo "bucket=${{ env.DEV_BUCKET }}" >> $GITHUB_OUTPUT
-            echo "cf_dist=${{ env.DEV_CF_DIST }}" >> $GITHUB_OUTPUT
-            echo "api_url=https://dev.fanith.com/api/v1/" >> $GITHUB_OUTPUT
-          fi
+      - name: Test task-definition renderer
+        run: node --test deploy/ecs/render-task-definition.test.mjs
 
-      - name: Build (${{ inputs.environment }})
+      - name: Strict lint gate
+        run: npm run lint
+
+      - name: Select build environment
+        id: build_env
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          case "$TARGET_ENV" in
+            dev)
+              api_url='https://dev.fanith.com/api/v1/'
+              deploy_env='dev'
+              ;;
+            prod)
+              api_url='https://live.fanith.com/api/v1/'
+              deploy_env='production'
+              ;;
+            *)
+              printf 'Unsupported deployment environment.\n' >&2
+              exit 1
+              ;;
+          esac
+          printf 'api_url=%s\n' "$api_url" >> "$GITHUB_OUTPUT"
+          printf 'deploy_env=%s\n' "$deploy_env" >> "$GITHUB_OUTPUT"
+
+      - name: Build selected environment
         run: npm run build
         env:
-          NEXT_PUBLIC_API_URL: ${{ steps.env.outputs.api_url }}
+          NEXT_PUBLIC_API_URL: ${{ steps.build_env.outputs.api_url }}
+          NEXT_PUBLIC_DEPLOY_ENV: ${{ steps.build_env.outputs.deploy_env }}
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+  deploy:
+    name: Deploy ECS / ${{ inputs.environment }}
+    needs: validate
+    if: needs.validate.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    environment:
+      name: ${{ inputs.environment }}
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      TARGET_ENV: ${{ inputs.environment }}
+      AWS_ACCOUNT_ID: ${{ vars.AWS_ACCOUNT_ID }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      AWS_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
+      ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
+      ECS_CLUSTER: ${{ vars.ECS_CLUSTER }}
+      ECS_SERVICE: ${{ vars.ECS_SERVICE }}
+      ECS_TASK_FAMILY: ${{ vars.ECS_TASK_FAMILY }}
+      ECS_CONTAINER_NAME: ${{ vars.ECS_CONTAINER_NAME }}
+      ECS_TASK_EXECUTION_ROLE_ARN: ${{ vars.ECS_TASK_EXECUTION_ROLE_ARN }}
+      ECS_TASK_ROLE_ARN: ${{ vars.ECS_TASK_ROLE_ARN }}
+      PROD_READY: ${{ vars.PROD_READY }}
+    steps:
+      - name: Checkout selected ref
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          node-version: 22
+
+      - name: Fail closed when production is not ready
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          if [[ "$TARGET_ENV" == 'prod' && "${PROD_READY:-false}" != 'true' ]]; then
+            printf 'Production readiness is disabled; no AWS credentials will be requested.\n' >&2
+            exit 1
+          fi
+
+      - name: Build and smoke-test image
+        id: image
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+
+          case "$TARGET_ENV" in
+            dev)
+              api_url='https://dev.fanith.com/api/v1/'
+              deploy_env='dev'
+              player_path='/fanpedia/football/player/daisuke-yokota'
+              ;;
+            prod)
+              api_url='https://live.fanith.com/api/v1/'
+              deploy_env='production'
+              player_path='/fanpedia/cricket/player/ajeet-verma'
+              ;;
+            *)
+              printf 'Unsupported deployment environment.\n' >&2
+              exit 1
+              ;;
+          esac
+
+          [[ "$AWS_ACCOUNT_ID" == '735395976490' ]] || {
+            printf 'Unexpected AWS account configuration.\n' >&2
+            exit 1
+          }
+          [[ "$AWS_REGION" == 'ap-south-1' ]] || {
+            printf 'Unexpected AWS region configuration.\n' >&2
+            exit 1
+          }
+          [[ -n "$ECR_REPOSITORY" ]] || {
+            printf 'ECR repository configuration is missing.\n' >&2
+            exit 1
+          }
+
+          registry="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+          image_tag="sha-${GITHUB_SHA}-run-${GITHUB_RUN_ID}-attempt-${GITHUB_RUN_ATTEMPT}"
+          local_image="${registry}/${ECR_REPOSITORY}:${image_tag}"
+
+          docker build \
+            --platform linux/amd64 \
+            --provenance=false \
+            --sbom=false \
+            --build-arg "NEXT_PUBLIC_API_URL=${api_url}" \
+            --build-arg "NEXT_PUBLIC_DEPLOY_ENV=${deploy_env}" \
+            --tag "$local_image" \
+            .
+
+          [[ "$(docker image inspect --format '{{.Architecture}}' "$local_image")" == 'amd64' ]] || {
+            printf 'Image architecture is not amd64.\n' >&2
+            exit 1
+          }
+          [[ "$(docker image inspect --format '{{.Os}}' "$local_image")" == 'linux' ]] || {
+            printf 'Image OS is not linux.\n' >&2
+            exit 1
+          }
+          [[ "$(docker image inspect --format '{{.Config.User}}' "$local_image")" == 'nextjs' ]] || {
+            printf 'Image is not configured for the nextjs runtime user.\n' >&2
+            exit 1
+          }
+
+          smoke_name="fanith-website-smoke-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          cleanup() {
+            docker rm --force "$smoke_name" >/dev/null 2>&1 || true
+          }
+          trap cleanup EXIT
+
+          docker run --detach --rm \
+            --name "$smoke_name" \
+            --publish 3101:3001 \
+            --env HOSTNAME=simulated-task-host \
+            --env "NEXT_PUBLIC_API_URL=${api_url}" \
+            --env "NEXT_PUBLIC_DEPLOY_ENV=${deploy_env}" \
+            "$local_image" >/dev/null
+
+          node deploy/ecs/smoke-container.mjs \
+            --base-url http://127.0.0.1:3101 \
+            --environment "$TARGET_ENV" \
+            --player-path "$player_path"
+
+          printf 'local_image=%s\n' "$local_image" >> "$GITHUB_OUTPUT"
+          printf 'image_tag=%s\n' "$image_tag" >> "$GITHUB_OUTPUT"
+          printf 'api_url=%s\n' "$api_url" >> "$GITHUB_OUTPUT"
+
+      - name: Scan image for HIGH/CRITICAL vulnerabilities
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          scan-type: image
+          image-ref: ${{ steps.image.outputs.local_image }}
+          version: v0.70.0
+          severity: HIGH,CRITICAL
+          ignore-unfixed: false
+          scanners: vuln
+          exit-code: '1'
+          format: table
+          timeout: 10m0s
+
+      - name: Configure AWS credentials through OIDC
+        uses: aws-actions/configure-aws-credentials@cbe3b392738ccf3f987d68400dafcf4b0624a56c # v6.2.4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
+          role-session-name: fanith-website-${{ github.run_id }}
+          role-duration-seconds: 3600
+          allowed-account-ids: '735395976490'
 
-      - name: Deploy to S3
-        run: aws s3 sync out/ s3://${{ steps.env.outputs.bucket }} --delete
+      - name: AWS and ECS drift preflight
+        id: preflight
+        shell: bash
+        run: bash deploy/ecs/actions-preflight.sh
 
-      - name: Invalidate CloudFront cache
+      - name: Login and push immutable image
+        id: push
+        shell: bash
+        env:
+          LOCAL_IMAGE: ${{ steps.image.outputs.local_image }}
+          IMAGE_TAG: ${{ steps.image.outputs.image_tag }}
         run: |
-          aws cloudfront create-invalidation \
-            --distribution-id ${{ steps.env.outputs.cf_dist }} \
-            --paths "/*"
+          set -Eeuo pipefail
+          registry="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+          aws ecr get-login-password | docker login --username AWS --password-stdin "$registry" >/dev/null
+          docker push "$LOCAL_IMAGE"
 
-      - name: Summary
+          digest="$(aws ecr describe-images \
+            --repository-name "$ECR_REPOSITORY" \
+            --image-ids "imageTag=${IMAGE_TAG}" \
+            --query 'imageDetails[0].imageDigest' \
+            --output text)"
+          [[ "$digest" =~ ^sha256:[0-9a-f]{64}$ ]] || {
+            printf 'ECR did not return an immutable image digest.\n' >&2
+            exit 1
+          }
+          printf 'image_digest=%s\n' "$digest" >> "$GITHUB_OUTPUT"
+          printf 'image_uri=%s@%s\n' "$registry/$ECR_REPOSITORY" "$digest" >> "$GITHUB_OUTPUT"
+
+      - name: Confirm ECR scan completed
+        shell: bash
+        env:
+          IMAGE_TAG: ${{ steps.image.outputs.image_tag }}
         run: |
-          echo "### Deployment Summary" >> $GITHUB_STEP_SUMMARY
-          echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Server**: ${{ inputs.environment }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **API URL**: ${{ steps.env.outputs.api_url }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **S3 Bucket**: ${{ steps.env.outputs.bucket }}" >> $GITHUB_STEP_SUMMARY
+          set -Eeuo pipefail
+          status=''
+          for attempt in $(seq 1 30); do
+            status="$(aws ecr describe-image-scan-findings \
+              --repository-name "$ECR_REPOSITORY" \
+              --image-id "imageTag=${IMAGE_TAG}" \
+              --query 'imageScanStatus.status' \
+              --output text 2>/dev/null || true)"
+            case "$status" in
+              COMPLETE)
+                findings="$(aws ecr describe-image-scan-findings \
+                  --repository-name "$ECR_REPOSITORY" \
+                  --image-id "imageTag=${IMAGE_TAG}" \
+                  --query 'imageScanFindings.findingSeverityCounts' --output json)"
+                jq -e '((.CRITICAL // 0) == 0) and ((.HIGH // 0) == 0)' <<< "$findings" >/dev/null || {
+                  printf 'ECR scan found HIGH/CRITICAL vulnerabilities.\n' >&2
+                  exit 1
+                }
+                exit 0
+                ;;
+              FAILED|SCAN_ELIGIBILITY_EXPIRED)
+                printf 'ECR image scan failed with status %s.\n' "$status" >&2
+                exit 1
+                ;;
+            esac
+            sleep 10
+          done
+          printf 'ECR image scan did not complete in the bounded wait.\n' >&2
+          exit 1
+
+      - name: Read current task definition without printing it
+        id: task_definition
+        shell: bash
+        env:
+          CURRENT_TASK_DEFINITION: ${{ steps.preflight.outputs.current_task_definition }}
+        run: |
+          set -Eeuo pipefail
+          task_file="$RUNNER_TEMP/fanith-task-definition.json"
+          aws ecs describe-task-definition \
+            --task-definition "$CURRENT_TASK_DEFINITION" \
+            --query taskDefinition \
+            --output json > "$task_file"
+          [[ -s "$task_file" ]] || {
+            printf 'Current task definition could not be read.\n' >&2
+            exit 1
+          }
+          printf 'task_file=%s\n' "$task_file" >> "$GITHUB_OUTPUT"
+
+      - name: Render task definition with image-only change
+        id: render
+        shell: bash
+        env:
+          TASK_FILE: ${{ steps.task_definition.outputs.task_file }}
+          IMAGE_URI: ${{ steps.push.outputs.image_uri }}
+        run: |
+          set -Eeuo pipefail
+          rendered_file="$RUNNER_TEMP/fanith-rendered-task-definition.json"
+          node deploy/ecs/render-task-definition.mjs \
+            --input "$TASK_FILE" \
+            --output "$rendered_file" \
+            --image "$IMAGE_URI" \
+            --container "$ECS_CONTAINER_NAME" \
+            --expected-family "$ECS_TASK_FAMILY" \
+            --expected-execution-role-arn "$ECS_TASK_EXECUTION_ROLE_ARN" \
+            --expected-task-role-arn "$ECS_TASK_ROLE_ARN"
+          [[ -s "$rendered_file" ]] || {
+            printf 'Rendered task definition is empty.\n' >&2
+            exit 1
+          }
+          printf 'rendered_file=%s\n' "$rendered_file" >> "$GITHUB_OUTPUT"
+
+      - name: Register task definition
+        id: register
+        shell: bash
+        env:
+          RENDERED_FILE: ${{ steps.render.outputs.rendered_file }}
+        run: |
+          set -Eeuo pipefail
+          registered_task_definition="$(aws ecs register-task-definition \
+            --cli-input-json "file://${RENDERED_FILE}" \
+            --query 'taskDefinition.taskDefinitionArn' \
+            --output text)"
+          [[ "$registered_task_definition" == arn:aws:ecs:${AWS_REGION}:${AWS_ACCOUNT_ID}:task-definition/${ECS_TASK_FAMILY}:* ]] || {
+            printf 'Registered task definition family does not match the allowlist.\n' >&2
+            exit 1
+          }
+          printf 'task_definition=%s\n' "$registered_task_definition" >> "$GITHUB_OUTPUT"
+
+      - name: Update selected ECS service
+        id: update
+        shell: bash
+        env:
+          REGISTERED_TASK_DEFINITION: ${{ steps.register.outputs.task_definition }}
+        run: |
+          set -Eeuo pipefail
+          aws ecs update-service \
+            --cluster "$ECS_CLUSTER" \
+            --service "$ECS_SERVICE" \
+            --task-definition "$REGISTERED_TASK_DEFINITION" \
+            --query 'service.{serviceArn:serviceArn,taskDefinition:taskDefinition,desiredCount:desiredCount}' \
+            --output json >/dev/null
+
+      - name: Wait for ECS service stability
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          aws ecs wait services-stable \
+            --cluster "$ECS_CLUSTER" \
+            --services "$ECS_SERVICE"
+
+      - name: Verify expected revision and digest
+        shell: bash
+        env:
+          REGISTERED_TASK_DEFINITION: ${{ steps.register.outputs.task_definition }}
+          IMAGE_DIGEST: ${{ steps.push.outputs.image_digest }}
+          PREVIOUS_TASK_DEFINITION: ${{ steps.preflight.outputs.current_task_definition }}
+        run: |
+          set -Eeuo pipefail
+          service_file="$RUNNER_TEMP/fanith-service-after-deploy.json"
+          tasks_file="$RUNNER_TEMP/fanith-tasks-after-deploy.json"
+
+          aws ecs describe-services \
+            --cluster "$ECS_CLUSTER" \
+            --services "$ECS_SERVICE" \
+            --query 'services[0].{taskDefinition:taskDefinition,desiredCount:desiredCount,runningCount:runningCount,pendingCount:pendingCount,rolloutState:deployments[?status==`PRIMARY`]|[0].rolloutState}' \
+            --output json > "$service_file"
+          [[ "$(jq -r '.taskDefinition' "$service_file")" == "$REGISTERED_TASK_DEFINITION" ]] || {
+            printf 'ECS service is not on the registered task definition.\n' >&2
+            exit 1
+          }
+          [[ "$(jq -r '.rolloutState' "$service_file")" == 'COMPLETED' ]] || {
+            printf 'ECS primary rollout is not completed.\n' >&2
+            exit 1
+          }
+          [[ "$(jq -r '.desiredCount' "$service_file")" == '1' ]] || {
+            printf 'ECS desired count drifted from 1.\n' >&2
+            exit 1
+          }
+          [[ "$(jq -r '.runningCount' "$service_file")" == '1' ]] || {
+            printf 'ECS running count is not 1.\n' >&2
+            exit 1
+          }
+          [[ "$(jq -r '.pendingCount' "$service_file")" == '0' ]] || {
+            printf 'ECS pending count is not 0.\n' >&2
+            exit 1
+          }
+
+          mapfile -t task_arns < <(aws ecs list-tasks \
+            --cluster "$ECS_CLUSTER" \
+            --service-name "$ECS_SERVICE" \
+            --desired-status RUNNING \
+            --query 'taskArns[]' \
+            --output text)
+          [[ "${#task_arns[@]}" == '1' ]] || {
+            printf 'ECS service does not have exactly one running task.\n' >&2
+            exit 1
+          }
+
+          aws ecs describe-tasks \
+            --cluster "$ECS_CLUSTER" \
+            --tasks "${task_arns[0]}" \
+            --query 'tasks[0].{taskDefinition:taskDefinitionArn,health:healthStatus,lastStatus:lastStatus,imageDigest:containers[0].imageDigest}' \
+            --output json > "$tasks_file"
+          [[ "$(jq -r '.taskDefinition' "$tasks_file")" == "$REGISTERED_TASK_DEFINITION" ]] || {
+            printf 'Running task is not on the registered task definition.\n' >&2
+            exit 1
+          }
+          [[ "$(jq -r '.health' "$tasks_file")" == 'HEALTHY' ]] || {
+            printf 'Running ECS task is not HEALTHY.\n' >&2
+            exit 1
+          }
+          [[ "$(jq -r '.lastStatus' "$tasks_file")" == 'RUNNING' ]] || {
+            printf 'Running ECS task status is unexpected.\n' >&2
+            exit 1
+          }
+          [[ "$(jq -r '.imageDigest' "$tasks_file")" == "$IMAGE_DIGEST" ]] || {
+            printf 'Running ECS task image digest does not match the pushed image.\n' >&2
+            exit 1
+          }
+
+          {
+            printf '### ECS deployment summary\n'
+            printf '%s\n' '- Validation completed before AWS credentials were requested.'
+            printf '%s\n' '- Target environment: '"$TARGET_ENV"
+            printf '%s\n' '- Branch: '"$GITHUB_REF_NAME"
+            printf '%s\n' '- Commit: '"$GITHUB_SHA"
+            printf '%s\n' '- Image digest: '"$IMAGE_DIGEST"
+            printf '%s\n' '- Task definition: '"$REGISTERED_TASK_DEFINITION"
+            printf '%s\n' '- Previous task definition: '"$PREVIOUS_TASK_DEFINITION"
+            printf '%s\n' '- Rollback remains the previous verified revision; no automatic rollback was invoked.'
+            printf '%s\n' '- CloudFront, DNS and cache invalidation were not touched.'
+          } >> "$GITHUB_STEP_SUMMARY"

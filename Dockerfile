@@ -1,6 +1,6 @@
 # Stage 1: Dependencies
-FROM node:20-alpine AS deps
-RUN apk add --no-cache libc6-compat
+FROM node:22-alpine AS deps
+RUN apk add --no-cache libc6-compat && apk upgrade --no-cache
 WORKDIR /app
 
 # Copy package files
@@ -10,7 +10,12 @@ COPY package.json package-lock.json* ./
 RUN npm ci
 
 # Stage 2: Build
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_DEPLOY_ENV=production
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ENV NEXT_PUBLIC_DEPLOY_ENV=${NEXT_PUBLIC_DEPLOY_ENV}
+RUN apk upgrade --no-cache
 WORKDIR /app
 
 # Copy dependencies from deps stage
@@ -21,11 +26,16 @@ COPY . .
 RUN npm run build
 
 # Stage 3: Production
-FROM node:20-alpine AS runner
+FROM node:22-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+
+# The runtime only needs Node. Removing npm keeps build-time tooling out of the
+# serving image and avoids shipping its unrelated package tree.
+RUN apk upgrade --no-cache \
+  && rm -rf /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx
 
 # Create non-root user for security
 RUN addgroup --system --gid 1001 nodejs
@@ -52,4 +62,4 @@ ENV PORT=3001
 ENV HOSTNAME="0.0.0.0"
 
 # Start the application
-CMD ["node", "server.js"]
+CMD ["sh", "-c", "HOSTNAME=0.0.0.0 exec node server.js"]

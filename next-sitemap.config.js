@@ -1,4 +1,45 @@
 /** @type {import('next-sitemap').IConfig} */
+const isDevPreview = process.env.NEXT_PUBLIC_DEPLOY_ENV === "dev";
+const publicApiBaseUrl = (
+  process.env.NEXT_PUBLIC_API_URL || "https://live.fanith.com/api/v1/"
+).replace(/\/+$/, "");
+const BLOG_PAGE_SIZE = 100;
+const MAX_BLOG_PAGES = 1000;
+
+async function fetchPublicBlogs() {
+  const blogs = [];
+
+  for (let page = 1; page <= MAX_BLOG_PAGES; page += 1) {
+    const res = await fetch(
+      `${publicApiBaseUrl}/public/blogs?page=${page}&limit=${BLOG_PAGE_SIZE}`
+    );
+
+    if (!res.ok) {
+      throw new Error(`Blog sitemap fetch failed on page ${page}: HTTP ${res.status}`);
+    }
+
+    const payload = await res.json();
+    const pageBlogs = payload?.data?.data;
+    const meta = payload?.data?.meta;
+
+    if (!Array.isArray(pageBlogs)) {
+      throw new Error(`Blog sitemap response has no data array on page ${page}`);
+    }
+
+    blogs.push(...pageBlogs);
+
+    const hasNext =
+      meta?.hasNext ??
+      (Number.isInteger(meta?.totalPages)
+        ? page < meta.totalPages
+        : pageBlogs.length === BLOG_PAGE_SIZE);
+
+    if (!hasNext) return blogs;
+  }
+
+  throw new Error(`Blog sitemap exceeded the ${MAX_BLOG_PAGES}-page safety limit`);
+}
+
 module.exports = {
   siteUrl: "https://www.fanith.com",
   generateRobotsTxt: true,
@@ -31,33 +72,23 @@ module.exports = {
   robotsTxtOptions: {
     // ~25k player URLs are generated at request time rather than at build
     // time, so Google is pointed at the live index instead.
-    additionalSitemaps: ["https://www.fanith.com/sitemap-players.xml"],
+    additionalSitemaps: isDevPreview
+      ? []
+      : ["https://www.fanith.com/sitemap-players.xml"],
+    ...(isDevPreview
+      ? { policies: [{ userAgent: "*", disallow: "/" }] }
+      : {}),
   },
 
   // For adding dynamic blogs
-  additionalPaths: async (config) => {
-    try {
-      const res = await fetch(
-        "https://live.fanith.com/api/v1/public/blogs?page=1&limit=100"
-      );
+  additionalPaths: async () => {
+    const blogs = await fetchPublicBlogs();
 
-      const data = await res.json();
-
-      // ✅ safe check
-      if (!data?.data?.blogs) {
-        console.error("Invalid API response:", data);
-        return [];
-      }
-
-      return data.data.blogs.map((blog) => ({
-        loc: `/blog/${blog.slug}`,
-        changefreq: "daily",
-        priority: 0.8,
-        lastmod: blog.publishedAt,
-      }));
-    } catch (error) {
-      console.error("Sitemap fetch error:", error);
-      return []; // 🔥 prevent build crash
-    }
+    return blogs.map((blog) => ({
+      loc: `/blog/${blog.slug}`,
+      changefreq: "daily",
+      priority: 0.8,
+      lastmod: blog.publishedAt,
+    }));
   },
 };

@@ -1,0 +1,73 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "EcrAuthorization",
+      "Effect": "Allow",
+      "Action": "ecr:GetAuthorizationToken",
+      "Resource": "*"
+    },
+    {
+      "Sid": "DevRepositoryOnly",
+      "Effect": "Allow",
+      "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:CompleteLayerUpload",
+        "ecr:DescribeImages",
+        "ecr:DescribeImageScanFindings",
+        "ecr:DescribeRepositories",
+        "ecr:InitiateLayerUpload",
+        "ecr:PutImage",
+        "ecr:UploadLayerPart"
+      ],
+      "Resource": "arn:aws:ecr:ap-south-1:735395976490:repository/fanith-website-dev"
+    },
+    {
+      "Sid": "DevClusterRead",
+      "Effect": "Allow",
+      "Action": [
+        "ecs:DescribeClusters",
+        "ecs:ListTasks"
+      ],
+      "Resource": "arn:aws:ecs:ap-south-1:735395976490:cluster/fanith-dev"
+    },
+    {
+      "Sid": "DevServiceReadUpdate",
+      "Effect": "Allow",
+      "Action": [
+        "ecs:DescribeServices",
+        "ecs:UpdateService"
+      ],
+      "Resource": "arn:aws:ecs:ap-south-1:735395976490:service/fanith-dev/fanith-website-dev-ssr"
+    },
+    {
+      "Sid": "DevTaskRead",
+      "Effect": "Allow",
+      "Action": "ecs:DescribeTasks",
+      "Resource": "arn:aws:ecs:ap-south-1:735395976490:task/fanith-dev/*"
+    },
+    {
+      "Sid": "DevTaskDefinitionRead",
+      "Effect": "Allow",
+      "Action": "ecs:DescribeTaskDefinition",
+      "Resource": "arn:aws:ecs:ap-south-1:735395976490:task-definition/fanith-website-dev-ssr:*"
+    },
+    {
+      "Sid": "RegisterTaskDefinitionRequiredWildcard",
+      "Effect": "Allow",
+      "Action": "ecs:RegisterTaskDefinition",
+      "Resource": "*"
+    },
+    {
+      "Sid": "PassOnlyDevExecutionRoleToEcs",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::735395976490:role/fanith-website-dev-ssr-execution-role",
+      "Condition": {
+        "StringEquals": {
+          "iam:PassedToService": "ecs-tasks.amazonaws.com"
+        }
+      }
+    }
+  ]
+}

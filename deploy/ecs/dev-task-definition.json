@@ -1,0 +1,60 @@
+{
+  "family": "fanith-website-dev-ssr",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::735395976490:role/fanith-website-dev-ssr-execution-role",
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "containerDefinitions": [
+    {
+      "name": "fanith-website-dev-ssr",
+      "image": "735395976490.dkr.ecr.ap-south-1.amazonaws.com/fanith-website-dev@sha256:bd5d82a01f7ae1c0eebbc0b4a6746c4592951ddfd4337f7f2e61f2af5a09b80a",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3001,
+          "hostPort": 3001,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "NEXT_PUBLIC_API_URL",
+          "value": "https://dev.fanith.com/api/v1/"
+        },
+        {
+          "name": "NEXT_PUBLIC_DEPLOY_ENV",
+          "value": "dev"
+        },
+        {
+          "name": "NEXT_TELEMETRY_DISABLED",
+          "value": "1"
+        }
+      ],
+      "healthCheck": {
+        "command": [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3001/api/health').then((response) => process.exit(response.status === 200 ? 0 : 1)).catch(() => process.exit(1))"
+        ],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 180
+      },
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/fanith-dev/website-ssr",
+          "awslogs-region": "ap-south-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}
