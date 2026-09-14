@@ -5,7 +5,7 @@ import FanPediaView from "@/src/components/fanpedia/FanPediaView";
  * Fan Pedia hub — /fanpedia.
  *
  * The screen itself lives in FanPediaView, shared with the per-player URLs
- * (/cricket/player/ishan-kishan). Here it runs with no preselected player, so
+ * (/fanpedia/cricket/player/ishan-kishan). Here it runs with no preselected player, so
  * it falls back to the #1 ranked player exactly as it always has.
  */
 

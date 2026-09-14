@@ -15,7 +15,8 @@ export const SITE_URL = "https://www.fanith.com";
  * Sports that own a URL prefix. The API stores the key uppercased
  * (`players.sport`); the URL uses the lowercase form.
  *
- * Adding a sport here is all it takes to open /{sport}/player/... for it —
+ * Adding a sport here is all it takes to open /fanpedia/{sport}/player/...
+ * for it —
  * anything not listed 404s rather than rendering an empty page for a crawler.
  */
 export const SPORT_SEGMENTS = ["cricket", "football", "kabaddi"] as const;
@@ -49,7 +50,7 @@ export function sportSegment(key?: string): SportSegment {
 
 /** The canonical path for a player. Single source of truth for every link. */
 export function playerPath(sport: string | undefined, slug: string): string {
-  return `/${sportSegment(sport)}/player/${slug}`;
+  return `/fanpedia/${sportSegment(sport)}/player/${slug}`;
 }
 
 export function playerUrl(sport: string | undefined, slug: string): string {
