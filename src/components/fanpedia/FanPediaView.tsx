@@ -14,7 +14,7 @@ type Player = {
   id: string;
   fullName: string;
   // `slug` + `sport` together address the player's own page,
-  // /cricket/player/virat-kohli. Optional because a row synced before the slug
+  // /fanpedia/cricket/player/virat-kohli. Optional because a row synced before the slug
   // backfill has none — those fall back to the in-page preview only.
   slug?: string;
   sport?: string;
@@ -190,7 +190,7 @@ function PlayerSearchBox({
     setLoading(true);
     const handle = setTimeout(async () => {
       const headers = tokenHeaders();
-      // publishedOnly: every result here is a link to /{sport}/player/{slug},
+      // publishedOnly: every result here is a link to /fanpedia/{sport}/player/{slug},
       // and an unpublished player's page 404s. Better not to offer the row.
       const res = await axios
         .get(apiUrl(`players/search?query=${encodeURIComponent(q)}&limit=5&publishedOnly=true`), { headers })
@@ -273,7 +273,7 @@ function PlayerSearchBox({
  * The Fan Pedia screen. One component, two URLs:
  *
  *   /fanpedia                      no props — defaults to the #1 ranked player
- *   /cricket/player/ishan-kishan   the player page passes that player in
+ *   /fanpedia/cricket/player/ishan-kishan   the player page passes that player in
  *
  * The player page fetches the player on the server and hands it over as
  * `initialPlayer` / `initialCareerStats`, so the name, team and stats are in
@@ -381,7 +381,7 @@ export default function FanPediaView({
         });
         setTopPlayers(rankedPlayers);
         // Only pick a default when the URL did not name one. On
-        // /cricket/player/ishan-kishan the player is already chosen.
+        // /fanpedia/cricket/player/ishan-kishan the player is already chosen.
         if (!urlChosePlayer.current) setSelectedPlayer(rankedPlayers[0]);
       }
 
