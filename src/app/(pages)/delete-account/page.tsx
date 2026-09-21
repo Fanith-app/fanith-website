@@ -3,6 +3,7 @@
 import Banner from "@/src/components/common/Banner";
 import { motion } from 'framer-motion';
 import { User, Settings, Trash2, CheckCircle, AlertTriangle } from 'lucide-react';
+import Link from 'next/link';
 
 const DeleteAccountPage = () => {
   const steps = [
@@ -113,15 +114,15 @@ const DeleteAccountPage = () => {
           <div className="inline-block bg-gray-50 border-2 border-gray-200 rounded-lg p-8 shadow-md">
             <h3 className="text-xl font-semibold text-gray-900 mb-3">Need Help?</h3>
             <p className="text-gray-600 mb-6 max-w-md">
-              If you're facing any issues or have questions about deleting your account,
+              If you&apos;re facing any issues or have questions about deleting your account,
               our support team is here to help.
             </p>
-            <a
+            <Link
               href="/contact"
               className="inline-block px-8 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-red-500/50 hover:scale-105"
             >
               Contact Support
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>

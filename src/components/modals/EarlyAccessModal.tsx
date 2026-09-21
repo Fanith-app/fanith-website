@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 import endpoints, { BASE_URL } from "../../api/endpoint";
+import type { ApiError } from "../../types/api";
 import { Modal } from "../ui/modal";
 import {
   Select,
@@ -69,9 +70,10 @@ export default function EarlyAccessModal({
       } else {
         toast.error(response.data?.message || "Something went wrong.");
       }
-    } catch (error: any) {
+    } catch (error) {
+      const err = error as ApiError;
       const errorMessage =
-        error?.response?.data?.message ||
+        err?.response?.data?.message ||
         "Failed to submit. Please try again.";
       toast.error(errorMessage);
     } finally {
@@ -252,7 +254,7 @@ export default function EarlyAccessModal({
                 </h3>
 
                 <p className="text-gray-600 mb-8 leading-relaxed">
-                  Thank you for joining our exclusive community! We'll notify you as soon as early access becomes available. Get ready for an amazing fan experience!
+                  Thank you for joining our exclusive community! We&apos;ll notify you as soon as early access becomes available. Get ready for an amazing fan experience!
                 </p>
 
                 <button

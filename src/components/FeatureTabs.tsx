@@ -45,24 +45,22 @@ export default function FeatureTabs() {
   const tabParam = searchParams.get('tab');
   const tabsRef = useRef<HTMLDivElement>(null);
 
-  // Set initial tab based on URL parameter
-  const [activeTab, setActiveTab] = useState(() => {
-    if (tabParam) {
-      const foundTab = TABS.find(tab => tab.key === tabParam);
-      return foundTab || TABS[0];
-    }
-    return TABS[0];
-  });
+  // The tab the visitor clicked, remembered together with the URL parameter it
+  // was clicked under, so a later ?tab= change takes over again.
+  const [picked, setPicked] = useState<{ key: string; param: string | null } | null>(null);
 
-  // Update tab when URL parameter changes and scroll to tabs
+  const tabFromParam = tabParam ? TABS.find(tab => tab.key === tabParam) : undefined;
+
+  const activeTab =
+    (picked && picked.param === tabParam
+      ? TABS.find(tab => tab.key === picked.key)
+      : undefined) ?? tabFromParam ?? TABS[0];
+
+  const setActiveTab = (tab: typeof TABS[0]) => setPicked({ key: tab.key, param: tabParam });
+
+  // Scroll to tabs when the URL parameter points at one
   useEffect(() => {
     if (tabParam) {
-      const foundTab = TABS.find(tab => tab.key === tabParam);
-      if (foundTab) {
-        setActiveTab(foundTab);
-      }
-
-      // Scroll to tabs section if tab parameter exists
       const scrollToTabs = () => {
         // Try using ref first
         if (tabsRef.current) {

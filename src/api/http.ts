@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { InternalAxiosRequestConfig } from "axios";
 import { BASE_URL } from "./endpoint";
 
 const http = axios.create({
@@ -10,15 +10,11 @@ const http = axios.create({
 });
 
 http.interceptors.request.use(
-  (conf: any) => {
+  (conf: InternalAxiosRequestConfig) => {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem('token');
       if (token) {
-        conf.headers = {
-          ...conf.headers,
-          Authorization: `Bearer ${token}`,
-        };
-
+        conf.headers.Authorization = `Bearer ${token}`;
       }
     }
     return conf;

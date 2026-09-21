@@ -1,64 +1,51 @@
 import http from "./http";
-import axios from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { BASE_URL } from "./endpoint";
+
+// Backend JSON payloads are not typed at this layer; callers narrow what they need.
+type ApiPayload = AxiosResponse["data"];
 
 export const _makeGetRequest = async (
   endpoint: string,
-  params?: Record<string, any>
-): Promise<any> => {
-  try {
-    const response = await http.get(endpoint, {
-      params,
-    });
-    return response;
-  } catch (error: any) {
-    // Don't return the error object directly, throw it so it can be handled properly
-    throw error;
-  }
+  params?: Record<string, unknown>
+): Promise<AxiosResponse> => {
+  return http.get(endpoint, {
+    params,
+  });
 };
 
 export const _makeAuthenticatedGetRequest = async (
   endpoint: string,
   token: string,
-  params?: Record<string, any>
-): Promise<any> => {
-  try {
-    const response = await http.get(endpoint, {
-      params,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-    });
-    return response;
-  } catch (error: any) {
-    throw error;
-  }
+  params?: Record<string, unknown>
+): Promise<AxiosResponse> => {
+  return http.get(endpoint, {
+    params,
+    headers: {
+      Authorization: `Bearer ${token}`,
+
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    },
+  });
 };
 
 export const _makePostRequest = async (
   endpoint: string,
-  data: any
-): Promise<any> => {
-  try {
-    const response = await http.post(endpoint, data, {
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-    });
-    return response;
-  } catch (error: any) {
-    throw error;
-  }
+  data: unknown
+): Promise<AxiosResponse> => {
+  return http.post(endpoint, data, {
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    },
+  });
 };
 
 export const _makeUnauthenticatedPostRequest = async (
   endpoint: string,
-  data: any
-): Promise<any> => {
+  data: unknown
+): Promise<ApiPayload> => {
   try {
     // Create a direct axios call without interceptors to avoid automatic token addition
     const response = await axios.post(`${BASE_URL}${endpoint}`, data, {
@@ -68,12 +55,12 @@ export const _makeUnauthenticatedPostRequest = async (
       },
       timeout: 60000,
     });
-    
+
     // Return the data directly to match the interceptor behavior
     return response.data;
-  } catch (error: any) {
+  } catch (error) {
     // Handle error similar to the interceptor
-    if (error.response) {
+    if (axios.isAxiosError(error) && error.response) {
       throw error.response.data;
     }
     throw error;
@@ -83,8 +70,8 @@ export const _makeUnauthenticatedPostRequest = async (
 
 export const _makeFormDataMultipartRequest = async (
   endpoint: string,
-  data: any
-): Promise<any> => {
+  data: Record<string, unknown>
+): Promise<ApiPayload> => {
   try {
     // Create a new FormData object
     const formData = new FormData();
@@ -101,7 +88,7 @@ export const _makeFormDataMultipartRequest = async (
       } else if (typeof value === "object" && value !== null) {
         formData.append(key, JSON.stringify(value)); // convert nested objects
       } else {
-        formData.append(key, value);
+        formData.append(key, String(value));
       }
     });
 
@@ -114,9 +101,9 @@ export const _makeFormDataMultipartRequest = async (
     });
 
     return response.data;
-  } catch (error: any) {
+  } catch (error) {
     // Laravel returns errors in error.response.data
-    if (error.response) {
+    if (axios.isAxiosError(error) && error.response) {
       console.error("Laravel error:", error.response.data);
       throw error.response.data;
     }
@@ -126,23 +113,17 @@ export const _makeFormDataMultipartRequest = async (
 
 export const _makeDeleteRequest = async (
   endpoint: string,
-  params?: Record<string, any>
-): Promise<any> => {
-  try {
-    const response = await http.delete(endpoint, {
-      params,
-    });
-    return response;
-  } catch (error: any) {
-    throw error;
-  }
+  params?: Record<string, unknown>
+): Promise<AxiosResponse> => {
+  return http.delete(endpoint, {
+    params,
+  });
 };
 
-export const _makePutRequest = async (url: string, data: any, config: any = {}) => {
-  try {
-    const response = await http.put(url, data, config);
-    return response;
-  } catch (error: any) {
-    throw error;
-  }
+export const _makePutRequest = async (
+  url: string,
+  data: unknown,
+  config: AxiosRequestConfig = {}
+) => {
+  return http.put(url, data, config);
 };

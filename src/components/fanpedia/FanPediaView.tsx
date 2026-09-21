@@ -176,18 +176,18 @@ function PlayerSearchBox({
   onSelect: (player: Player) => void;
 }) {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<Player[]>([]);
-  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  // Results are kept next to the query they belong to, so what is shown and
+  // whether we are still waiting can both be read off this one value.
+  const [fetched, setFetched] = useState<{ query: string; players: Player[] } | null>(null);
+
+  const q = query.trim();
+  const searchable = q.length >= 2;
+  const results = fetched && fetched.query === q ? fetched.players : [];
+  const loading = searchable && (!fetched || fetched.query !== q);
 
   useEffect(() => {
-    const q = query.trim();
-    if (q.length < 2) {
-      setResults([]);
-      setLoading(false);
-      return;
-    }
-    setLoading(true);
+    if (!searchable) return;
     const handle = setTimeout(async () => {
       const headers = tokenHeaders();
       // publishedOnly: every result here is a link to /fanpedia/{sport}/player/{slug},
@@ -196,11 +196,10 @@ function PlayerSearchBox({
         .get(apiUrl(`players/search?query=${encodeURIComponent(q)}&limit=5&publishedOnly=true`), { headers })
         .catch(() => null);
       const data = unwrap<Player[]>(res) || [];
-      setResults(Array.isArray(data) ? data.slice(0, 5) : []);
-      setLoading(false);
+      setFetched({ query: q, players: Array.isArray(data) ? data.slice(0, 5) : [] });
     }, 300);
     return () => clearTimeout(handle);
-  }, [query]);
+  }, [q, searchable]);
 
   return (
     <div className="relative">

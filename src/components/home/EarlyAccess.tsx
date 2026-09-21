@@ -17,6 +17,7 @@ import {
 } from "../ui/select";
 
 import { _makePostRequest } from "@/src/api/api";
+import type { ApiError } from "@/src/types/api";
 import endpoints, { BASE_URL } from "../../api/endpoint";
 
 interface Team {
@@ -67,10 +68,11 @@ export default function EarlyAccess() {
       } else {
         toast.error(response?.data?.message || "Something went wrong.");
       }
-    } catch (error: any) {
+    } catch (error) {
+      const err = error as ApiError;
       console.error("Early access error:", error);
       toast.error(
-        error?.response?.data?.message ||
+        err?.response?.data?.message ||
           "Failed to submit. Please try again."
       );
     } finally {

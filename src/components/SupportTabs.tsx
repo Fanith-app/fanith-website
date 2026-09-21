@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { _makeUnauthenticatedPostRequest } from "@/src/api/api";
+import type { ApiError } from "@/src/types/api";
 import endpoints from "@/src/api/endpoint";
 import { useCenterPopup } from "@/src/context/CenterPopupContext";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -55,23 +56,26 @@ export default function SupportTabs() {
   const router = useRouter();
   const { showPopup } = useCenterPopup();
 
-  // Set initial tab based on URL parameter
-  const [activeTab, setActiveTab] = useState<Tab>(() => {
-    if (tabParam === 'brand') {
-      return "Brand Partnership Form";
-    }
-    return "Support Form";
-  });
+  // The tab the visitor picked, remembered together with the URL parameter it
+  // was picked under, so a later ?tab= change takes over again.
+  const [picked, setPicked] = useState<{ tab: Tab; param: string | null } | null>(null);
 
-  // Update tab when URL parameter changes and scroll to tabs
+  const tabFromParam: Tab | null =
+    tabParam === 'brand'
+      ? "Brand Partnership Form"
+      : tabParam === 'support'
+        ? "Support Form"
+        : null;
+
+  const activeTab: Tab =
+    picked && picked.param === tabParam
+      ? picked.tab
+      : tabFromParam ?? "Support Form";
+
+  const setActiveTab = (tab: Tab) => setPicked({ tab, param: tabParam });
+
+  // Scroll to tabs section if tab parameter exists
   useEffect(() => {
-    if (tabParam === 'brand') {
-      setActiveTab("Brand Partnership Form");
-    } else if (tabParam === 'support') {
-      setActiveTab("Support Form");
-    }
-
-    // Scroll to tabs section if tab parameter exists
     if (tabParam && tabsRef.current) {
       setTimeout(() => {
         tabsRef.current?.scrollIntoView({
@@ -258,17 +262,18 @@ function SupportForm() {
       } else {
         throw new Error('Unexpected response format');
       }
-    } catch (error: any) {
+    } catch (error) {
+      const err = error as ApiError;
       console.error('Support form submission error:', error);
 
       let errorMessage = 'Something went wrong. Please try again.';
 
       // Handle API error response
-      if (error && error.message) {
-        errorMessage = error.message;
-      } else if (error && error.details && Array.isArray(error.details)) {
-        errorMessage = error.details.join(', ');
-      } else if (error && typeof error === 'string') {
+      if (err && err.message) {
+        errorMessage = err.message;
+      } else if (err && Array.isArray(err.details)) {
+        errorMessage = err.details.join(', ');
+      } else if (typeof error === 'string') {
         errorMessage = error;
       }
 
@@ -405,16 +410,17 @@ function BrandForm() {
       } else {
         throw new Error('Unexpected response format');
       }
-    } catch (error: any) {
+    } catch (error) {
+      const err = error as ApiError;
       console.error('Brand form submission error:', error);
 
       let errorMessage = 'Something went wrong. Please try again.';
 
-      if (error && error.message) {
-        errorMessage = error.message;
-      } else if (error && error.details && Array.isArray(error.details)) {
-        errorMessage = error.details.join(', ');
-      } else if (error && typeof error === 'string') {
+      if (err && err.message) {
+        errorMessage = err.message;
+      } else if (err && Array.isArray(err.details)) {
+        errorMessage = err.details.join(', ');
+      } else if (typeof error === 'string') {
         errorMessage = error;
       }
 
