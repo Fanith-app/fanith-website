@@ -1,10 +1,11 @@
 "use client";
 
 import { BASE_URL } from "@/src/api/endpoint";
+import type { Blog } from "@/src/types/blog";
 import { useEffect, useRef, useState } from "react";
 
 const BlogDetail = ({ slug }: { slug: string }) => {
-  const [blog, setBlog] = useState<any>(null);
+  const [blog, setBlog] = useState<Blog | null>(null);
   const hasFetched = useRef(false);
 
   useEffect(() => {
@@ -53,7 +54,7 @@ const readTime = blog?.readTime
         className="w-full rounded-lg mb-6"
       />
 
-      <div className="prose prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: blog.contentHtml }} />
+      <div className="prose prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: blog.contentHtml ?? "" }} />
     </div>
   );
 };

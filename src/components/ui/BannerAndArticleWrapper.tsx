@@ -3,29 +3,38 @@
 import { BASE_URL } from "@/src/api/endpoint";
 import Banner from "@/src/components/common/Banner";
 import { CommunitySearch } from "@/src/components/common/SearchInput";
-import { useEffect, useState } from "react";
+import type { Blog, BlogArticle, BlogCategory } from "@/src/types/blog";
+import { useCallback, useEffect, useState } from "react";
 import CommunityArticles from "../CommunityArticles";
 import CommunityHeroTabs from "../CommunityHeroTabs";
 
-const BannerAndArticleWrapper = ({ initialArticles = [], initialCategories = [] }: any) => {
+interface BannerAndArticleWrapperProps {
+  initialArticles?: BlogArticle[];
+  initialCategories?: BlogCategory[];
+}
+
+const toArticle = (blog: Blog): BlogArticle => ({
+  category: blog.category?.name || "General",
+  title: blog.title,
+  description: blog.description ?? "",
+  date: new Date(blog.publishedAt).toDateString(),
+  image: blog.thumbnailUrl ?? "",
+  slug: blog.slug,
+});
+
+const BannerAndArticleWrapper = ({
+  initialArticles = [],
+  initialCategories = [],
+}: BannerAndArticleWrapperProps) => {
   const [activeTab, setActiveTab] = useState("All");
-  const [articles, setArticles] = useState<any[]>(initialArticles);
-  const [categories, setCategories] = useState<any[]>(initialCategories);
+  const [articles, setArticles] = useState<BlogArticle[]>(initialArticles);
+  const [categories, setCategories] = useState<BlogCategory[]>(initialCategories);
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    if (categories.length === 0) {
-      const fetchCategories = async () => {
-        const res = await fetch(`${BASE_URL}public/blogs/categories`);
-        const data = await res.json();
-        setCategories(data.data);
-      };
+  const hasInitialArticles = initialArticles.length > 0;
+  const hasInitialCategories = initialCategories.length > 0;
 
-      fetchCategories();
-    }
-  }, []);
-
-  const fetchBlogs = async (pageNumber = 1, categoryId?: string) => {
+  const fetchBlogs = useCallback(async (pageNumber = 1, categoryId?: string) => {
     try {
       let url = `${BASE_URL}public/blogs?page=${pageNumber}&limit=6`;
 
@@ -36,14 +45,7 @@ const BannerAndArticleWrapper = ({ initialArticles = [], initialCategories = [] 
       const res = await fetch(url);
       const data = await res.json();
 
-      const formatted = data.data.data.map((blog: any) => ({
-        category: blog.category?.name || "General",
-        title: blog.title,
-        description: blog.description,
-        date: new Date(blog.publishedAt).toDateString(),
-        image: blog.thumbnailUrl,
-        slug: blog.slug,
-      }));
+      const formatted: BlogArticle[] = data.data.data.map(toArticle);
 
       if (pageNumber === 1) {
         setArticles(formatted);
@@ -53,13 +55,24 @@ const BannerAndArticleWrapper = ({ initialArticles = [], initialCategories = [] 
     } catch (error) {
       console.error("Error fetching blogs:", error);
     }
-  };
-
-  useEffect(() => {
-    if (initialArticles.length === 0) {
-      fetchBlogs(1, "all");
-    }
   }, []);
+
+  // Client fetch is only a fallback for what the server did not send.
+  useEffect(() => {
+    const loadMissing = async () => {
+      if (!hasInitialCategories) {
+        const res = await fetch(`${BASE_URL}public/blogs/categories`);
+        const data = await res.json();
+        setCategories(data.data);
+      }
+
+      if (!hasInitialArticles) {
+        await fetchBlogs(1, "all");
+      }
+    };
+
+    loadMissing();
+  }, [hasInitialArticles, hasInitialCategories, fetchBlogs]);
 
   return (
     <main className="w-full">

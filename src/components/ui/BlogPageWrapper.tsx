@@ -1,6 +1,7 @@
 
 import { BASE_URL } from "@/src/api/endpoint";
 import NewsletterWrapper from "@/src/components/ui/NewsletterWrapper";
+import type { Blog, BlogArticle } from "@/src/types/blog";
 import BannerAndArticleWrapper from "./BannerAndArticleWrapper";
 
 // ✅ SSR blogs
@@ -18,12 +19,12 @@ async function getBlogs() {
     data?.blogs ||
     [];
 
-  return blogs.map((blog: any) => ({
+  return blogs.map((blog: Blog): BlogArticle => ({
     category: blog.category?.name || "General",
     title: blog.title,
-    description: blog.description,
+    description: blog.description ?? "",
     date: new Date(blog.publishedAt).toDateString(),
-    image: blog.thumbnailUrl,
+    image: blog.thumbnailUrl ?? "",
     slug: blog.slug,
   }));
 }

@@ -12,6 +12,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { _makePostRequest } from "../../api/api";
+import type { ApiError } from "../../types/api";
 import endpoints from "../../api/endpoint";
 import EarlyAccessModal from "../modals/EarlyAccessModal";
 
@@ -101,12 +102,13 @@ export default function Footer() {
       });
 
       setEmail("");
-    } catch (error: any) {
+    } catch (error) {
+      const err = error as ApiError;
       console.error("Email subscription error:", error);
 
       // ❌ TOAST ERROR
       toast.error(
-        error?.message || "Something went wrong. Please try again."
+        err?.message || "Something went wrong. Please try again."
       );
     } finally {
       setIsSubmitting(false);

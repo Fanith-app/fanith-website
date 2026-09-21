@@ -1,6 +1,6 @@
 import React from "react";
 
-interface Props extends React.SVGProps<SVGSVGElement> {}
+type Props = React.SVGProps<SVGSVGElement>;
 
 const GameRoomCardShape: React.FC<Props> = (props) => {
   return (

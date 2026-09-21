@@ -1,4 +1,5 @@
 import { BASE_URL } from "@/src/api/endpoint";
+import type { Blog } from "@/src/types/blog";
 import { Metadata } from "next";
 import BlogDetail from "./BlogDetail";
 
@@ -7,7 +8,7 @@ export async function generateStaticParams() {
     `${BASE_URL}public/blogs?limit=100`
   );
   const data = await res.json();
-  return data.data.data.map((blog: any) => ({ slug: blog.slug }));
+  return data.data.data.map((blog: Blog) => ({ slug: blog.slug }));
 }
 
 export async function generateMetadata({

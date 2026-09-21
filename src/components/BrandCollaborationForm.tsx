@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { ArrowRight } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { _makeUnauthenticatedPostRequest } from '@/src/api/api';
+import type { ApiError } from '@/src/types/api';
 import endpoints from '@/src/api/endpoint';
 import { useCenterPopup } from '@/src/context/CenterPopupContext';
 
@@ -70,15 +71,16 @@ export default function BrandCollaborationForm() {
       } else {
         throw new Error('Unexpected response format');
       }
-    } catch (error: any) {
+    } catch (error) {
+      const err = error as ApiError;
       console.error('Brand collaboration form submission error:', error);
       let errorMessage = 'Something went wrong. Please try again.';
 
-      if (error && error.message) {
-        errorMessage = error.message;
-      } else if (error && error.details && Array.isArray(error.details)) {
-        errorMessage = error.details.join(', ');
-      } else if (error && typeof error === 'string') {
+      if (err && err.message) {
+        errorMessage = err.message;
+      } else if (err && Array.isArray(err.details)) {
+        errorMessage = err.details.join(', ');
+      } else if (typeof error === 'string') {
         errorMessage = error;
       }
 

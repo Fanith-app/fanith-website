@@ -58,7 +58,7 @@ export default function RootLayout({
           `}
         </Script>
         {/* <!-- Google Tag Manager --> */}
-        <Script>
+        <Script id="google-tag-manager">
           {`
             (function(w,d,s,l,i){w[l] = w[l] || [];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -69,7 +69,7 @@ export default function RootLayout({
         </Script>
         {/* <!-- End Google Tag Manager --> */}
         {/* Microsoft Clarity Tag */}
-        <Script type="text/javascript">
+        <Script id="microsoft-clarity" type="text/javascript">
           {`
             (function(c,l,a,r,i,t,y){
             c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };

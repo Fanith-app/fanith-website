@@ -83,7 +83,7 @@ export default function OurStory({
             }
           }}
         >
-          For every fan who has ever cheered alone in front of a screen, or felt the ache of a missed connection during a match-winning six—Fanith was built for you. We believe that the true pulse of sports isn't just on the field; it’s in the collective roar of the fans.<br /><br />
+          For every fan who has ever cheered alone in front of a screen, or felt the ache of a missed connection during a match-winning six—Fanith was built for you. We believe that the true pulse of sports isn&apos;t just on the field; it’s in the collective roar of the fans.<br /><br />
           Fanith was born to unite that energy. We’ve moved beyond static scores to create a digital stadium where every fan has a home. Through Game Rooms that crackle with real-time life, FanPedia that honors our shared sporting history, and FanDom rewards that finally value your loyalty, we are bringing fans closer to the action—and to each other—than ever before.
         </motion.p>
 

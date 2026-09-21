@@ -4,6 +4,7 @@ import { useCenterPopup } from "@/src/context/CenterPopupContext";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { _makePostRequest } from "../api/api";
+import type { ApiError } from "../types/api";
 import endpoints from "../api/endpoint";
 
 interface NewsletterSubscribeProps {
@@ -54,11 +55,12 @@ export default function NewsletterSubscribe({
 
       if (onSubmit) onSubmit(email.trim());
       setEmail("");
-    } catch (error: any) {
+    } catch (error) {
+      const err = error as ApiError;
       console.error("Email subscription error:", error);
       setErrorMessage(
-        error?.response?.data?.message ||
-          error?.message ||
+        err?.response?.data?.message ||
+          err?.message ||
           "Something went wrong. Please try again."
       );
     } finally {
