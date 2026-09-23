@@ -1,4 +1,6 @@
 const DEFAULT_TIMEOUT_MS = 15_000;
+const READY_TIMEOUT_MS = 60_000;
+const READY_POLL_MS = 1_000;
 
 function parseArguments(argv) {
   const values = {};
@@ -52,10 +54,29 @@ async function expectStatus(baseUrl, path, expectedStatus) {
   return response;
 }
 
+// The container is started detached right before this script runs, so the
+// server may not be listening yet. Retry connection errors until it answers.
+async function waitForServer(baseUrl) {
+  const deadline = Date.now() + READY_TIMEOUT_MS;
+  for (;;) {
+    try {
+      await request(baseUrl, "/api/health");
+      return;
+    } catch (error) {
+      if (Date.now() >= deadline) {
+        throw new Error(`Server not reachable after ${READY_TIMEOUT_MS / 1000}s: ${error.message}`);
+      }
+      await new Promise((resolve) => setTimeout(resolve, READY_POLL_MS));
+    }
+  }
+}
+
 async function main() {
   const options = parseArguments(process.argv.slice(2));
   const baseUrl = new URL(options["base-url"]);
   baseUrl.pathname = baseUrl.pathname.endsWith("/") ? baseUrl.pathname : `${baseUrl.pathname}/`;
+
+  await waitForServer(baseUrl);
 
   const health = await expectStatus(baseUrl, "/api/health", 200);
   if ((await health.text()).trim() !== "ok") throw new Error("/api/health: unexpected body");
