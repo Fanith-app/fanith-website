@@ -9,9 +9,12 @@ async function getBlogs() {
   const res = await fetch(
     `${BASE_URL}public/blogs?page=1&limit=6`,
     { next: { revalidate: 60 } }
-  );
+  ).catch(() => null);
 
-  const data = await res.json();
+  // An unreachable API or an HTML error page must not fail the build; the
+  // page renders empty and the next revalidation picks the blogs up.
+  if (!res?.ok) return [];
+  const data = await res.json().catch(() => null);
 
   const blogs =
     data?.data?.blogs ||
@@ -33,9 +36,10 @@ async function getBlogs() {
 async function getCategories() {
   const res = await fetch(`${BASE_URL}public/blogs/categories`, {
     next: { revalidate: 300 },
-  });
+  }).catch(() => null);
 
-  const data = await res.json();
+  if (!res?.ok) return [];
+  const data = await res.json().catch(() => null);
   return data?.data || [];
 }
 
