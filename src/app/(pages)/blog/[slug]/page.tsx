@@ -3,12 +3,28 @@ import type { Blog } from "@/src/types/blog";
 import { Metadata } from "next";
 import BlogDetail from "./BlogDetail";
 
-export async function generateStaticParams() {
-  const res = await fetch(
-    `${BASE_URL}public/blogs?limit=100`
-  );
-  const data = await res.json();
-  return data.data.data.map((blog: Blog) => ({ slug: blog.slug }));
+/** Slugs outside generateStaticParams render on demand rather than 404. */
+export const dynamicParams = true;
+
+/**
+ * Prebuilds known blog slugs. If the API is unreachable or answers with a
+ * non-JSON error page, the build still succeeds and every slug renders on
+ * its first request instead.
+ */
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  try {
+    const res = await fetch(`${BASE_URL}public/blogs?limit=100`);
+    if (!res.ok) {
+      console.warn(`Blog slugs not prebuilt: API responded ${res.status}`);
+      return [];
+    }
+    const data = await res.json();
+    const blogs: Blog[] = data?.data?.data ?? [];
+    return blogs.map((blog) => ({ slug: blog.slug }));
+  } catch (error) {
+    console.warn("Blog slugs not prebuilt:", error);
+    return [];
+  }
 }
 
 export async function generateMetadata({
