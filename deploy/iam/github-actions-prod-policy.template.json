@@ -25,11 +25,14 @@
     {
       "Sid": "ProdClusterRead",
       "Effect": "Allow",
-      "Action": [
-        "ecs:DescribeClusters",
-        "ecs:ListTasks"
-      ],
+      "Action": "ecs:DescribeClusters",
       "Resource": "${ECS_CLUSTER_ARN}"
+    },
+    {
+      "Sid": "ProdTaskList",
+      "Effect": "Allow",
+      "Action": "ecs:ListTasks",
+      "Resource": "arn:aws:ecs:ap-south-1:735395976490:container-instance/fanith-prod/*"
     },
     {
       "Sid": "ProdServiceReadUpdate",
@@ -50,7 +53,7 @@
       "Sid": "ProdTaskDefinitionRead",
       "Effect": "Allow",
       "Action": "ecs:DescribeTaskDefinition",
-      "Resource": "${ECS_TASK_DEFINITION_ARN_PATTERN}"
+      "Resource": "*"
     },
     {
       "Sid": "RegisterTaskDefinitionRequiredWildcard",
@@ -59,13 +62,10 @@
       "Resource": "*"
     },
     {
-      "Sid": "PassOnlyApprovedProdTaskRolesToEcs",
+      "Sid": "PassOnlyApprovedProdExecutionRoleToEcs",
       "Effect": "Allow",
       "Action": "iam:PassRole",
-      "Resource": [
-        "${ECS_EXECUTION_ROLE_ARN}",
-        "${ECS_TASK_ROLE_ARN}"
-      ],
+      "Resource": "${ECS_EXECUTION_ROLE_ARN}",
       "Condition": {
         "StringEquals": {
           "iam:PassedToService": "ecs-tasks.amazonaws.com"

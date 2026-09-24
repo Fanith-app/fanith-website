@@ -2,17 +2,18 @@
 
 ## Status
 
-The S3/CloudFront workflow has been replaced by one manual ECS workflow. The
-workflow has no `push` or `pull_request` trigger and has not been triggered,
-committed, or pushed by this change.
+The S3/CloudFront workflow has been replaced by one manual ECS workflow. It
+has no `push` or `pull_request` trigger. The dev and prod jobs have both run
+successfully; production ECS and the existing website CloudFront aliases now
+serve the SSR site.
 
 Workflow file: `.github/workflows/deploy.yml`
 
 ## Branch behavior
 
-`workflow_dispatch` exposes only `dev` and `prod` as target choices. The
-selected ref is checked out exactly as requested; no main-only or protected-
-branch condition is present. Branch names are never used in image tags.
+`workflow_dispatch` exposes only `dev` and `prod` as target choices. Dev can
+use any selected ref; validation rejects production unless the ref is
+`refs/heads/main`. Branch names are never used in image tags.
 
 The workflow must first be committed/pushed to the default branch for GitHub's
 manual-dispatch UI to expose it. Selected branches also need this workflow and
@@ -28,17 +29,19 @@ sha-<GITHUB_SHA>-run-<GITHUB_RUN_ID>-attempt-<GITHUB_RUN_ATTEMPT>
 ECR repositories remain immutable. Each environment has its own repository and
 OIDC role.
 
-Any branch can modify a workflow before manually dispatching it. This is a
-deliberate product choice, so the production environment reviewer must inspect
-the selected ref, commit, workflow diff and summary before approval.
+The production role trusts only the GitHub OIDC subject for `main`. Production
+does not use a GitHub environment or reviewer. The repository's `main` branch
+is currently unprotected, so write access to main includes production deploy
+authority. Review branch protection before broadening write access.
 
 ## Job and permission model
 
 1. `validate` checks out the selected ref, runs `npm ci`, task-definition helper
    tests, strict `npm run lint`, and the selected environment build.
 2. The deploy job is blocked unless validation succeeds.
-3. The deploy job is bound to the selected GitHub environment and is the only
-   job with `id-token: write`.
+3. The selected deploy job is the only job with `id-token: write`. Dev retains
+   its GitHub `dev` environment; prod has no environment and uses main-only
+   OIDC trust.
 4. It builds a separate `linux/amd64` image, runs local health/SEO/route smoke
    checks, and runs pinned Trivy scanning. Scanner errors and HIGH/CRITICAL
    findings fail the job.
@@ -55,7 +58,8 @@ the selected ref, commit, workflow diff and summary before approval.
    and running image digest.
 
 The workflow does not call S3, CloudFront, Route 53, Secrets Manager, ECS
-service creation/deletion, or cache invalidation.
+service creation/deletion, or cache invalidation. The one-time CloudFront
+origin handoff was performed separately; see `docs/prod-live-cutover.md`.
 
 ## OIDC trust model
 
@@ -70,11 +74,10 @@ The intended exact subjects are:
 
 ```text
 repo:Fanith-app/fanith-website:environment:dev
-repo:Fanith-app/fanith-website:environment:prod
+repo:Fanith-app/fanith-website:ref:refs/heads/main
 ```
 
-There is intentionally no branch claim. This preserves any-branch dispatch,
-while environment protection remains the production control.
+Dev uses an environment subject; prod uses an exact main-branch subject.
 
 ## Environment configuration
 
@@ -90,7 +93,8 @@ Variables are nonsecret GitHub environment variables only:
 - `ECS_CONTAINER_NAME`
 - `ECS_TASK_EXECUTION_ROLE_ARN`
 - `ECS_TASK_ROLE_ARN` (only when the approved task definition has one)
-- `PROD_READY` (production only; must remain `false` until readiness review)
+- `PROD_READY` (production is set to `true` only in the main-only job; dev
+  does not use this flag)
 
 `REVALIDATE_SECRET` must remain an ECS managed-secret reference. The workflow
 never reads or prints its value. Production preflight requires exactly one
@@ -108,32 +112,19 @@ Required dev variable values:
 - `ECS_CONTAINER_NAME=fanith-website-dev-ssr`
 - `ECS_TASK_EXECUTION_ROLE_ARN=arn:aws:iam::735395976490:role/fanith-website-dev-ssr-execution-role`
 
-Production should use the corresponding `fanith-prod`/`fanith-website-prod`
-values and the prod OIDC role, but must leave
-`ECS_TASK_EXECUTION_ROLE_ARN` unset until that role is actually created and
-reviewed. The production service/task definition is currently absent.
+Production job configuration uses the verified `fanith-prod` /
+`fanith-website-prod` resources, `fanith-website-github-actions-prod` OIDC role,
+and `fanith-website-prod-ssr-execution-role`. No runtime secret value is set
+in GitHub variables; ECS resolves `REVALIDATE_SECRET` from Secrets Manager.
 
 ## Environment protection
 
 `dev` is intended to be any-branch and has no production approval requirement.
 
-`prod` must be any-branch but protected by a required reviewer, with
-self-review disabled. The authenticated operator is not a valid sole
-reviewer because that would create a self-review deadlock. Repository metadata
-must be used by the repository admin to choose an eligible human reviewer.
-No reviewer identity has been approved or configured yet.
-
-The repository currently has no environments, and environment creation failed
-with GitHub `403 Must have admin rights to Repository` for the authenticated
-write-level operator. An administrator must create/configure both environments
-without narrowing branch policy:
-
-- `dev`: `deployment_branch_policy: null` (any branch).
-- `prod`: the same any-branch policy, an approved required reviewer,
-  `prevent_self_review=true`, and `PROD_READY=false`.
-
-Until that protection is persisted, production remains fail-closed: do not
-enable `PROD_READY` or grant an unprotected production path.
+The repository has a dev environment but no prod environment. The authenticated
+operator does not have repository admin access; the owner selected main-only
+OIDC trust for production instead of GitHub environment protection. Dev
+retains the existing environment behavior.
 
 ## IAM scope
 
@@ -150,17 +141,16 @@ granted. `ecs:RegisterTaskDefinition` is resource `*` because AWS does not
 provide a task-definition resource constraint for that operation; all other
 supported resources stay narrowed.
 
-The production OIDC role currently has trust only; deploy permissions remain
-fail-closed while the production ECS service, execution role, managed
-revalidation secret and readiness review are absent. Templates are under
-`deploy/iam/`.
+The production OIDC role has permissions limited to the production website
+ECR repository, selected ECS service, required ECS reads/register calls and
+the website execution role for `iam:PassRole`. Its trust checks the exact
+main-branch subject. Templates are under `deploy/iam/`.
 
 ## Current quality gate
 
-The latest local check reports `49 errors / 60 warnings` from `npm run lint`.
-Those app issues are intentionally not changed in this scope. Consequently,
-the GitHub workflow's strict lint gate currently blocks deployment; there is no
-`continue-on-error` or baseline exception.
+The strict lint gate and production build passed in GitHub Actions run
+`35953781640`; lint warnings remain non-blocking. There is no
+`continue-on-error` on validation or deployment.
 
 ## Rollback and handoff
 
@@ -169,22 +159,16 @@ deployment must use the existing ECS circuit-breaker/previous verified revision;
 the workflow does not declare rollback success merely because an old revision
 exists.
 
-CloudFront, DNS and existing S3 deployment assets remain unchanged. Production
-deployment readiness is still separately blocked by the paused rollout review,
-secure CloudFront-to-ALB origin design, and production revalidation secret and
-caller integration.
+CloudFront now routes the existing website aliases to the healthy ECS service.
+The S3 origin remains configured for rollback and DNS was not changed.
+Production `fanith-service` revalidation caller integration remains to be
+verified independently.
 
-## Latest verification and setup blocker
+## Latest verification
 
-- Verified GitHub login: `deepaktiwari09`; repository push access, no admin access.
-- Creating `dev` returned HTTP 403 `Must have admin rights to Repository`.
-  GitHub environments/variables and the production reviewer remain unconfigured.
-- Verified existing AWS OIDC provider and exact dev/prod environment trust subjects.
-- Updated DEV inline IAM policy to include scoped `ecr:DescribeImageScanFindings`.
-- Verified PROD role has no inline or attached permissions; it remains disabled.
-- Renderer tests: 3 passed; shell syntax and `git diff --check` passed.
-- Actionlint 1.7.7 passed (ShellCheck integration disabled; Bash syntax checked separately).
-- AWS IAM Access Analyzer validation returned zero findings for the DEV policy.
-- Action version commit pins verified through GitHub tag APIs.
-- No GitHub workflow has been dispatched; end-to-end OIDC/ECS execution is untested.
-- ECR scan completion alone is insufficient: HIGH/CRITICAL counts also block rollout.
+- Verified GitHub login `deepaktiwari09` has push but not admin access.
+- Prod role OIDC trust is exact `main`; dev trust remains environment-scoped.
+- Renderer tests: 3 passed. Production workflow run `35953781640` succeeded,
+  including OIDC, smoke, image/ECR scanning, ECS rollout and digest checks.
+- CloudFront distribution `E2J478Y0Q3GD2F` deployed the ECS origin and the
+  existing public aliases passed SSR smoke checks. See the cutover runbook.

@@ -10,25 +10,25 @@ audience: sts.amazonaws.com
 thumbprint: ab9d0263244dd0326eb67015705a667e79cfe998
 ```
 
-The trust policies use exact environment subjects, not branch wildcards:
+The trust policies use exact subjects, not branch wildcards:
 
 ```text
 repo:Fanith-app/fanith-website:environment:dev
-repo:Fanith-app/fanith-website:environment:prod
+repo:Fanith-app/fanith-website:ref:refs/heads/main
 ```
 
-Any branch remains dispatchable. The production environment approval is the
-critical human control because a selected branch can contain a modified
-workflow.
+Dev can dispatch any branch; production can dispatch only `main`. The
+production job has no GitHub environment approval, and `main` is currently
+unprotected. Restrict write access accordingly.
 
 ## Roles
 
 - `fanith-website-github-actions-dev`: applies
   `github-actions-dev-policy.json`.
-- `fanith-website-github-actions-prod`: trust-only until the production ECS
-  service, execution/task roles, managed revalidation secret and readiness
-  review exist. Apply the production policy template only after replacing all
-  placeholders with verified resource ARNs and independent review.
+- `fanith-website-github-actions-prod`: trusts the exact `main` ref and has a
+  policy limited to the production website repository/service and execution
+  role. Replace all production policy template placeholders with verified
+  resource ARNs before reapplying it.
 
 Both roles use a 3600-second IAM maximum session duration. The workflow asks
 for a 3600-second session to cover image push, scanning and ECS stabilization.
@@ -38,9 +38,10 @@ for a 3600-second session to cover image push, scanning and ECS stabilization.
 - ECR repository access is environment-specific; authorization-token access is
   the only ECR wildcard required by AWS.
 - ECS update is limited to one selected service per environment.
-- Task-definition registration is `Resource: "*"` because AWS does not expose a
-  resource-level constraint for that API. Read operations use cluster/service/
-  task/task-definition patterns where supported.
+- Task-definition registration and `ecs:DescribeTaskDefinition` require
+  `Resource: "*"`; AWS evaluates both calls there. `ecs:ListTasks` needs the
+  selected cluster's container-instance ARN pattern. Other reads use
+  cluster/service/task patterns where supported.
 - `iam:PassRole` is limited to verified ECS role ARNs and requires
   `iam:PassedToService=ecs-tasks.amazonaws.com`.
 - No S3, CloudFront, Route 53, Secrets Manager, ECS create/delete, or admin

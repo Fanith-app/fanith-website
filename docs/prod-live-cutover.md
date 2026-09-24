@@ -1,5 +1,21 @@
 # Production website ECS handoff
 
+## Deployment result (2026-09-24)
+
+- GitHub Actions run `35953781640` passed production build, image and ECR
+  scanning, drift preflight, service stability and running image-digest checks.
+- `fanith-website-prod` runs task definition revision `:2` with one healthy
+  Fargate task. The selected ALB route passed home, about and player checks.
+- CloudFront distribution `E2J478Y0Q3GD2F` deployed the website ECS origin;
+  current post-cutover ETag was `E1IM4EOPHS76S7`. Invalidation
+  `I10ZOM5579VQ6XPQO0BIVE75VA` completed. Both existing aliases kept their
+  DNS names, and the S3 origin/OAC remain configured for rollback.
+- HTTP checks passed: home, about, player, sitemap and static asset returned
+  `200`; an unknown route returned `404`, and unauthenticated revalidation
+  returned `401`. Headless Chrome loaded home, about and a player page with no
+  page errors. Do not claim publish/unpublish revalidation integration until
+  `fanith-service` has been configured with the managed secret and verified.
+
 ## Website deployment
 
 - `workflow_dispatch` on `main` selects `prod`; the validation job rejects a
