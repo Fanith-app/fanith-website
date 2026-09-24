@@ -34,6 +34,16 @@ jobs:
       - name: Checkout selected ref
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
+      - name: Require main for production
+        if: inputs.environment == 'prod'
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          [[ "$GITHUB_REF" == 'refs/heads/main' ]] || {
+            printf 'Production deployment requires the main branch.\n' >&2
+            exit 1
+          }
+
       - name: Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
@@ -78,13 +88,13 @@ jobs:
           NEXT_PUBLIC_DEPLOY_ENV: ${{ steps.build_env.outputs.deploy_env }}
 
   deploy:
-    name: Deploy ECS / ${{ inputs.environment }}
+    name: Deploy ECS / dev
     needs: validate
-    if: needs.validate.result == 'success'
+    if: needs.validate.result == 'success' && inputs.environment == 'dev'
     runs-on: ubuntu-24.04
     timeout-minutes: 35
     environment:
-      name: ${{ inputs.environment }}
+      name: dev
     permissions:
       contents: read
       id-token: write
@@ -101,7 +111,7 @@ jobs:
       ECS_TASK_EXECUTION_ROLE_ARN: ${{ vars.ECS_TASK_EXECUTION_ROLE_ARN }}
       ECS_TASK_ROLE_ARN: ${{ vars.ECS_TASK_ROLE_ARN }}
       PROD_READY: ${{ vars.PROD_READY }}
-    steps:
+    steps: &ecs_deploy_steps
       - name: Checkout selected ref
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -469,3 +479,27 @@ jobs:
             printf '%s\n' '- Rollback remains the previous verified revision; no automatic rollback was invoked.'
             printf '%s\n' '- CloudFront, DNS and cache invalidation were not touched.'
           } >> "$GITHUB_STEP_SUMMARY"
+
+  deploy_prod:
+    name: Deploy ECS / prod
+    needs: validate
+    if: needs.validate.result == 'success' && inputs.environment == 'prod' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      TARGET_ENV: prod
+      AWS_ACCOUNT_ID: '735395976490'
+      AWS_REGION: ap-south-1
+      AWS_ROLE_ARN: arn:aws:iam::735395976490:role/fanith-website-github-actions-prod
+      ECR_REPOSITORY: fanith-website-prod
+      ECS_CLUSTER: fanith-prod
+      ECS_SERVICE: fanith-website-prod
+      ECS_TASK_FAMILY: fanith-website-prod
+      ECS_CONTAINER_NAME: fanith-website-prod
+      ECS_TASK_EXECUTION_ROLE_ARN: arn:aws:iam::735395976490:role/fanith-website-prod-ssr-execution-role
+      ECS_TASK_ROLE_ARN: ''
+      PROD_READY: 'true'
+    steps: *ecs_deploy_steps
