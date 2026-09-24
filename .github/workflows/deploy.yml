@@ -273,9 +273,9 @@ jobs:
                 findings="$(aws ecr describe-image-scan-findings \
                   --repository-name "$ECR_REPOSITORY" \
                   --image-id "imageTag=${IMAGE_TAG}" \
-                  --query 'imageScanFindings.findingSeverityCounts' --output json)"
-                jq -e '((.CRITICAL // 0) == 0) and ((.HIGH // 0) == 0)' <<< "$findings" >/dev/null || {
-                  printf 'ECR scan found HIGH/CRITICAL vulnerabilities.\n' >&2
+                  --query '{status:imageScanStatus.status,counts:imageScanFindings.findingSeverityCounts}' --output json)"
+                jq -e '.status == "COMPLETE" and (.counts | type == "object" and ((.CRITICAL // 0) == 0) and ((.HIGH // 0) == 0))' <<< "$findings" >/dev/null || {
+                  printf 'ECR scan is incomplete or has HIGH/CRITICAL vulnerabilities.\n' >&2
                   exit 1
                 }
                 exit 0
